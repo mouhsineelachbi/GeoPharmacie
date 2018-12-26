@@ -13,7 +13,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>AFICHAGE DES PRODUITS</title>
+        <title>AFFICHAGE DES PRODUITS</title>
     </head>
     <body>
          <%
