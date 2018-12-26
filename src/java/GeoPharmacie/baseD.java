@@ -1,5 +1,4 @@
 package GeoPharmacie;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -12,10 +11,6 @@ import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author Hamza
- */
 
 public class baseD {
     private Connection con;
@@ -198,6 +193,24 @@ public class baseD {
     }
     
     
+    public Client selectClient(String cin) throws SQLException {
+        Statement stmt = con.createStatement();
+        String query = "select * from client where cin='"+cin+"'";
+        stmt.executeQuery(query);
+        ResultSet rs = stmt.executeQuery(query);
+            String adresse=rs.getString("adresse");
+            String email=rs.getString("email");
+            String motDepasse=rs.getString("motdepasse");
+            String nom=rs.getString("nom");
+            int numeroAdmin=rs.getInt("numeroClient");
+            String prenom=rs.getString("prenom");
+            String pseudo=rs.getString("pseudo");
+            String tele=rs.getString("tele");
+        Client c = new Client(numeroAdmin, nom, prenom, cin, tele, email, adresse, pseudo, motDepasse);
+        return c;
+    }
+    
+    
     //***********************************************************************************************************
      public boolean VerifierExistancePharmacien(String cin) throws SQLException{
         String req="select numeroPharmacien from pharmacien where cin='"+cin+"'";
@@ -209,12 +222,12 @@ public class baseD {
      
     ///**********************************************************************************************************
      public ArrayList<Pharmacien> selectPharmacien() throws SQLException {
-         Statement stmt = con.createStatement();
-         String query="select * from pharmacien";
+        Statement stmt = con.createStatement();
+        String query="select * from pharmacien";
         stmt.executeQuery(query);
         ResultSet rs=stmt.executeQuery(query);
         ArrayList<Pharmacien> P=new ArrayList<Pharmacien>();
-      while(rs.next()){
+        while(rs.next()){
             String adresse=rs.getString("adresse");
             String cin=rs.getString("cin");
             String email=rs.getString("email");
@@ -231,6 +244,24 @@ public class baseD {
      }
      
      
+    public Pharmacien selectPharmacien(String cin) throws SQLException {
+        Statement stmt = con.createStatement();
+        String query = "select * from pharmacien where cin = '"+cin+"'";
+        stmt.executeQuery(query);
+        ResultSet rs=stmt.executeQuery(query);
+            String adresse=rs.getString("adresse");
+            String email=rs.getString("email");
+            String motDepasse=rs.getString("motdepasse");
+            String nom=rs.getString("nom");
+            int numeroAdmin=rs.getInt("numeroPharmacien");
+            String prenom=rs.getString("prenom");
+            String pseudo=rs.getString("pseudo");
+            String tele=rs.getString("tele");
+        Pharmacien ph = new Pharmacien(numeroAdmin, nom, prenom, cin, tele, email, adresse, pseudo, motDepasse);
+        return ph;
+     }
+     
+     
      //******************************************************************************************************************
      public ArrayList<Commande> selectCommande() throws SQLException {
         Statement stmt = con.createStatement();
@@ -239,11 +270,11 @@ public class baseD {
         ResultSet rs=stmt.executeQuery(query);
         ArrayList<Commande> Co=new ArrayList<Commande>();
         while(rs.next()){
-       String dateCommande=rs.getString("dateCommande");
-       String EtatCommade=rs.getString("EtatCommade");
-       int numeroCommande=rs.getInt("numeroCommande");
-       Commande com=new Commande( numeroCommande, dateCommande, EtatCommade);
-       Co.add(com);
+            String dateCommande=rs.getString("dateCommande");
+            String EtatCommade=rs.getString("EtatCommade");
+            int numeroCommande=rs.getInt("numeroCommande");
+            Commande com=new Commande( numeroCommande, dateCommande, EtatCommade);
+            Co.add(com);
         }
         return Co;
      }
@@ -287,9 +318,24 @@ public class baseD {
         return p;
     }
      
+    public LinkedList<Commande> AfficherPanier(int numeroclient) throws SQLException{
+        LinkedList<Commande> l = new LinkedList<Commande>();
+        String req = "select * from commande where numeroclient = "+numeroclient;
+        Statement st = con.createStatement();
+        ResultSet rst = st.executeQuery(req);
+        while(rst.next()){
+            int numeroCommande = rst.getInt(1);
+            String dateCommande = rst.getString(2);
+            String etatCommande = rst.getString(3);
+            Commande c = new Commande(numeroCommande, dateCommande, etatCommande);
+            l.add(c);
+        }
+        return l;
+    }
+     
  
     public LinkedList<Facture> AfficherFacture(int numerofacture) throws SQLException{
-        String req = "select * from facture where numerofacture="+numerofacture;
+        String req = "select * from facture where numerofacture = "+numerofacture;
         LinkedList<Facture> p = new LinkedList<Facture>();
         Statement st = con.createStatement();
         ResultSet rst = st.executeQuery(req);
@@ -324,8 +370,8 @@ public class baseD {
 // UPDATE COMMANDE
     public void modifierCommande(int numeroCommande, String dateCommande, String EtatCommande) throws SQLException{
         PreparedStatement stm = con.prepareStatement("update Commande SET dateCommande=?, EtatCommande=? where numeroCommande=?");
-    stm.setString(1, dateCommande);
-    stm.setString(2, EtatCommande);
+        stm.setString(1, dateCommande);
+        stm.setString(2, EtatCommande);
         stm.setInt(3, numeroCommande);
         stm.executeUpdate();
     }
@@ -351,8 +397,8 @@ public class baseD {
     public void modifierFacture(int numeroFacture, String DateFacture, double SommeTotale) throws SQLException{
         PreparedStatement stm = con.prepareStatement("update Facture SET DateFacture=?, SommeTotale=? where numeroFacture=?");
         stm.setString(1, DateFacture);
-    stm.setDouble(2, SommeTotale);
-    stm.setInt(3, numeroFacture);
+        stm.setDouble(2, SommeTotale);
+        stm.setInt(3, numeroFacture);
         stm.executeUpdate();
     }
  
