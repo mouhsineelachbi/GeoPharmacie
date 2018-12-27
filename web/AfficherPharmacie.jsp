@@ -12,7 +12,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>LES PHARMACIES</title>
+        <title>JSP Page</title>
     </head>
     <body>
         <%
@@ -25,9 +25,9 @@
                 <tr>
                     <th>NOM PHARMACIE</th>
                 
-                    <th>ADRESSE : </th>
+                    <th>ADRESSE  </th>
                 
-                    <th>TEL : </th>
+                    <th>TEL </th>
                 </tr>
                 <tr>
                     <%
