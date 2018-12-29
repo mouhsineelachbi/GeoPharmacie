@@ -1,7 +1,4 @@
 package GeoPharmacie;
-
-
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -270,20 +267,20 @@ public class baseD {
         Statement stmt = con.createStatement();
         String query="select * from pharmacien";
         stmt.executeQuery(query);
-        ResultSet rs=stmt.executeQuery(query);
-        ArrayList<Pharmacien> P=new ArrayList<Pharmacien>();
-        while(rs.next()){
-            String adresse = rs.getString("adresse");
-            String cin = rs.getString("cin");
-            String email = rs.getString("email");
-            String motDepasse = rs.getString("motdepasse");
-            String nom = rs.getString("nom");
-            int numeroAdmin = rs.getInt("numeroPharmacien");
-            String prenom = rs.getString("prenom");
-            String pseudo = rs.getString("pseudo");
-            String tel = rs.getString("tele");
-            int idPharmacie = rs.getInt(10);
-            Pharmacien ph=new Pharmacien(numeroAdmin, nom, prenom, cin, tel, email, adresse, pseudo, motDepasse, idPharmacie);
+        ResultSet rst = stmt.executeQuery(query);
+        ArrayList<Pharmacien> P = new ArrayList<Pharmacien>();
+        while(rst.next()){
+            int numeroPharmacien = rst.getInt(1);
+            String nom = rst.getString(2);
+            String prenom = rst.getString(3);
+            String cin = rst.getString(4);
+            String tel = rst.getString(5);
+            String email = rst.getString(6);
+            String pseudo = rst.getString(7);
+            String adresse = rst.getString(8);
+            String password = rst.getString(9);
+            int idPharmacie = rst.getInt(10);
+            Pharmacien ph=new Pharmacien(numeroPharmacien , nom, prenom, cin, tel, email, adresse, pseudo, password, idPharmacie);
             P.add(ph);
         }
         return P;
@@ -295,7 +292,7 @@ public class baseD {
         String query="select * from commande";
         stmt.executeQuery(query);
         ResultSet rs=stmt.executeQuery(query);
-        ArrayList<Commande> Co=new ArrayList<Commande>();
+        ArrayList<Commande> Co = new ArrayList<Commande>();
         while(rs.next()){
             String dateCommande=rs.getString("dateCommande");
             String EtatCommade=rs.getString("EtatCommade");

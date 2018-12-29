@@ -8,6 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,6 +23,12 @@ public class login extends HttpServlet {
         String cin = request.getParameter("cin");
         String password = request.getParameter("password");
         String type = request.getParameter("type");
+        Cookie ck = new Cookie("username", cin);
+        ck.setMaxAge(3600);
+        Cookie pass = new Cookie("password", password);
+        pass.setMaxAge(3600);
+        response.addCookie(ck);
+        response.addCookie(pass);
         baseD db = null;
         try {
             db = new baseD();
@@ -43,7 +50,7 @@ public class login extends HttpServlet {
                 }
                 else{
                     // CLIENT DOESNT EXIST
-                    response.sendRedirect("login.jsp");
+                    //response.sendRedirect("login.jsp");
                 }
             }
             else{
@@ -64,8 +71,6 @@ public class login extends HttpServlet {
                     response.sendRedirect("login.jsp");
                 }
             }
-
-        
     }
 
 

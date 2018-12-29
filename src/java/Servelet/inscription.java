@@ -6,10 +6,7 @@
 package Servelet;
 
 import GeoPharmacie.baseD;
-import java.awt.HeadlessException;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,54 +16,34 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
-/**
- *
- * @author Hamza
- */
 @WebServlet(name = "inscription", urlPatterns = {"/inscription"})
 public class inscription extends HttpServlet {
-
-   
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, ClassNotFoundException{
-            baseD op=new baseD();
-            System.out.println("avant recupirer les champs d'input*****************************************************************");
+        baseD op=new baseD();
+        System.out.println("avant recupirer les champs d'input*****************************************************************");
 
-         String action = request.getParameter("action");
-          if(action.equals("ajouter")){
-         System.out.println("valablité dial action=ajouter*****************************************************************");
+        String action = request.getParameter("action");
+        if(action.equals("ajouter")){
+            System.out.println("valablité dial action=ajouter*****************************************************************");
                
-              String nom = request.getParameter("nom");
-              String prenom = request.getParameter("prenom");
-              String cin =request.getParameter("cin");
-              String tel =request.getParameter("tel");
-              String email =request.getParameter("email");
-              String adresse =request.getParameter("adresse");
-              String pseudo =request.getParameter("pseudo");
-              String motdepasse =request.getParameter("motdepasse");
-              String type =request.getParameter("type");
-              if(type.equals("Client")){
-              if(!op.VerifierExistanceClient(cin)){
-                
-                 op.insertInToClient(nom, prenom, tel, cin, email, pseudo, adresse, motdepasse, 0);
-                 
-                 System.out.println("if de client************************"+nom+""+cin+"****************************************************");
-                 response.sendRedirect("index.html");
-                
-              }
-                    else
-                    {
+            String nom = request.getParameter("nom");
+            String prenom = request.getParameter("prenom");
+            String cin =request.getParameter("cin");
+            String tel =request.getParameter("tel");
+            String email =request.getParameter("email");
+            String adresse =request.getParameter("adresse");
+            String pseudo =request.getParameter("pseudo");
+            String motdepasse =request.getParameter("motdepasse");
+            String type =request.getParameter("type");
+            if(type.equals("Client")){
+                if(!op.VerifierExistanceClient(cin)){
+                    op.insertInToClient(nom, prenom, tel, cin, email, pseudo, adresse, motdepasse, 0);
+                    System.out.println("if de client************************"+nom+""+cin+"****************************************************");
+                    response.sendRedirect("index.html");
+                }
+                else{
                         
                         /*
                         try{
@@ -81,14 +58,14 @@ public class inscription extends HttpServlet {
               }
               else
               {
-                  int idPharmacie =Integer.parseInt(request.getParameter("idPharmacie"));//*****************************we are here 15/12/2018 00:08************************************
-                  if(!op.VerifierExistancePharmacien(cin)){
-                 op.insertInToPharmacien(nom, prenom, tel, cin, email, pseudo, adresse, motdepasse, 0, idPharmacie);
-                  System.out.println("if de pharmacien************************"+nom+""+cin+"****************************************************");
-                 response.sendRedirect("index.html");
-              }
-                  else
-                  {
+                int idPharmacie = Integer.parseInt(request.getParameter("idPharmacie"));//*****************************we are here 15/12/2018 00:08************************************
+                if(!op.VerifierExistancePharmacien(cin)){
+                    op.insertInToPharmacien(nom, prenom, tel, cin, email, pseudo, adresse, motdepasse, 0, idPharmacie);
+                    System.out.println("if de pharmacien************************"+nom+""+cin+"****************************************************");
+                    response.sendRedirect("index.html");
+                }
+                else
+                {
                     //  java.awt.event.ActionEvent evt;
                       //JOptionPane jop1;
  
