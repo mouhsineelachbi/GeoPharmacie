@@ -7,11 +7,13 @@
     </head>
     <body>
         <form action="login" method="POST">
+            
             Username <input type="text" name="cin"/><br><br>
             Login <input type="password" name="password"/><br><br>
             Type <br>
             <input type="radio" name="type" value="client"> Client <br>
             <input type="radio" name="type" value="pharmacie"> Pharmacien <br>
+           
             <input type="submit" value="login"/>
         </form>
     </body>

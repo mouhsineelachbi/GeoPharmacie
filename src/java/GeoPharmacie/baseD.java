@@ -177,6 +177,7 @@ public class baseD {
         String req = "select * from client where cin ='"+cin+"'";
         Statement st = con.createStatement();
         ResultSet rst = st.executeQuery(req);
+
         int numClient = rst.getInt(1);
         String nom = rst.getString(2);
         String prenom = rst.getString(3);
@@ -210,14 +211,14 @@ public class baseD {
         return lc;
     }
     
-    public Client informationsClient(int numeroClient) throws SQLException{
+    public Client informationsClient(String cin) throws SQLException{
         Client c = new Client();
         Statement stmt = con.createStatement();
-        String query="select * from client where numeroclient="+c.getNumClient()+"";
+        String query="select * from client where cin='"+cin+"' ";
         stmt.executeQuery(query);
         ResultSet rs = stmt.executeQuery(query);
-        String adresse=rs.getString("adresse");
-        String cin=rs.getString("cin");
+        while(rs.next()){
+        //cin=rs.getString("cin");
         String email=rs.getString("email");
         String motDepasse=rs.getString("motdepasse");
         String nom=rs.getString("nom");
@@ -225,8 +226,10 @@ public class baseD {
         String prenom=rs.getString("prenom");
         String pseudo=rs.getString("pseudo");
         String tele=rs.getString("tele");
+        String adresse=rs.getString(7);
          c= new Client(numeroAdmin, nom, prenom, cin, tele, email, adresse, pseudo, motDepasse);
-        return c;
+        }
+         return c;
     }
         
 //**********************************************************************************************************
