@@ -15,9 +15,28 @@
     </head>
     <body>
   <!-- -->
-        
+    <%
+             System.out.println("hna  instatitiation du bd");
+            baseD op = new baseD();
+            
+            %>
+        <%
+                                
+                //recuperer le client
+                Client cl=new Client();
+                cl =(Client)request.getAttribute("Client");
+                System.out.println("hna kanrecupiriw l objet client99999999999999999999999999999999999999"+cl.getPrenom());
+           
+                                cl= op.informationsClient(cl.getCin());                                
+                                
+            
+                //faux
+                
+                %>
          <c:if test="${!empty sessionScope.cin && !empty sessionScope.password}">
-                <p>  Bon Journéé Mr.${sessionScope.nom} ${sessionScope.prenom}</p>
+                <p>  <!--Bon Journéé Mr.${sessionScope.nom} ${sessionScope.prenom}-->
+                 Bienvenue<%=cl.getNom()%> <%=cl.getPrenom()%>
+             </p>
          </c:if>
     <%
         int i;
@@ -31,11 +50,7 @@
         <form action="inscription" method="post">
         <input type="hidden" name="action" value="info"/>
         <table border="" background="aqua">
-                 <%
-             System.out.println("hna  instatitiation du bd");
-            baseD op = new baseD();
-            
-            %>
+               
                 <tr>
                     
                     <th>Nom</th>
@@ -50,19 +65,7 @@
  
                    
                 </tr> 
-                            <%
-                                
-                //recuperer le client
-                Client cl=new Client();
-                cl =(Client)request.getAttribute("Client");
-                System.out.println("hna kanrecupiriw l objet client99999999999999999999999999999999999999"+cl.getPrenom());
-           
-                                cl= op.informationsClient(cl.getCin());                                
-                                
-            
-                //faux
-                
-                %>
+                            
                 <tr>
                     <td><%=cl.getNom() %></td>
                     <td><%=cl.getPrenom() %></td>
