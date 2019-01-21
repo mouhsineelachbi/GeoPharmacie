@@ -35,7 +35,7 @@
                 %>
          <c:if test="${!empty sessionScope.cin && !empty sessionScope.password}">
                 <p>  <!--Bon Journéé Mr.${sessionScope.nom} ${sessionScope.prenom}-->
-                 Bienvenue<%=cl.getNom()%>   <%=cl.getPrenom()%>
+                 Bienvenue<%=cl.getNom()%>  <%=cl.getPrenom()%>
              </p>
          </c:if>
     <%
