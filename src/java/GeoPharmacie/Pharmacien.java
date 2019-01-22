@@ -17,6 +17,10 @@ public class Pharmacien extends Utilisateur {
         super(Nom, Prenom, Cin, tel, Email, Adresse, Pseudo, motDePasse);
         this.NumeroPharmacien = NumeroPharmacien;
     }
+
+    Pharmacien() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
    
 
     public int getNumeroPharmacien() {

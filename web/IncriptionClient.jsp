@@ -10,75 +10,61 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <link href="newcss.css" rel="stylesheet" media="all"/>
     </head>
     <body>
+        <div class="I">
+        
         <form action="inscription" method="post">
-        <table border="">
-            <tr>
-                <td> NOM :</td>
-                <td><input name="nom" type="text"/> </td>
-            </tr>
-            <tr>
-                <td> PRENOM :</td> <td><input name="prenom" type="text"/> </td>
-            </tr>
-            <tr>
-                <td> CIN :</td> <td> <input name="cin" type="text"/></td>
-            </tr>
-            <tr>
-                <td> TEL :</td> <td><input name="tel" type="tel"/> </td>
-            </tr>
-            <tr>
-                <td> EMAIL :</td> <td><input name="email" type="email"/> </td>
-            </tr>
-            <tr>
-                <td> ADRESSE :</td> <td><input name="adresse" type="text"/> </td>
-            </tr>
-            <tr>
-                <td> PSEUDO :</td> <td> <input name="pseudo" type="text"/></td>
-            </tr>
-            <tr>
-                <td> MOT DE PASSE :</td> <td> <input name="motdepasse" type="password"/></td>
-            </tr>
-            <tr>
-                <td> TYPE :</td>
-                <td>
-                    <select name="type" id="list">
-                                <option value="Client">Client</option>
-                                <option value="Pharmacien">Pharmacien</option> 
-                     </select>
-                     
-                </td>
-            </tr>
-            <tr id="5">
-            <td id="3"><input type="hidden" name="idPharmacie" id="idPharmacie" value="Identité de la pharmacie"disabled="disabled" /></td>
-            <td id="4"><input type="hidden" name="idPharmacie" id="id2" /></td>
-            </tr>
-            <tr>  <td>
-                                        <input type='hidden' name="action" value="ajouter"/>
-                                        
-                </td> 
-                <td>
-                    <input type="submit" value="Enregister" />                        
-                </td>
-            </tr>
+            <h1>inscription Clien</h1>
             
-
+                <input name="nom" type="text" placeholder="nom" class="txtb">
+                <input name="prenom" type="text" placeholder="prenom" class="txtb">
+                <input name="cin" type="text" placeholder="cin" class="txtb">
+                <input name="tel" type="tel" placeholder="tel" class="txtb">
+                <input name="email" type="email" placeholder="email" class="txtb">
+                <input name="adresse" type="text" placeholder="adresse" class="txtb">
+                <input name="pseudo" type="text" placeholder="pseudo" class="txtb">
+                <input name="motdepasse"  placeholder="motdepasse" class="txtb">
+                <div class="b">
+                  <p><centet>TYPE :</centet></p>
+                        <label>
+                            <select name="type" id="list">
+                                        <option value="Client">Client</option>
+                                        <option value="Pharmacien">Pharmacien</option> 
+                            </select>
+                        </label>
+                </div>
+                <div id="5">
+                <input id="4"  name="idPharmacie" placeholder="idPharmacie" class="txtb">
+                <input type='hidden' name="action" value="ajouter">
+                </div>
+                <input type="submit" value="Enregister" class="signup-btn" />
+                <a href="http://localhost:8080/GeoPharmacieweb/login.jsp">déjà inscrit</a>
                 
+                
+                
+                
+                                     
+                                        
+        </div>
+                
+               
                        <script>
-                           document.getElementById('3').style.visibility = 'hidden';
+                           
                            document.getElementById('4').style.visibility = 'hidden';
                                 var list = document.getElementById('list'); 
                                 list.addEventListener('change', function() {
                                 // On affiche le contenu de l'élément <option> ciblé par la propriété selectedIndex
                                 if(list.options[list.selectedIndex].innerHTML=='Pharmacien'){
-                                    document.getElementById('3').style.visibility= 'visible';
+                                    
                                     document.getElementById('4').style.visibility = 'visible';
                                     document.getElementById('5').style.visibility = 'visible';
                                     document.getElementById('idPharmacie').type = 'text';
                                     document.getElementById('id2').type = 'number';
                                 }
                                 else{
-                                     document.getElementById('3').style.visibility= 'hidden';
+                                     
                                     document.getElementById('4').style.visibility = 'hidden';
                                     document.getElementById('5').style.visibility = 'hidden';
                                     
@@ -87,7 +73,9 @@
                                 //alert(list.options[list.selectedIndex].innerHTML);
                                 }, true);
                        </script>
-        </table>
+        
+            
         </form>
+        </div>
     </body>
 </html>

@@ -56,14 +56,15 @@ public class login extends HttpServlet {
                         rd.forward(request, response);
                         String nom=c.getNom();
                         String prenom=c.getPrenom();
+                        //session
                         HttpSession session =request.getSession();
                         session.setAttribute("nom", nom);
                         session.setAttribute("prenom", prenom);
                         session.setAttribute("cin", cin);
                         session.setAttribute("password", password);
-                        
-                        response.sendRedirect("MesInformations.jsp");
-                        
+                        System.out.println("********************************************************************** login avant la redirection");
+                       // response.sendRedirect("MesInformations.jsp");
+                        System.out.println("********************************************************************** login apres la redirection");
                         
                     }
                     else{

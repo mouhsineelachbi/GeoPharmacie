@@ -12,6 +12,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Mes InfoRmations</title>
+        <link href="newcss.css" rel="stylesheet" media="all"/>
     </head>
     <body>
   <!-- -->
@@ -33,11 +34,7 @@
                 //faux
                 
                 %>
-         <c:if test="${!empty sessionScope.cin && !empty sessionScope.password}">
-                <p>  <!--Bon Journéé Mr.${sessionScope.nom} ${sessionScope.prenom}-->
-                 Bienvenue<%=cl.getNom()%>  <%=cl.getPrenom()%>
-             </p>
-         </c:if>
+         
     <%
         int i;
         Cookie[] k=request.getCookies() ;
@@ -47,37 +44,45 @@
     
     %>
     
-        <form action="inscription" method="post">
-        <input type="hidden" name="action" value="info"/>
-        <table border="" background="aqua">
-               
-                <tr>
-                    
-                    <th>Nom</th>
-                    <th>Prenom</th>
-                    <th>Email</th>
-                    <th>Cin</th>
-                    <th> Adresse</th>
-                    <th> Pseudo</th>
-                    <th> Tel</th>
-                    
-                    
- 
-                   
-                </tr> 
+      <div class="I">
+         <form action="ModifierClient" method="post">
+                    <c:if test="${!empty sessionScope.cin && !empty sessionScope.password}">
+             <h1>  Bon Journéé Mr.${sessionScope.nom} ${sessionScope.prenom}</h1>
+                <!-- Bienvenue<%=cl.getNom()%>  <%=cl.getPrenom()%>-->
+            
+                    </c:if>  
+        
+              
+              <input  name="nom" value="<%=cl.getNom()  %>" class="txtb">
+              <input  name="prenom" value="<%=cl.getPrenom()  %>" class="txtb">
+              <input  name="email" value="<%=cl.getEmail() %>" class="txtb">
+              <input  name="cin" value="<%=cl.getCin() %>" class="txtb">
+              <input  name="adresse" value="<%=cl.getAdresse() %>" class="txtb">
+              <input  name="pseudo" value="<%=cl.getPseudo()%>" class="txtb">
+              <input  name="tel" value="<%=cl.getTel()%>" class="txtb">
+              
+              
+        
+        
+                     <form action="ModifierClient" method="post">
+                            <input type="hidden" name="numeroclient" value="<%=cl.getNumClient()  %>"/>
+                            <input type="hidden" name="nom" value="<%=cl.getNom()  %>"/>
+                            <input type="hidden" name="prenom" value="<%=cl.getPrenom()  %>"/>
+                            <input type="hidden" name="cin" value="<%=cl.getCin()  %>"/>
+                            <input type="hidden" name="email" value="<%=cl.getEmail()  %>"/>
+                            <input type="hidden" name="adresse" value="<%=cl.getAdresse() %>"/>
+                             <input type="hidden" name="pseudo" value="<%=cl.getPseudo()  %>"/>
+                            <input type="hidden" name="tel" value="<%=cl.getTel() %>"/>
+                            <input type="hidden" name="motdepasse" value="<%=cl.getMotDePasse() %>"/>
+                           <input type='hidden' name="action" value="ModifierClient"/>
+                           
+                           
                             
-                <tr>
-                    <td><%=cl.getNom() %></td>
-                    <td><%=cl.getPrenom() %></td>
-                    <td><%=cl.getEmail() %></td>
-                    <td><%=cl.getCin() %></td>
-                    <td> <%=cl.getAdresse() %></td>
-                    <td> <%=cl.getPseudo()%></td>
-                    <td> <%=cl.getTel()%></td>
-                    
-                </tr>
-        </table>
+                             <input type="submit" value="Modifier les informations" class="signup-btn">
+                            
+                             
         </form>
-           <!-- </c:if>-->         
+           <!-- </c:if>-->  
+      </div>
     </body>
 </html>

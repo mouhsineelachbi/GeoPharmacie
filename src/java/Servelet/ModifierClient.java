@@ -67,6 +67,10 @@ public class ModifierClient extends HttpServlet {
                   c.setMotDePasse(motdepasse);
                   op.modifierClient(numeroclient, nom, prenom, cin, tel, email, adresse, pseudo, motdepasse);
                   //response.sendRedirect("Accueil.jsp");
+                  request.setAttribute("Client", c);
+                ServletContext context= getServletContext();
+                RequestDispatcher rd= context.getRequestDispatcher("/MesInformations.jsp");
+                rd.forward(request, response);
         }
        
     }

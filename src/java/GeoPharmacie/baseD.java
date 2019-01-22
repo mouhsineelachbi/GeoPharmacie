@@ -62,9 +62,9 @@ public class baseD {
 //************************************************************************************************************************************************
     public void insertInToPharmacien( String nom,String prenom,String tele,String cin,String email,String pseudo,String adresse,String motDepasse,int numeroPharmacien,int idPharmacie) throws SQLException{
         Statement stmt = con.createStatement();
-        String query="INSERT INTO pharmacien (numeroPharmacien,+nom,prenom,cin, tele,email, pseudo, adresse,motDepasse,idPharmacie)VALUES ("
+        String query="INSERT INTO pharmacien (numeroPharmacien,nom,prenom,cin, tele,email, pseudo, adresse,motDepasse,idPharmacie)VALUES ("
                     +numeroPharmacien+",'"+nom+"',' "+prenom+"','"
-                    + cin+"','"+ tele+"',' "+email+"','"+ pseudo+"','"+ adresse+"','"+motDepasse+"','"+idPharmacie+"')";
+                    + cin+"','"+ tele+"',' "+email+"','"+ pseudo+"','"+ adresse+"','"+motDepasse+"',"+idPharmacie+")";
         System.out.println("ibase de pharmacien************************");
         stmt.executeUpdate(query);
     }
@@ -250,9 +250,12 @@ public class baseD {
      
 //**********************************************************************************************************
     public Pharmacien selectPharmacien(String cin) throws SQLException{
-        String req = "select * from pharmacien where cin='"+cin+"'";
+        Pharmacien p=new Pharmacien();
         Statement st = con.createStatement();
+        String req = "select * from pharmacien where cin='"+cin+"'";
+        st.executeQuery(req);
         ResultSet rst = st.executeQuery(req);
+        while(rst.next()){
         int numeroPharmacien = rst.getInt(1);
         String nom = rst.getString(2);
         String prenom = rst.getString(3);
@@ -262,7 +265,11 @@ public class baseD {
         String adresse = rst.getString(8);
         String password = rst.getString(9);
         int idPharmacie = rst.getInt(10);
-        Pharmacien p =new Pharmacien(numeroPharmacien, nom, prenom, cin, tel, email, adresse, pseudo, password, idPharmacie);
+            System.out.println("***************************************************idPharmacie="+idPharmacie);
+        p =new Pharmacien(numeroPharmacien, nom, prenom, cin, tel, email, adresse, pseudo, password, idPharmacie);
+        
+       
+        }
         return p;
     }
     
