@@ -13,23 +13,23 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <link href="AF.css" rel="stylesheet" media="all"/>
     </head>
     <body>
+        <div class="A">
+        <form action="AfficherPharmacie">
+            <h1>Pharmacies</h1>
         <%
             
             baseD op = new baseD();
             
             %>
-            <table border="" >
+                <input align="right" disabled="disabled"  value="NOM PHARMACIE" class="txta">
                 
-                <tr>
-                    <th>NOM PHARMACIE</th>
+                <input disabled="disabled"  value="ADRESSE" class="txta">
                 
-                    <th>ADRESSE  </th>
+                <input align="left" disabled="disabled"  value="TEL" class="txta">
                 
-                    <th>TEL </th>
-                </tr>
-                <tr>
                     <%
                                 LinkedList<Pharmacie> Pharmacies = op.AfficherPharmacie();                                
                                 System.out.println("hhhhh"+Pharmacies.size());
@@ -37,17 +37,22 @@
                 
                 // n'est pas terminé
                 %>
-                    <th><%=p.getNomPharmacie() %></th>
+                <br>
+                <input  disabled="disabled"  value="<%=p.getNomPharmacie() %>" class="txtb">
                 
-                    <th><%=p.getAdresse()%> </th>
+                <input disabled="disabled"  value="<%=p.getAdresse()%>" class="txtb">
                 
-                    <th> <%=p.getTele()%></th>
-                </tr>
+                <input  disabled="disabled"  value="<%=p.getTele()%>" class="txtb">
+                
+                 
                  <%
                     
             }
         
             %>
-            </table>
+            
+           
+        </form>
+        </div>
     </body>
 </html>

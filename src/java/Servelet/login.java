@@ -82,8 +82,14 @@ public class login extends HttpServlet {
                 if(db.VerifierExistancePharmacien(cin)){
                      // PHARMACIEN EXIST
                      Pharmacien p = db.selectPharmacien(cin);
+                     System.out.println(" 1-ici login.java p.getIdPharmacie()"+p.getIdPharmacie());
                      if((p.getMotDePasse()).equals(password)){
-                         response.sendRedirect("login.jsp");
+                         System.out.println("2- ici login.java p.getIdPharmacie()"+p.getIdPharmacie());
+                          request.setAttribute("Pharmacien", p);
+                        ServletContext context= getServletContext();
+                        context.getRequestDispatcher("/MesInformationsPharmacien.jsp").forward(request, response);
+                       // context.getRequestDispatcher("/InfoMonPharmacie.jsp").forward(request, response);
+                        // response.sendRedirect("login.jsp");
                      }
                      else{
                          // WRONG PASSWORD

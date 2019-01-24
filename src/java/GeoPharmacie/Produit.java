@@ -23,8 +23,9 @@ public class Produit {
      private double TemperatureStock;
      private int NumeroProduit;
      private double Prix;
+     private int idpharmacie;
 
-    public Produit(int NumeroProduit,int ReferenceProduit, String Libelle, String DateFabrication, String DateExpiration, double TemperatureStock,  double Prix) {
+    public Produit(int NumeroProduit,int ReferenceProduit, String Libelle, String DateFabrication, String DateExpiration, double TemperatureStock,  double Prix,int idpharmacie) {
         this.ReferenceProduit = ReferenceProduit;
         this.Libelle = Libelle;
         this.DateFabrication = DateFabrication;
@@ -32,7 +33,29 @@ public class Produit {
         this.TemperatureStock = TemperatureStock;
         this.NumeroProduit = NumeroProduit;
         this.Prix = Prix;
+        this.idpharmacie=idpharmacie;
     }
+
+    public Produit() {
+        
+    }
+
+    public void setTemperatureStock(double TemperatureStock) {
+        this.TemperatureStock = TemperatureStock;
+    }
+
+    public void setPrix(double Prix) {
+        this.Prix = Prix;
+    }
+
+    public void setIdpharmacie(int idpharmacie) {
+        this.idpharmacie = idpharmacie;
+    }
+
+    public int getIdpharmacie() {
+        return idpharmacie;
+    }
+    
 
     public int getReferenceProduit() {
         return ReferenceProduit;

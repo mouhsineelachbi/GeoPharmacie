@@ -17,7 +17,7 @@ public class Planning {
     private String dateOuverture;
     private String dateFermeture;
     private LinkedList<String> dateFerer;
-    private LinkedList<String>dateGarde;
+    private LinkedList<String> dateGarde;
 
     public Planning(int numeroPharmacien, String dateOuverture, String dateFermeture, LinkedList<String> dateFerer) {
         this.numeroPharmacien = numeroPharmacien;

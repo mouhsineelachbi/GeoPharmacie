@@ -1,7 +1,15 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package Servelet;
+
 import GeoPharmacie.Client;
+import GeoPharmacie.Pharmacien;
 import GeoPharmacie.baseD;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -13,26 +21,31 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "ModifierClient", urlPatterns = {"/ModifierClient"})
-public class ModifierClient extends HttpServlet {
+/**
+ *
+ * @author Hamza
+ */
+@WebServlet(name = "ModifierPharmacien", urlPatterns = {"/ModifierPharmacien"})
+public class ModifierPharmacien extends HttpServlet {
 
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
-        
-        baseD op = new baseD();
+       baseD op = new baseD();
         String action = request.getParameter("action");
-        if(action.equals("ModifierClient")){
-            int numeroclient =Integer.parseInt(request.getParameter("numeroclient"));
+        if(action.equals("ModifierPharmacien")){
+            int numeroPharmacien =Integer.parseInt(request.getParameter("numeroPharmacien"));
             String nom = request.getParameter("nom");
             String prenom = request.getParameter("prenom");
             String cin = request.getParameter("cin");
             String email = request.getParameter("email");
-            String tel = request.getParameter("tel");
+            String tel = request.getParameter("tele");
             String adresse = request.getParameter("adresse");
             String pseudo = request.getParameter("pseudo");
             String motdepasse =request.getParameter("motdepasse");
-            Client c;
-                  c = new Client();
+            int idPharmacie=Integer.parseInt(request.getParameter("idpharmacie"));
+            Pharmacien c;
+                  c = new Pharmacien();
                   c.setNom(nom);
                   c.setPrenom(prenom);
                   c.setCin(cin);
@@ -40,24 +53,28 @@ public class ModifierClient extends HttpServlet {
                   c.setTel(tel);
                   c.setAdresse(adresse);
                   c.setPseudo(pseudo);
-                  c.setNumClient(numeroclient);
+                  c.setNumeroPharmacien(numeroPharmacien);
                   c.setMotDePasse(motdepasse);
-            request.setAttribute("Client", c);
+                  c.setIdPharmacie(idPharmacie);
+                  
+            request.setAttribute("Pharmacien", c);
             ServletContext context= getServletContext();
-            RequestDispatcher rd= context.getRequestDispatcher("/ModifierClient.jsp");
+            RequestDispatcher rd= context.getRequestDispatcher("/ModifierPharmacien.jsp");
             rd.forward(request, response);
         }
         if(action.equals("modifier")){
-            int numeroclient =Integer.parseInt(request.getParameter("numeroclient"));
+            int numeroPharmacien =Integer.parseInt(request.getParameter("numeroPharmacien"));
             String nom = request.getParameter("nom");
             String prenom = request.getParameter("prenom");
             String cin = request.getParameter("cin");
             String email = request.getParameter("email");
-            String tel = request.getParameter("tel");
+            String tel = request.getParameter("tele");
             String adresse = request.getParameter("adresse");
             String pseudo = request.getParameter("pseudo");
             String motdepasse=request.getParameter("motdepasse");
-            Client c = new Client();
+            int idPharmacie=Integer.parseInt(request.getParameter("idpharmacie"));
+            Pharmacien c;
+                  c = new Pharmacien();
                   c.setNom(nom);
                   c.setPrenom(prenom);
                   c.setCin(cin);
@@ -65,15 +82,18 @@ public class ModifierClient extends HttpServlet {
                   c.setTel(tel);
                   c.setAdresse(adresse);
                   c.setPseudo(pseudo);
-                  c.setNumClient(numeroclient);
+                  c.setNumeroPharmacien(numeroPharmacien);
                   c.setMotDePasse(motdepasse);
-                  op.modifierClient(numeroclient, nom, prenom, cin, tel, email, adresse, pseudo, motdepasse);
-                  request.setAttribute("Client", c);
+                  c.setIdPharmacie(idPharmacie);
+                  op.modifierPharmacien(idPharmacie, nom, prenom, cin, tel, email, adresse, pseudo, motdepasse,numeroPharmacien);
+                  System.out.println("----------------------------------------------------idpharmacie=    "+idPharmacie);
+                  
+                  request.setAttribute("Pharmacien", c);
                 ServletContext context= getServletContext();
-                RequestDispatcher rd= context.getRequestDispatcher("/MesInformations.jsp");
+                RequestDispatcher rd= context.getRequestDispatcher("/MesInformationsPharmacien.jsp");
                 rd.forward(request, response);
-                   System.out.println("***********************dans action=modifier************************************ modifierClient.java avant la redirection");
-                  response.sendRedirect("MesInformations.jsp");
+                   System.out.println("***********************dans action=modifier**************   tele=    ****************** modifierClient.java avant la redirection"+c.getTel());
+//                  response.sendRedirect("MesInformationsPharmacien.jsp");
                   System.out.println("***********************dans action=modifier************************************ modifierClient.java apres la redirection");
         }
        

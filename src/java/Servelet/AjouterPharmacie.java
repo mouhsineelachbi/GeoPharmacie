@@ -1,9 +1,11 @@
 package Servelet;
+import GeoPharmacie.Pharmacie;
 import GeoPharmacie.baseD;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -28,11 +30,25 @@ public class AjouterPharmacie extends HttpServlet {
                String tel =request.getParameter("tel");
                
                if(!op.VerifierExistanceNomPharmacie(nomPharmacie)){
-               op.insertInToPharmacie(0, nomPharmacie, adresse, numeroPharmacien, tel);
+               op.insertInToPharmacie(0, nomPharmacie, adresse, tel);
                response.sendRedirect("AfficherPharmacie.jsp");
                }
                else{
                 response.sendRedirect("AfficherPharmacie.jsp");}
+          }
+          if(action.equals("Afficher")){
+                int idPharmacie=Integer.parseInt(request.getParameter("idPharmacie"));
+                Pharmacie phcie =new Pharmacie();
+                phcie=(Pharmacie)op.selectPharmacie(idPharmacie);
+                String nomPharmacie =phcie.getNomPharmacie();
+                String adresse =phcie.getAdresse();
+                String tel=phcie.getTele();
+                Pharmacie p=new Pharmacie(idPharmacie, nomPharmacie, adresse, tel);
+                request.setAttribute("Pharmacie", p);
+                        ServletContext context= getServletContext();
+                        context.getRequestDispatcher("/InfoMonPharmacie.jsp").forward(request, response);
+                
+              
           }
     }
     

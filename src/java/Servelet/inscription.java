@@ -6,6 +6,7 @@
 package Servelet;
 
 import GeoPharmacie.Client;
+import GeoPharmacie.Pharmacien;
 import GeoPharmacie.baseD;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -25,11 +26,11 @@ public class inscription extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, ClassNotFoundException{
         baseD op=new baseD();
-        System.out.println("avant recupirer les champs d'input*****************************************************************");
+      
 
         String action = request.getParameter("action");
         if(action.equals("ajouter")){
-            System.out.println("valablité dial action=ajouter*****************************************************************");
+            
                
             String nom = request.getParameter("nom");
             String prenom = request.getParameter("prenom");
@@ -43,17 +44,17 @@ public class inscription extends HttpServlet {
             if(type.equals("Client")){
                     if(!op.VerifierExistanceClient(cin)){
                         op.insertInToClient(nom, prenom, tel, cin, email, pseudo, adresse, motdepasse, 0);
-                        System.out.println("if de client************************"+nom+""+cin+"*****non existe dans bd***********************************************");
+                       
 
 
                         Client c = op.informationsClient(cin);
-                    System.out.println("apreéé getRequestDispatcher du clien ***************************00000000000000000000");
+                   
                         request.setAttribute("Client", c);
                         ServletContext context= getServletContext();
                         RequestDispatcher rd= context.getRequestDispatcher("/MesInformations.jsp");
                        
                         rd.forward(request, response);
-                    System.out.println("apreéé getRequestDispatcher du clien ***************************111111111111111");
+                   
                         
                        
                     }
@@ -72,11 +73,20 @@ public class inscription extends HttpServlet {
               }
               else
               {
-                        int idPharmacie = Integer.parseInt(request.getParameter("idPharmacie"));//*****************************we are here 15/12/2018 00:08************************************
+                        int idPharmacie = Integer.parseInt(request.getParameter("idPharmacie"));
+                        System.out.println("idPharmacie="+idPharmacie+"**************************************");
                         if(!op.VerifierExistancePharmacien(cin)){
                             op.insertInToPharmacien(nom, prenom, tel, cin, email, pseudo, adresse, motdepasse, 0, idPharmacie);
-                            System.out.println("if de pharmacien************************"+nom+""+cin+"****************************************************");
-                            response.sendRedirect("MesInformations.jsp");
+                           
+                            Pharmacien c = op.selectPharmacien(cin);
+                           // c.getIdPharmacie()=idPharmacie;
+                           System.out.println("transfere des donner vers mesInformationparmatien**************************************"+c.getIdPharmacie());
+                            request.setAttribute("Pharmacien", c);
+                            ServletContext context= getServletContext();
+                            RequestDispatcher rd= context.getRequestDispatcher("/MesInformationsPharmacien.jsp");
+                            rd.forward(request, response);
+                            System.out.println("transfere des donner vers mesInformationparmatien**************************************"+c.getIdPharmacie());
+                            //response.sendRedirect("MesInformations.jsp");
                         }
                         else
                         {

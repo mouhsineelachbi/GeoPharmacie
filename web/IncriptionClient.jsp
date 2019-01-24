@@ -10,22 +10,23 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        <link href="newcss.css" rel="stylesheet" media="all"/>
+        <link href="IC.css" rel="stylesheet" media="all"/>
+        
     </head>
     <body>
-        <div class="I">
+        <div class="K">
         
         <form action="inscription" method="post">
-            <h1>inscription Clien</h1>
             
-                <input name="nom" type="text" placeholder="nom" class="txtb">
-                <input name="prenom" type="text" placeholder="prenom" class="txtb">
+            <h1>Inscription</h1>
+            
+                <input name="nom" type="text" placeholder="nom" class="txtb"> <input name="prenom" type="text" placeholder="prenom" class="txtb">
                 <input name="cin" type="text" placeholder="cin" class="txtb">
                 <input name="tel" type="tel" placeholder="tel" class="txtb">
                 <input name="email" type="email" placeholder="email" class="txtb">
                 <input name="adresse" type="text" placeholder="adresse" class="txtb">
                 <input name="pseudo" type="text" placeholder="pseudo" class="txtb">
-                <input name="motdepasse"  placeholder="motdepasse" class="txtb">
+                <input name="motdepasse" type="password"  placeholder="motdepasse" class="txtb">
                 <div class="b">
                   <p><centet>TYPE :</centet></p>
                         <label>
@@ -40,13 +41,12 @@
                 <input type='hidden' name="action" value="ajouter">
                 </div>
                 <input type="submit" value="Enregister" class="signup-btn" />
-                <a href="http://localhost:8080/GeoPharmacieweb/login.jsp">déjà inscrit</a>
-                
-                
-                
-                
-                                     
-                                        
+                <a href="http://localhost:8080/GeoPharmacieweb/PageClient.jsp?">déjà inscrit</a>
+                                       
+        </div>
+        <div class="X">
+             <a><img src="bg3.png" alt=""/></a>
+            <h1>Giopharmacie vous aide à trouver votre médecin plus rapidement et à l'endroit le plus proche.</h1>
         </div>
                 
                

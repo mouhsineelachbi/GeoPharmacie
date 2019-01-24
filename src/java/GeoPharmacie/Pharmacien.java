@@ -1,13 +1,16 @@
 package GeoPharmacie;
 import java.util.LinkedList;
 
+
 public class Pharmacien extends Utilisateur {
     
     private int NumeroPharmacien;
     private int idPharmacie;
 
-  
-    public Pharmacien(int NumeroPharmacien,String Nom, String Prenom, String Cin, String tel, String Email, String Adresse, String Pseudo, String motDePasse, int pharmacie){
+    
+    public Pharmacien(){
+    }
+    public Pharmacien(int NumeroPharmacien,String Nom, String Prenom, String Cin, String tel, String Email, String Adresse, String Pseudo, String motDePasse, int idPharmacie){
         super(Nom, Prenom, Cin, tel, Email, Adresse, Pseudo, motDePasse);
         this.NumeroPharmacien = NumeroPharmacien;
         this.idPharmacie = idPharmacie;
@@ -17,11 +20,13 @@ public class Pharmacien extends Utilisateur {
         super(Nom, Prenom, Cin, tel, Email, Adresse, Pseudo, motDePasse);
         this.NumeroPharmacien = NumeroPharmacien;
     }
-
-    Pharmacien() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public int getIdPharmacie() {
+        return idPharmacie;
     }
-   
+
+    public void setIdPharmacie(int idPharmacie) {
+        this.idPharmacie = idPharmacie;
+    }
 
     public int getNumeroPharmacien() {
         return NumeroPharmacien;

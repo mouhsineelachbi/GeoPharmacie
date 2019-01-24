@@ -22,6 +22,10 @@ public class Pharmacie {
         this.tele=tele;
     }
 
+    public Pharmacie() {
+        
+    }
+
     public void setTele(String tele) {
         this.tele = tele;
     }

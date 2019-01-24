@@ -53,19 +53,19 @@
                     </c:if>  
         
               
-              <input  name="nom" value="<%=cl.getNom()  %>" class="txtb">
-              <input  name="prenom" value="<%=cl.getPrenom()  %>" class="txtb">
-              <input  name="email" value="<%=cl.getEmail() %>" class="txtb">
-              <input  name="cin" value="<%=cl.getCin() %>" class="txtb">
-              <input  name="adresse" value="<%=cl.getAdresse() %>" class="txtb">
-              <input  name="pseudo" value="<%=cl.getPseudo()%>" class="txtb">
-              <input  name="tel" value="<%=cl.getTel()%>" class="txtb">
+              <input disabled="disabled" name="nom" value="<%=cl.getNom()  %>" class="txtb">
+              <input disabled="disabled" name="prenom" value="<%=cl.getPrenom()  %>" class="txtb">
+              <input disabled="disabled" name="email" value="<%=cl.getEmail() %>" class="txtb">
+              <input disabled="disabled" name="cin" value="<%=cl.getCin() %>" class="txtb">
+              <input disabled="disabled" name="adresse" value="<%=cl.getAdresse() %>" class="txtb">
+              <input disabled="disabled" name="pseudo" value="<%=cl.getPseudo()%>" class="txtb">
+              <input disabled="disabled" name="tel" value="<%=cl.getTel()%>" class="txtb">
               
               
         
         
                      <form action="ModifierClient" method="post">
-                            <input type="hidden" name="numeroclient" value="<%=cl.getNumClient()  %>"/>
+                            <input  type="hidden" name="numeroclient" value="<%=cl.getNumClient()  %>"/>
                             <input type="hidden" name="nom" value="<%=cl.getNom()  %>"/>
                             <input type="hidden" name="prenom" value="<%=cl.getPrenom()  %>"/>
                             <input type="hidden" name="cin" value="<%=cl.getCin()  %>"/>
