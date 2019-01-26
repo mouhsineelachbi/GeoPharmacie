@@ -24,6 +24,16 @@ public class Produit {
      private int NumeroProduit;
      private double Prix;
      private int idpharmacie;
+     
+     public Produit(int NumeroProduit,int ReferenceProduit, String Libelle, String DateFabrication, String DateExpiration, double TemperatureStock,  double Prix) {
+        this.ReferenceProduit = ReferenceProduit;
+        this.Libelle = Libelle;
+        this.DateFabrication = DateFabrication;
+        this.DateExpiration = DateExpiration;
+        this.TemperatureStock = TemperatureStock;
+        this.NumeroProduit = NumeroProduit;
+        this.Prix = Prix;
+    }
 
     public Produit(int NumeroProduit,int ReferenceProduit, String Libelle, String DateFabrication, String DateExpiration, double TemperatureStock,  double Prix,int idpharmacie) {
         this.ReferenceProduit = ReferenceProduit;

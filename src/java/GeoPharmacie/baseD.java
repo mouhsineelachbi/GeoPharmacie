@@ -385,7 +385,16 @@ public class baseD {
         }
         return p;
     }
-    //*****************************************************************************************
+// Get Pharmacie Id of Product
+    public String GetPharId(int numProduit) throws SQLException{
+        String req = "Select idpharmacie from produit";
+        Statement st = con.createStatement();
+        ResultSet rst = st.executeQuery(req);
+        String idPharmacie = rst.getString(8);
+        return idPharmacie;
+}
+    
+//*****************************************************************************************
  
     public LinkedList<Facture> AfficherFacture(int numerofacture) throws SQLException{
         String req = "select * from facture where numerofacture="+numerofacture+"";
