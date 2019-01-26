@@ -385,6 +385,26 @@ public class baseD {
         }
         return p;
     }
+    
+    public LinkedList<Produit> listProduit(int numeroPharmacien) throws SQLException{
+        String req = "select * from produit where idpharmacie IN ( select idpharmacie from pharmacien where numeropharmacien = "+numeroPharmacien+")";
+        LinkedList<Produit> lp = new LinkedList<Produit>();
+        Statement st = con.createStatement();
+        ResultSet rst = st.executeQuery(req);
+        while(rst.next()){
+            int num = rst.getInt(1);
+            int ref = rst.getInt(2);
+            String libelle = rst.getString(3);
+            String d1 = rst.getString(4);
+            String d2 = rst.getString(5);
+            Double temp = rst.getDouble(6);
+            Double prix = rst.getDouble(7);
+            int idpharmacie = rst.getInt(8);
+            Produit pr = new Produit(num, ref, libelle, d1, d2, temp, prix,idpharmacie);
+            lp.add(pr);
+        }
+        return lp;        
+    }
 // Get Pharmacie Id of Product
     public String GetPharId(int numProduit) throws SQLException{
         String req = "Select idpharmacie from produit";
