@@ -10,7 +10,7 @@
     </head>
     <body>
         <% baseD db = new baseD(); %>
-        <form  method="GET" action="modifierProduit">
+        <form  method="POST" action="modifierProduit">
         <table border=2 >
             <tr>
                 <th>REFERENCE PRODUIT</th>
@@ -27,7 +27,7 @@
                 for(Produit p:produitList){
                     
                 %>
-                
+            <tr>
                 <td><input type="text" name="reference" value=<%=p.getReferenceProduit()%>></td>
                 <td><input type="text" name="libelle" value=<%=p.getLibelle()%>></td>
                 <td><input type="text" name="prix" value=<%=p.getPrix()%>></td>
@@ -37,7 +37,7 @@
                 <!--<td><select><option value="empty"></option><option value="Modifier">Modifier</select>-->
                     <input type="hidden" name="numproduit" value=<%=p.getNumeroProduit()%>>
                 <td><center><input type="submit" value="Modifier"/></center></td>
-
+            </tr>
                 <%
                     }
                     %>

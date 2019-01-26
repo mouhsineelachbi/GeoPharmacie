@@ -44,7 +44,7 @@ public class ModifierClient extends HttpServlet {
                   c.setMotDePasse(motdepasse);
             request.setAttribute("Client", c);
             ServletContext context= getServletContext();
-            RequestDispatcher rd= context.getRequestDispatcher("/ModifierClient.jsp");
+            RequestDispatcher rd = context.getRequestDispatcher("/ModifierClient.jsp");
             rd.forward(request, response);
         }
         if(action.equals("modifier")){

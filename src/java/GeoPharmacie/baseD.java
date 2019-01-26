@@ -379,8 +379,8 @@ public class baseD {
             String d2 = rst.getString(5);
             Double temp = rst.getDouble(6);
             Double prix = rst.getDouble(7);
-            int idpharmacie=rst.getInt(8);
-            Produit pr = new Produit(num, ref, libelle, d1, d2, temp, prix,idpharmacie);
+            int idpharmacie = rst.getInt(8);
+            Produit pr = new Produit(num, ref, libelle, d1, d2, temp, prix);
             p.add(pr);
         }
         return p;
