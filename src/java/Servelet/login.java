@@ -26,15 +26,28 @@ public class login extends HttpServlet {
         String cin = request.getParameter("cin");
         String password = request.getParameter("password");
         String type = request.getParameter("type");
+        String message ;
        
         //Client c=db.informationsClient(cin);
 
+       if(password.trim().isEmpty() || cin.trim().isEmpty() || type.isEmpty())
+       {
+            message ="Vous devez remplire tous les champs SVP!";
+           request.setAttribute("message", message);
+           ServletContext context= getServletContext();
+                        RequestDispatcher rd= context.getRequestDispatcher("/login.jsp");
+                        rd.forward(request, response);
+       }
+            else
+       {
+          
        
-            Cookie ck = new Cookie("username", cin);
-            ck.setMaxAge(3600);
-            Cookie pass = new Cookie("password", password);
-           pass.setMaxAge(3600);
+           Cookie ck = new Cookie("username", cin);
+           ck.setMaxAge(3600);
            response.addCookie(ck);
+           
+           Cookie pass = new Cookie("password", password);
+           pass.setMaxAge(3600);
             response.addCookie(pass);
        
        
@@ -52,12 +65,17 @@ public class login extends HttpServlet {
                         // CLIENT EXIST
                         request.setAttribute("Client", c);
                         ServletContext context= getServletContext();
+                        message ="login avec succés";
+                        request.setAttribute("message", message);
                         RequestDispatcher rd= context.getRequestDispatcher("/MesInformations.jsp");
                         rd.forward(request, response);
                         String nom=c.getNom();
                         String prenom=c.getPrenom();
                         //session
-                        HttpSession session =request.getSession();
+                        
+                        
+                        HttpSession session =request.getSession(true);
+                        session.setAttribute("Client", c);
                         session.setAttribute("nom", nom);
                         session.setAttribute("prenom", prenom);
                         session.setAttribute("cin", cin);
@@ -65,7 +83,7 @@ public class login extends HttpServlet {
                         System.out.println("********************************************************************** login avant la redirection");
                        // response.sendRedirect("MesInformations.jsp");
                         System.out.println("********************************************************************** login apres la redirection");
-                        
+                       
                     }
                     else{
                         // WRONG PASSWORD
@@ -82,11 +100,24 @@ public class login extends HttpServlet {
                 if(db.VerifierExistancePharmacien(cin)){
                      // PHARMACIEN EXIST
                      Pharmacien p = db.selectPharmacien(cin);
-                     System.out.println(" 1-ici login.java p.getIdPharmacie()"+p.getIdPharmacie());
+                     
                      if((p.getMotDePasse()).equals(password)){
-                         System.out.println("2- ici login.java p.getIdPharmacie()"+p.getIdPharmacie());
-                          request.setAttribute("Pharmacien", p);
+                         
+                        String nom=p.getNom();
+                        String prenom=p.getPrenom();
+                         message ="login avec succés";
+                        request.setAttribute("message", message);
+                        request.setAttribute("Pharmacien", p);
+                        
                         ServletContext context= getServletContext();
+                        
+                        HttpSession session =request.getSession();
+                        session.setAttribute("Pharmacien", p);
+                        session.setAttribute("nom", nom);
+                        session.setAttribute("prenom", prenom);
+                        session.setAttribute("cin", cin);
+                        session.setAttribute("password", password);
+                        
                         context.getRequestDispatcher("/MesInformationsPharmacien.jsp").forward(request, response);
                        // context.getRequestDispatcher("/InfoMonPharmacie.jsp").forward(request, response);
                         // response.sendRedirect("login.jsp");
@@ -101,6 +132,8 @@ public class login extends HttpServlet {
                     response.sendRedirect("login.jsp");
                 }
             }
+        }
+      
     }
 
 

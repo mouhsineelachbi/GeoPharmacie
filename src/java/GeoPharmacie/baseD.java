@@ -109,12 +109,12 @@ public class baseD {
     
 //*******************************************************************************************************************
 
-    public void insertIntoProduit(int referenceProduit,String libelle,String DateExpiration,String DateFabrication,double TemperatureStock, double prix,int idPharmacie) throws SQLException{
-        Statement st = con.createStatement();
-        String query="INSERT INTO produit(referenceProduit, libelle, DateExpiration, DateFabrication, TemperatureStock, prix, idPharmacie) Values ("
+    public void insertIntoProduit(int referenceProduit,String libelle,String DateExpiration,String DateFabrication,double TemperatureStock,int numeroProduit,double prix,int idPharmacie) throws SQLException{
+        Statement stmt =con.createStatement();
+        String query="INSERT INTO produit( referenceProduit, libelle,DateExpiration, DateFabrication, TemperatureStock,numeroProduit, prix,idPharmacie)Values ("
                 +referenceProduit+", '"+libelle+"','"+DateExpiration+"', '"+DateFabrication+"', "
-                +TemperatureStock+","+prix+","+idPharmacie+")";
-        st.execute(query);
+                +TemperatureStock+","+numeroProduit+", "+prix+","+idPharmacie+")";
+        stmt.execute(query);
     }
 
 //*******************************************************************************************************************
@@ -125,8 +125,19 @@ public class baseD {
                 +"', '"+dateFermeture+"','"+dateFerie+"','"+dateGarde+"')";
         stmt.execute(query);
     }
-
-//******************************************************************SUPPRIMER PRODUIT**************
+    //ajouter une date de ferie 
+     public void insertIntoDateFerie(int idDateFirie,String heureDM,String heureFM,String heureDS,String heureFS,int idPharmacie,String jourFerie) throws SQLException{
+        Statement stmt =con.createStatement();
+        String query="INSERT INTO datefirieropos (idDateFirie,heureDM,heureFM,heureDS,heureFS,idPharmacie,jourFerie) VALUES("+idDateFirie+",'"+heureDM+"','"+heureFM+"','"+heureDS+"','"+heureFS+"',"+idPharmacie+",'"+jourFerie+"')";
+        stmt.execute(query);
+    }
+     //ajouter une date de Garde
+     public void insertIntoDateGarde(int idDateGarde,String heureDM,String heureFM,String heureDS,String heureFS,int idPharmacie,String jourGarde) throws SQLException{
+        Statement stmt =con.createStatement();
+        String query="INSERT INTO dategarde (idDateGarde,heureDM,heureFM,heureDS,heureFS,idPharmacie,jourGarde) VALUES("+idDateGarde+",'"+heureDM+"','"+heureFM+"','"+heureDS+"','"+heureFS+"',"+idPharmacie+",'"+jourGarde+"')";
+        stmt.execute(query);
+    }
+    //******************************************************************SUPPRIMER PRODUIT**************
     public void deletProduit(int numeroProduit) throws SQLException{
         Statement stmt = con.createStatement();
         String query="delete from produit where numeroProduit = "+numeroProduit;
@@ -173,7 +184,65 @@ public class baseD {
        ResultSet rs = st.executeQuery(req);
        return rs.next();
     }
+    //afficher les date de gareds de la pharmacie
+    public LinkedList<DateGarde> AfficherDateGarde(int idpharmacie)throws SQLException {
+        LinkedList<DateGarde> fs=new LinkedList<DateGarde>(); 
+        String req = "select * from dategarde where idpharmacie ="+idpharmacie+"";
+        Statement st = con.createStatement();
+        ResultSet rst = st.executeQuery(req);
+        while(rst.next()){
+        int idDateGarde=rst.getInt(1);
+        String heureDM=rst.getString(3);     
+        String heureFM=rst.getString(4);
+        String heureDS=rst.getString(5);
+        String heureFS=rst.getString(6);
+        String jourGarde=rst.getString(2);
+             
+        DateGarde f=new DateGarde(idDateGarde, heureDM, heureFM, heureDS, heureFS, idpharmacie, jourGarde);
+            fs.add(f);
+        } 
+        return fs;
+    }
     
+//Afficher une suel date de ferie de la pharmacie
+    public DateFerie DateFerie(int idDateFirie)throws SQLException {
+         DateFerie f=new DateFerie();
+        String req = "select * from datefirieropos where idDateFirie ="+idDateFirie+"";
+        Statement st = con.createStatement();
+        ResultSet rst = st.executeQuery(req);
+        while(rst.next()){
+        int idpharmacie=rst.getInt(6);
+        String heureDM=rst.getString(2);     
+        String heureFM=rst.getString(3);
+        String heureDS=rst.getString(4);
+        String heureFS=rst.getString(5);
+        String jourferie=rst.getString(7);
+             
+        f=new DateFerie(idDateFirie, heureDM, heureFM, heureDS, heureFS, idpharmacie, jourferie);
+            
+        } 
+        return f;
+    }
+//afficher les dates de feries de la pharmacie        
+    public LinkedList<DateFerie> AfficherDateFeries(int idpharmacie)throws SQLException {
+        LinkedList<DateFerie> fs=new LinkedList<DateFerie>(); 
+        String req = "select * from datefirieropos where idpharmacie ="+idpharmacie+"";
+        Statement st = con.createStatement();
+        ResultSet rst = st.executeQuery(req);
+        while(rst.next()){
+        int idDateFirie=rst.getInt(1);
+        String heureDM=rst.getString(2);     
+        String heureFM=rst.getString(3);
+        String heureDS=rst.getString(4);
+        String heureFS=rst.getString(5);
+        String jourferie=rst.getString(7);
+             
+        DateFerie f=new DateFerie(idDateFirie, heureDM, heureFM, heureDS, heureFS, idpharmacie, jourferie);
+            fs.add(f);
+        } 
+        return fs;
+    }
+    //afficher une seule Client
     public Client selectClient(String cin) throws SQLException{
         String req = "select * from client where cin ='"+cin+"'";
         Statement st = con.createStatement();
@@ -190,7 +259,7 @@ public class baseD {
         Client c = new Client(numClient, nom, prenom, cin, tel, email, adresse, pseudo, password);
         return c;
     }
-    
+    // AFFUICHER LA LISTES DES CLIENT 
     public LinkedList<Client> selectClient() throws SQLException{
         LinkedList<Client> lc = new LinkedList<Client>();
         String req = "select * from client";
@@ -211,7 +280,7 @@ public class baseD {
         }
         return lc;
     }
-    
+    //  AFFICHER UN SEULE CLIEN 
     public Client informationsClient(String cin) throws SQLException{
         Client c = new Client();
         Statement stmt = con.createStatement();
@@ -380,55 +449,14 @@ public class baseD {
             String d2 = rst.getString(5);
             Double temp = rst.getDouble(6);
             Double prix = rst.getDouble(7);
-            int idpharmacie = rst.getInt(8);
-            Produit pr = new Produit(num, ref, libelle, d1, d2, temp, prix);
+            int idpharmacie=rst.getInt(8);
+            String lien=rst.getString(9);
+            Produit pr = new Produit(num, ref, libelle, d1, d2, temp, prix,idpharmacie,lien);
             p.add(pr);
         }
         return p;
     }
-    
-    public LinkedList<Produit> listProduit(int numeroPharmacien) throws SQLException{
-        String req = "select * from produit where idpharmacie IN ( select idpharmacie from pharmacien where numeropharmacien = "+numeroPharmacien+")";
-        LinkedList<Produit> lp = new LinkedList<Produit>();
-        Statement st = con.createStatement();
-        ResultSet rst = st.executeQuery(req);
-        while(rst.next()){
-            int num = rst.getInt(1);
-            int ref = rst.getInt(2);
-            String libelle = rst.getString(3);
-            String d1 = rst.getString(4);
-            String d2 = rst.getString(5);
-            Double temp = rst.getDouble(6);
-            Double prix = rst.getDouble(7);
-            int idpharmacie = rst.getInt(8);
-            Produit pr = new Produit(num, ref, libelle, d1, d2, temp, prix,idpharmacie);
-            lp.add(pr);
-        }
-        return lp;        
-    }
-// Get Pharmacie Id of Product
-    public String GetPharId(int numProduit) throws SQLException{
-        String req = "Select idpharmacie from produit";
-        Statement st = con.createStatement();
-        ResultSet rst = st.executeQuery(req);
-        String idPharmacie = rst.getString(8);
-        return idPharmacie;
-}
-    
-// Get Pharmacie id from database
-    public LinkedList<String> GetPharId() throws SQLException{
-        String req = "select idpharmacie from pharmacie";
-        Statement st = con.createStatement();
-        LinkedList<String> Lid = new LinkedList<String>();
-        ResultSet rst = st.executeQuery(req);
-        while(rst.next()){
-            String id = rst.getString(1);
-            Lid.add(id);
-        }
-        return Lid;
-    }
-    
-//*****************************************************************************************
+    //*****************************************************************************************
  
     public LinkedList<Facture> AfficherFacture(int numerofacture) throws SQLException{
         String req = "select * from facture where numerofacture="+numerofacture+"";
@@ -444,10 +472,31 @@ public class baseD {
         }
         return p;
     }
-//Rechercher par nom de produit
+    //AFFICHER PLANIING DE LA PHARMACIE
+    public LinkedList<Planning> AfficherPlannig(int idPharmacie) throws SQLException{
+        String req = "select * from Plannig where idPharmacie="+idPharmacie+"";
+        LinkedList<Planning> p = new LinkedList<Planning>();
+        Statement st = con.createStatement();
+        ResultSet rst = st.executeQuery(req);
+        while(rst.next()){
+            int idplanning = rst.getInt(1);
+            String dateOuverture = rst.getString(2);
+            String dateFermeture = rst.getString(3);
+            String dateFerie = rst.getString(4);
+            String dateGarde = rst.getString(5);
+             
+            Double prix = rst.getDouble(7);
+            int idpharmacie=rst.getInt(8);
+            Planning pr = new Planning(dateOuverture, dateFermeture, dateFerie, dateGarde, idpharmacie);
+            p.add(pr);
+        }
+        return p;
+    }
+    
+    //Rechercher par nom de produit
     public LinkedList<Produit> rechercheProduit(String nomProd) throws SQLException{
         Produit p;
-        LinkedList <Produit>lisprod=new LinkedList<>();
+         LinkedList <Produit>lisprod=new LinkedList<>();
         Statement stmt = con.createStatement();
         String query="select * from produit where libelle LIKE '%"+nomProd+"%'";
         stmt.executeQuery(query);
@@ -461,37 +510,45 @@ public class baseD {
             double TemperatureStock=rs.getDouble(6);
             double prix=rs.getDouble(7);
             int idpharmacie=rs.getInt(8);
-            p=new Produit(numeroProduit, referenceProduit, libelle, DateFabrication, DateExpiration, TemperatureStock, prix,idpharmacie);
+            String lien=rs.getString(9);
+            p=new Produit(numeroProduit, referenceProduit, libelle, DateFabrication, DateExpiration, TemperatureStock, prix,idpharmacie,lien);
             lisprod.add(p);
         }
+       
         return lisprod;
     }
     public LinkedList<Pharmacie> recherchePharmacie(String nomPharcie) throws SQLException{
         Pharmacie p;
-        LinkedList <Pharmacie>lispharcie=new LinkedList<>();
+         LinkedList <Pharmacie>lispharcie=new LinkedList<>();
         Statement stmt = con.createStatement();
         String query="select * from pharmacie where nomPharmacie LIKE '%"+nomPharcie+"%'";
         stmt.executeQuery(query);
         ResultSet rs=stmt.executeQuery(query);
         while(rs.next()){
-            int idpharmacie=rs.getInt(1);
+           int idpharmacie=rs.getInt(1);
             String adress=rs.getString(3);
             String tel =rs.getString(4);
-            String nomPharmacie=rs.getString(2);
+           String nomPharmacie=rs.getString(2);
+            
             p=new Pharmacie(idpharmacie, nomPharmacie, adress, tel);
+            
             lispharcie.add(p);
         }
+       
         return lispharcie;
     }
-    
-//AFFICHER 1-PRODUIT PAR NOM
-    public Produit UneProduit(String libelle) throws SQLException{
+    //AFFICHER 1-PRODUIT PAR NOM
+    public  Produit UneProduit(String libelle) throws SQLException{
         Produit p=new Produit();
         Statement stmt = con.createStatement();
         if(!libelle.equals(""))
         {
             String query=" select * from produit where libelle like'%"+libelle+"%'";
-            ResultSet rs = stmt.executeQuery(query);
+            System.out.println("1-libelle---------------"+libelle);
+            //stmt.executeQuery(query);
+             ResultSet rs;
+            rs=stmt.executeQuery(query);
+            System.out.println("2-libelle---------------"+libelle+" "+rs);
             while(rs.next()){
                 int numeroProduit=rs.getInt(1);
                 int referenceProduit=rs.getInt(2);
@@ -500,26 +557,48 @@ public class baseD {
                 double TemperatureStock=rs.getDouble(6);
                 double prix=rs.getDouble(7);
                 int idpharmacie=rs.getInt(8);
-                p = new Produit(numeroProduit, referenceProduit, libelle, DateFabrication, DateExpiration, TemperatureStock, prix,idpharmacie);
+                String lien=rs.getString(9);
+                p=new Produit(numeroProduit, referenceProduit, libelle, DateFabrication, DateExpiration, TemperatureStock, prix,idpharmacie,lien);
             }
         }
         return p;
     }
-
-//AFFICHER 1-PRODUIT PAR NOM
-    public Pharmacie UnePharmacie(String libelle) throws SQLException{
-        Pharmacie p = new Pharmacie();
+     //AFFICHER 1-PRODUIT PAR NOM
+    public  Pharmacie UnePharmacie(String libelle) throws SQLException{
+        Pharmacie p=new Pharmacie();
         Statement stmt = con.createStatement();
         String query=" select * from Pharmacie where nomPharmacie like'%"+libelle+"%'";
-        ResultSet rs = stmt.executeQuery(query);
+        System.out.println("1-libelle---------------"+libelle);
+        //stmt.executeQuery(query);
+         ResultSet rs;
+        rs=stmt.executeQuery(query);
+        System.out.println("2-libelle---------------"+libelle+" "+rs);
         while(rs.next()){
             int idpharmacie=rs.getInt(1);
             String adress=rs.getString(3);
             String tel =rs.getString(4);
+           
+            
             p=new Pharmacie(idpharmacie, libelle, adress, tel);
         }
         return p;
     }
+    //Update date ferie
+     public void UpdateDateFerie(int idDateFirie,String heureDM,String heureFM,String heureDS,String heureFS,int idPharmacie,String jourFerie) throws SQLException{
+        PreparedStatement stm = con.prepareStatement("update datefirieropos SET  heureDM=?, heureFM=?, heureDS=?, heureFS=?, idPharmacie=?, jourFerie=? where idDateFirie=?");
+        
+        stm.setString(1, heureDM);
+        stm.setString(2, heureFM);
+        stm.setString(3,heureDS);
+        stm.setString(4, heureFS);
+        stm.setString(6, jourFerie);
+        stm.setInt(5, idPharmacie);
+        stm.setInt(7, idDateFirie);
+        stm.executeUpdate();
+        
+    }
+ 
+    //update date garde 
 //// UPDATE ADMIN
  
     public void modifierAdmin(int numeroAdmin ,String nom, String prenom, String cin, String tel, String email, String adresse, String pseudo, String motdepasse) throws SQLException{
@@ -568,15 +647,17 @@ public class baseD {
         stm.setInt(3, numeroFacture);
         stm.executeUpdate();
     }
-
-// UPDATE PHARMACIE
-    public void modifierPharmacie(Pharmacie c) throws SQLException{
+	// UPDATE PHARMACIE
+	public void modifierPharmacie(Pharmacie c) throws SQLException{
         System.out.println("nomPharmacie"+c.getNomPharmacie());
-        Statement st = con.createStatement();
+         Statement st = con.createStatement();
         String req = "update pharmacie SET nomPharmacie='"+c.getNomPharmacie()+"', adresse='"+c.getAdresse()+"', tel='"+c.getTele()+"' where idpharmacie="+c.getIdPharmacie()+" ";
-        System.out.println("nomPharmacie"+c.getNomPharmacie());
+        //st.executeQuery(req);
+       // PreparedStatement stm = con.prepareStatement("");
+       System.out.println("nomPharmacie"+c.getNomPharmacie());
         st.executeUpdate(req);
-        }
+      
+    }
     
  
 // UPDATE PHARMACIEN
@@ -593,6 +674,7 @@ public class baseD {
         stm.setInt(9, idPharmacie);
         stm.setInt(10, numeroPharmacien);
         stm.executeUpdate();
+        System.out.println("======================================================= IdPharmacie ==="+idPharmacie+" tele =======   "+tel);
     }
  
 // UPDATE PRODUIT
@@ -608,14 +690,28 @@ public class baseD {
         stm.executeUpdate();
     }
     
-    public void supprimerProduit(int numeroProduit) throws SQLException{
-        String req = "delete from produit where numeroProduit = "+numeroProduit;
-        Statement st = con.createStatement();
-        st.executeUpdate(req);
-    }
-    
      public static void main(String[] args) throws SQLException, ParseException, ClassNotFoundException{
-         
+        baseD mydb = new baseD();// makandirouch had chi tanchedo la base données o tandiroha f classe bohdha chouf
+        // mydb.insertInToAdmin("nomAdmin12","prenom2", "0670044061"," mc256482"," email"," pseudo"," adresse",3," motDepasse", 0);
+        //mydb.insertInToClient("hh", "pm"," tele", "in", "email", "pseudo", "adresse", "1234", 0);
+        // mydb.insertInToPharmacien("nom"," prenom"," tele11", "cin"," email"," pseudo", "adresse", "motDepasse", 0,2);
+        // mydb.insertIntoCommande(0, "2018-1-14", "EtatCommande");
+        // mydb.insertIntoFacture(0,"2018-1-14",1523);
+        // mydb.insertIntoLineCommande(8, 17, 7);
+        // mydb.insertIntoPaiementcarte("2017-5-14", 121.0, 1, "nomp", "prenomProprietaire","123", "rue najd el jadida", "mc456182");
+        // mydb.insertIntoPaiementLivraison("2017-4-14", 0, 0, "nomClient"," prenomClient"," emailClient"," teleClient"," adresseClient", "CinClient");
+        // mydb.insertIntoProduit(0, "libelle", "2017-12-14", "2017-5-14", 2, 0, 12,2);
+        // mydb.insertIntoPlanning("2018-1-14","2018-1-14","2018-1-14","2018-1-14");
+        // mydb.deletProduit(1);
+        
+       /* Pharmacie c = mydb.selectPharmacie(1);
+        c.setNomPharmacie("anasio");
+        
+        mydb.modifierPharmacie(c);
+         System.out.println(c);
+         System.out.println("hello !!");*/
+       mydb.insertIntoDateGarde(0, "19:30:10","19:30:10", "19:30:10","19:30:10", 1, "2018-1-14");
+       mydb.insertIntoDateFerie(0, "19:30:10","19:30:10", "19:30:10","19:30:10", 1, "2018-1-14");
     }
     
 }

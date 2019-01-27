@@ -4,6 +4,7 @@
     Author     : Hamza
 --%>
 
+<%@page import="javax.faces.bean.SessionScoped"%>
 <%@page import="GeoPharmacie.baseD"%>
 <%@page import="GeoPharmacie.Pharmacien"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -11,6 +12,9 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="pragma" content="no-cache" />
+        <meta http-equiv="cache-control" content="no-cache" />
+        <meta http-equiv="expires" content="0" />
         <title>INFORMATIONPHARMACIEN</title>
     </head>
     <body>
@@ -23,12 +27,25 @@
                               // cl= op.selectPharmacien(cl.getCin()); 
                 //recuperer le client
            
+                     //   request.getSession(true);
+                     //  if(session.isNew()){
+          //  Cookie ck[]= request.getCookies();
+               //         for(int i=0;i<ck.length;i++){
+                           
+                            
+                       
+                    //    ck[i].setValue("");
+                   //     }
+                
+           //}
                 %>
          <c:if test="${!empty sessionScope.cin && !empty sessionScope.password}">
-                <p>  Bon Journéé Mr.${sessionScope.nom} ${sessionScope.prenom}
-                <!-- Bienvenue<%=cl.getNom()%>  <%=cl.getPrenom()%>-->
+                <p>  Bienvenue ${sessionScope.nom} ${sessionScope.prenom}
+                <!-- Bon Journéé Mr.<%=cl.getNom()%>  <%=cl.getPrenom()%>-->
+                   
              </p>
          </c:if>
+          
    
     
         
@@ -73,7 +90,7 @@
                             <input type="hidden" name="tele" value="<%=cl.getTel() %>"/>
                             <input type="hidden" name="motdepasse" value="<%=cl.getMotDePasse() %>"/>
                             <input type="hidden" name="idpharmacie" value="<%=cl.getIdPharmacie() %>"/>
-                           <input type='hidden' name="action" value="ModifierPharmacien"/>
+                           <input type="hidden" name="action" value="ModifierPharmacien"/>
                              <input type="submit" value="Modifier les informations"/>
                                        
         </form>
@@ -81,7 +98,33 @@
                                <input type="hidden" name="idPharmacie" value="<%=cl.getIdPharmacie() %>"/>
                                <input type="submit" value="Afficher les Informations de la pharmacie"/>
                                <input type='hidden' name="action" value="Afficher"/>
-                           </form>          
-           <!-- </c:if>-->         
+                           </form>      
+                            <form action="ModifierPharmacien" method="post">
+                                  <input type="hidden" name="idpharmacie" value="<%=cl.getIdPharmacie() %>"/> 
+                                  <input type="hidden" name="action" value="dateferie"/>
+                                  <input type="submit" value="Ajouter une date Ferie"/>
+                                       
+                            </form>
+                            <form action="ModifierPharmacien" method="post">
+                                  <input type="hidden" name="idpharmacie" value="<%=cl.getIdPharmacie() %>"/> 
+                                  <input type="hidden" name="action" value="dategarde"/>
+                                  <input type="submit" value="Ajouter une date de garde"/>
+                                       
+                            </form>
+                            <form action="ModifierPharmacien" method="post">
+                                   <input type="hidden" name="action" value="deconnecter"/>
+                                    <input type="submit" value="Déconnecter"/>
+                            </form>
+            <b style="color: green;">
+                                
+        <%
+                String message=(String)request.getAttribute("message");
+                if(message !=null)
+                {
+                   out.print(message);
+                }
+            
+        %>  
+        <a href="AfficherPharmaciePharmacien.jsp">LISTER TOUT LES PHARMACIES</a>  
     </body>
 </html>

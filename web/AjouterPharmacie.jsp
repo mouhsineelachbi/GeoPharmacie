@@ -10,24 +10,38 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Ajouter une pharmacie</title>
-        <link href="newcss.css" rel="stylesheet" media="all"/>
     </head>
     <body>
-        <div class="I">
-        <form action="AjouterPharmacie">
-            <h1>Ajouter 
-                une pharmacie</h1>
+        <h1>Ajouter une pharmacie</h1>
+            <form action="AjouterPharmacie" method="post">
+        <table border="">
+            <tr>
+                <td> NOM DU PHARMACIE:</td>
+                <td><input name="nomPharmacie" type="text"/> </td>
+            </tr>
+           <tr>
+                <td> ADRESSE :</td> <td><input name="adresse" type="text"/> </td>
+            </tr>
             
-        
-            <input placeholder="NOM DU PHARMACIE:" name="nomPharmacie" type="text" class="txtb">
-            <input placeholder="ADRESSE " name="adresse" type="text" class="txtb">
-            <input placeholder="NUMERO DU PHARMACIEN :	" name="numeroPharmacien" type="text" class="txtb">
-            <input placeholder="TEL :" name="tel" type="tel" class="txtb"> 
-            <input type='hidden' name="action" value="ajouterPhar" >                      
-            <input type="submit" value="Enregister" class="signup-btn">                        
+            <tr>
+                <td> TEL :</td> <td><input name="tel" type="tel"/> </td>
+            </tr>
             
-            </form>
+            
+            <tr>  
+                <td>
+                  <input type='hidden' name="action" value="ajouterPhar"/>                      
+                </td> 
+                <td>
+                    <input type="submit" value="Enregister" />                        
+                </td>
+            </tr>
+            
+        </table>
+        </form>
         
-        </div>
+       
+                
+         
     </body>
 </html>

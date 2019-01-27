@@ -24,8 +24,9 @@ public class Produit {
      private int NumeroProduit;
      private double Prix;
      private int idpharmacie;
-     
-     public Produit(int NumeroProduit,int ReferenceProduit, String Libelle, String DateFabrication, String DateExpiration, double TemperatureStock,  double Prix) {
+     private String lien;
+
+    public Produit(int NumeroProduit,int ReferenceProduit, String Libelle, String DateFabrication, String DateExpiration, double TemperatureStock,  double Prix,int idpharmacie,String lien) {
         this.ReferenceProduit = ReferenceProduit;
         this.Libelle = Libelle;
         this.DateFabrication = DateFabrication;
@@ -33,8 +34,9 @@ public class Produit {
         this.TemperatureStock = TemperatureStock;
         this.NumeroProduit = NumeroProduit;
         this.Prix = Prix;
+        this.idpharmacie=idpharmacie;
+        this.lien=lien;
     }
-
     public Produit(int NumeroProduit,int ReferenceProduit, String Libelle, String DateFabrication, String DateExpiration, double TemperatureStock,  double Prix,int idpharmacie) {
         this.ReferenceProduit = ReferenceProduit;
         this.Libelle = Libelle;
@@ -44,6 +46,7 @@ public class Produit {
         this.NumeroProduit = NumeroProduit;
         this.Prix = Prix;
         this.idpharmacie=idpharmacie;
+        
     }
 
     public Produit() {

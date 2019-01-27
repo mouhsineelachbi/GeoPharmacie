@@ -35,7 +35,7 @@ public class SRechercheProduit extends HttpServlet {
         baseD op = new baseD();
         String action = request.getParameter("action");
         if(action.equals("rechercher")){
-            System.out.println("hna fi action=rechercher-----------------------------------------------------");
+           //recuperation
             String libelle = request.getParameter("libelle");
             
            Produit p=new Produit();
@@ -49,7 +49,7 @@ public class SRechercheProduit extends HttpServlet {
         
     }
         else{
-     //       response.sendRedirect("RechercheProduit.jsp");
+            response.sendRedirect("RechercheProduit.jsp");
         }
     }
   

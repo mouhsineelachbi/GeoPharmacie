@@ -31,7 +31,7 @@ public class AjouterPharmacie extends HttpServlet {
                
                if(!op.VerifierExistanceNomPharmacie(nomPharmacie)){
                op.insertInToPharmacie(0, nomPharmacie, adresse, tel);
-               response.sendRedirect("AfficherPharmacie.jsp");
+               response.sendRedirect("uploadPharmacie.jsp");
                }
                else{
                 response.sendRedirect("AfficherPharmacie.jsp");}

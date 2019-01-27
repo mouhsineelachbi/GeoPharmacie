@@ -1,6 +1,6 @@
 <%-- 
-    Document   : AfficherPharmacie
-    Created on : 15 déc. 2018, 21:51:48
+    Document   : AfficherPharmaciePharmacien
+    Created on : 27 janv. 2019, 15:44:31
     Author     : Hamza
 --%>
 
@@ -46,12 +46,12 @@
                     <th> <%=p.getTele()%></th>
                 <form action="ModifierPharmacien" method="post">
                     <input type="hidden" name="idpharmacie" value="<%=p.getIdPharmacie()%>"/>
-                    <input type="hidden" name="action" value="affichageIndepondanteF"/>  
+                    <input type="hidden" name="action" value="affichageIndepondanteFp"/>  
                     <th><input type="submit" value="PLUS DE DETAILL"> </th>
                 </form>
                 <form action="ModifierPharmacien" method="post">
                     <input type="hidden" name="idpharmacie" value="<%=p.getIdPharmacie()%>"/>
-                    <input type="hidden" name="action" value="affichageIndepondante"/>  
+                    <input type="hidden" name="action" value="affichageIndepondantep"/>  
                     <th><input type="submit" value="PLUS DE DETAILL"> </th>
                 </form>
             </tr>
