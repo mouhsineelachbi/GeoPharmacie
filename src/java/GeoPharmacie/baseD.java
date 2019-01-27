@@ -501,21 +501,21 @@ public class baseD {
         stmt.executeQuery(query);
         ResultSet rs=stmt.executeQuery(query);
         while(rs.next()){
-            int numeroProduit=rs.getInt(1);
-            int referenceProduit=rs.getInt(2);
-            String libelle=rs.getString(3);
-            String DateFabrication=rs.getString(5);
-            String DateExpiration=rs.getString(4);
-            double TemperatureStock=rs.getDouble(6);
-            double prix=rs.getDouble(7);
-            int idpharmacie=rs.getInt(8);
-            String lien=rs.getString(9);
+            int numeroProduit = rs.getInt(1);
+            int referenceProduit = rs.getInt(2);
+            String libelle = rs.getString(3);
+            String DateFabrication = rs.getString(5);
+            String DateExpiration = rs.getString(4);
+            double TemperatureStock = rs.getDouble(6);
+            double prix = rs.getDouble(7);
+            int idpharmacie = rs.getInt(8);
+            String lien = rs.getString(9);
             p = new Produit(numeroProduit, referenceProduit, libelle, DateFabrication, DateExpiration, TemperatureStock, prix,idpharmacie,lien);
             lisprod.add(p);
         }
-       
         return lisprod;
     }
+    
     public LinkedList<Pharmacie> recherchePharmacie(String nomPharcie) throws SQLException{
         Pharmacie p;
         LinkedList <Pharmacie>lispharcie=new LinkedList<>();
@@ -533,7 +533,8 @@ public class baseD {
         }
         return lispharcie;
     }
-    //AFFICHER 1-PRODUIT PAR NOM
+
+//AFFICHER 1-PRODUIT PAR NOM
     public  Produit UneProduit(String libelle) throws SQLException{
         Produit p=new Produit();
         Statement stmt = con.createStatement();
@@ -542,43 +543,38 @@ public class baseD {
             ResultSet rs;
             rs = stmt.executeQuery(query);
             while(rs.next()){
-                int numeroProduit=rs.getInt(1);
-                int referenceProduit=rs.getInt(2);
-                String DateFabrication=rs.getString(5);
-                String DateExpiration=rs.getString(4);
-                double TemperatureStock=rs.getDouble(6);
-                double prix=rs.getDouble(7);
-                int idpharmacie=rs.getInt(8);
-                String lien=rs.getString(9);
-                p = new Produit(numeroProduit, referenceProduit, libelle, DateFabrication, DateExpiration, TemperatureStock, prix,idpharmacie,lien);
+                int numeroProduit = rs.getInt(1);
+                int referenceProduit = rs.getInt(2);
+                String DateFabrication = rs.getString(5);
+                String DateExpiration = rs.getString(4);
+                double TemperatureStock = rs.getDouble(6);
+                double prix = rs.getDouble(7);
+                int idpharmacie = rs.getInt(8);
+                String lien = rs.getString(9);
+                p = new Produit(numeroProduit, referenceProduit, libelle, DateFabrication, DateExpiration, TemperatureStock, prix, idpharmacie, lien);
             }
         }
         return p;
     }
      //AFFICHER 1-PRODUIT PAR NOM
     public  Pharmacie UnePharmacie(String libelle) throws SQLException{
-        Pharmacie p=new Pharmacie();
+        Pharmacie p = new Pharmacie();
         Statement stmt = con.createStatement();
-        String query=" select * from Pharmacie where nomPharmacie like'%"+libelle+"%'";
-        System.out.println("1-libelle---------------"+libelle);
-        //stmt.executeQuery(query);
-         ResultSet rs;
+        String query = "select * from Pharmacie where nomPharmacie like'%"+libelle+"%'";
+        ResultSet rs;
         rs=stmt.executeQuery(query);
-        System.out.println("2-libelle---------------"+libelle+" "+rs);
         while(rs.next()){
             int idpharmacie=rs.getInt(1);
             String adress=rs.getString(3);
             String tel =rs.getString(4);
-           
-            
-            p=new Pharmacie(idpharmacie, libelle, adress, tel);
+            p = new Pharmacie(idpharmacie, libelle, adress, tel);
         }
         return p;
     }
-    //Update date ferie
+
+//Update date ferie
      public void UpdateDateFerie(int idDateFirie,String heureDM,String heureFM,String heureDS,String heureFS,int idPharmacie,String jourFerie) throws SQLException{
         PreparedStatement stm = con.prepareStatement("update datefirieropos SET  heureDM=?, heureFM=?, heureDS=?, heureFS=?, idPharmacie=?, jourFerie=? where idDateFirie=?");
-        
         stm.setString(1, heureDM);
         stm.setString(2, heureFM);
         stm.setString(3,heureDS);
@@ -590,7 +586,8 @@ public class baseD {
         
     }
  
-    //update date garde 
+//update date garde 
+     
 //// UPDATE ADMIN
  
     public void modifierAdmin(int numeroAdmin ,String nom, String prenom, String cin, String tel, String email, String adresse, String pseudo, String motdepasse) throws SQLException{
@@ -640,15 +637,12 @@ public class baseD {
         stm.executeUpdate();
     }
 	// UPDATE PHARMACIE
-	public void modifierPharmacie(Pharmacie c) throws SQLException{
+    public void modifierPharmacie(Pharmacie c) throws SQLException{
         System.out.println("nomPharmacie"+c.getNomPharmacie());
-         Statement st = con.createStatement();
+        Statement st = con.createStatement();
         String req = "update pharmacie SET nomPharmacie='"+c.getNomPharmacie()+"', adresse='"+c.getAdresse()+"', tel='"+c.getTele()+"' where idpharmacie="+c.getIdPharmacie()+" ";
-        //st.executeQuery(req);
-       // PreparedStatement stm = con.prepareStatement("");
-       System.out.println("nomPharmacie"+c.getNomPharmacie());
+        System.out.println("nomPharmacie"+c.getNomPharmacie());
         st.executeUpdate(req);
-      
     }
     
  
@@ -681,6 +675,49 @@ public class baseD {
         stm.setInt(7, numeroProduit);
         stm.executeUpdate();
     }
+    
+// List Produit
+    public LinkedList<Produit> listProduit(int numeroPharmacien) throws SQLException{
+        String req = "select * from produit where idpharmacie IN ( select idpharmacie from pharmacien where numeropharmacien = "+numeroPharmacien+")";
+        LinkedList<Produit> lp = new LinkedList<Produit>();
+        Statement st = con.createStatement();
+        ResultSet rst = st.executeQuery(req);
+        while(rst.next()){
+            int num = rst.getInt(1);
+            int ref = rst.getInt(2);
+            String libelle = rst.getString(3);
+            String d1 = rst.getString(4);
+            String d2 = rst.getString(5);
+            Double temp = rst.getDouble(6);
+            Double prix = rst.getDouble(7);
+            int idpharmacie = rst.getInt(8);
+            Produit pr = new Produit(num, ref, libelle, d1, d2, temp, prix,idpharmacie);
+            lp.add(pr);
+        }
+        return lp;        
+    }
+
+// Get Pharmacie Id of Product
+    public String GetPharId(int numProduit) throws SQLException{
+        String req = "Select idpharmacie from produit";
+        Statement st = con.createStatement();
+        ResultSet rst = st.executeQuery(req);
+        String idPharmacie = rst.getString(8);
+        return idPharmacie;
+}
+    
+// Get Pharmacie id from database
+    public LinkedList<String> GetPharId() throws SQLException{
+        String req = "select idpharmacie from pharmacie";
+        Statement st = con.createStatement();
+        LinkedList<String> Lid = new LinkedList<String>();
+        ResultSet rst = st.executeQuery(req);
+        while(rst.next()){
+            String id = rst.getString(1);
+            Lid.add(id);
+        }
+        return Lid;
+    }    
 
 // DDELETE PRODUIT    
     public void supprimerProduit(int numeroProduit) throws SQLException{

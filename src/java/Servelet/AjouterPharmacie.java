@@ -45,8 +45,8 @@ public class AjouterPharmacie extends HttpServlet {
                 String tel=phcie.getTele();
                 Pharmacie p=new Pharmacie(idPharmacie, nomPharmacie, adresse, tel);
                 request.setAttribute("Pharmacie", p);
-                        ServletContext context= getServletContext();
-                        context.getRequestDispatcher("/InfoMonPharmacie.jsp").forward(request, response);
+                ServletContext context= getServletContext();
+                context.getRequestDispatcher("/InfoMonPharmacie.jsp").forward(request, response);
                 
               
           }

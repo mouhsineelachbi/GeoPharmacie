@@ -2,10 +2,9 @@ package GeoPharmacie;
 import java.util.LinkedList;
 
 public class Client extends Utilisateur {
-     private int NumClient;
-
-// Constructeurs
-     
+    
+    private int NumClient;
+    
     public Client(){
     }
      
@@ -13,42 +12,42 @@ public class Client extends Utilisateur {
         super(Nom, Prenom, Cin, tel, Email, Adresse, Pseudo, motDePasse);
         this.NumClient = NumClient;
     }
-    //*********************************************************************
-    
-// Getters
+
     public int getNumClient() {
         return NumClient;
     }
-// Setters
+
     public void setNumClient(int NumClient) {
         this.NumClient = NumClient;
     }
-    //les commande*****************************************************************************
+
     LinkedList<Produit> AjouterCommande(){
         return null;
     }
     LinkedList<Produit> SupprimerCommande(){
         return null;
     }
+    
     LinkedList<Produit> ModifierCommande(){
         return null;
     }
-    //les commantares*****************************************************************************
-   LinkedList<Produit> AjouterCommantaire(){
+
+    LinkedList<Produit> AjouterCommantaire(){
         return null;
     }
+   
     LinkedList<Produit> SupprimerCommantaire(){
         return null;
     }
     LinkedList<Produit> ModifierCommantaire(){
         return null;
     } 
-    //******************************
-   void EvaluerPharmacie(){}
-   //**********************************
+
+   void EvaluerPharmacie(){
+   
+   }
+
    void PayerFacture(){
        
    }
-
-   
 }
