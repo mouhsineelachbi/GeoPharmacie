@@ -34,8 +34,7 @@
                 <td><input type="text" name="temp" value=<%=p.getTemperatureStock()%>></td>
                 <td><input type="date" name="dateex" value=<%=p.getDateExpiration()%>></td>
                 <td><input type="date" name="datefab" value=<%=p.getDateFabrication()%>></td>
-                <!--<td><select><option value="empty"></option><option value="Modifier">Modifier</select>-->
-                    <input type="hidden" name="numproduit" value=<%=p.getNumeroProduit()%>>
+                <input type="hidden" name="numproduit" value=<%=p.getNumeroProduit()%>>
                 <td><center><input type="submit" value="Modifier"/></center></td>
             </tr>
                 <%
