@@ -109,11 +109,11 @@ public class baseD {
     
 //*******************************************************************************************************************
 
-    public void insertIntoProduit(int referenceProduit,String libelle,String DateExpiration,String DateFabrication,double TemperatureStock,int numeroProduit,double prix,int idPharmacie) throws SQLException{
+    public void insertIntoProduit(int referenceProduit,String libelle,String DateExpiration,String DateFabrication,double TemperatureStock, double prix,int idPharmacie) throws SQLException{
         Statement stmt =con.createStatement();
-        String query="INSERT INTO produit( referenceProduit, libelle,DateExpiration, DateFabrication, TemperatureStock,numeroProduit, prix,idPharmacie)Values ("
+        String query="INSERT INTO produit( referenceProduit, libelle,DateExpiration, DateFabrication, TemperatureStock, prix,idPharmacie) values ("
                 +referenceProduit+", '"+libelle+"','"+DateExpiration+"', '"+DateFabrication+"', "
-                +TemperatureStock+","+numeroProduit+", "+prix+","+idPharmacie+")";
+                +TemperatureStock+","+prix+","+idPharmacie+")";
         stmt.execute(query);
     }
 
@@ -465,7 +465,7 @@ public class baseD {
         ResultSet rst = st.executeQuery(req);
         while(rst.next()){
             int num = rst.getInt(1);
-             String d1 = rst.getString(2);
+            String d1 = rst.getString(2);
             Double some = rst.getDouble(3);
             Facture f = new Facture(num, d1, some);
             p.add(f);
@@ -484,11 +484,10 @@ public class baseD {
             String dateFermeture = rst.getString(3);
             String dateFerie = rst.getString(4);
             String dateGarde = rst.getString(5);
-             
             Double prix = rst.getDouble(7);
-            int idpharmacie=rst.getInt(8);
-            Planning pr = new Planning(dateOuverture, dateFermeture, dateFerie, dateGarde, idpharmacie);
-            p.add(pr);
+            int idpharmacie = rst.getInt(8);
+            //Planning pr = new Planning(dateOuverture, dateFermeture, dateFerie, dateGarde, idpharmacie);
+            //p.add(pr);
         }
         return p;
     }
@@ -511,7 +510,7 @@ public class baseD {
             double prix=rs.getDouble(7);
             int idpharmacie=rs.getInt(8);
             String lien=rs.getString(9);
-            p=new Produit(numeroProduit, referenceProduit, libelle, DateFabrication, DateExpiration, TemperatureStock, prix,idpharmacie,lien);
+            p = new Produit(numeroProduit, referenceProduit, libelle, DateFabrication, DateExpiration, TemperatureStock, prix,idpharmacie,lien);
             lisprod.add(p);
         }
        
@@ -519,36 +518,29 @@ public class baseD {
     }
     public LinkedList<Pharmacie> recherchePharmacie(String nomPharcie) throws SQLException{
         Pharmacie p;
-         LinkedList <Pharmacie>lispharcie=new LinkedList<>();
+        LinkedList <Pharmacie>lispharcie=new LinkedList<>();
         Statement stmt = con.createStatement();
         String query="select * from pharmacie where nomPharmacie LIKE '%"+nomPharcie+"%'";
         stmt.executeQuery(query);
         ResultSet rs=stmt.executeQuery(query);
         while(rs.next()){
-           int idpharmacie=rs.getInt(1);
+            int idpharmacie=rs.getInt(1);
             String adress=rs.getString(3);
             String tel =rs.getString(4);
-           String nomPharmacie=rs.getString(2);
-            
-            p=new Pharmacie(idpharmacie, nomPharmacie, adress, tel);
-            
+            String nomPharmacie=rs.getString(2);
+            p = new Pharmacie(idpharmacie, nomPharmacie, adress, tel);
             lispharcie.add(p);
         }
-       
         return lispharcie;
     }
     //AFFICHER 1-PRODUIT PAR NOM
     public  Produit UneProduit(String libelle) throws SQLException{
         Produit p=new Produit();
         Statement stmt = con.createStatement();
-        if(!libelle.equals(""))
-        {
+        if(!libelle.equals("")){
             String query=" select * from produit where libelle like'%"+libelle+"%'";
-            System.out.println("1-libelle---------------"+libelle);
-            //stmt.executeQuery(query);
-             ResultSet rs;
-            rs=stmt.executeQuery(query);
-            System.out.println("2-libelle---------------"+libelle+" "+rs);
+            ResultSet rs;
+            rs = stmt.executeQuery(query);
             while(rs.next()){
                 int numeroProduit=rs.getInt(1);
                 int referenceProduit=rs.getInt(2);
@@ -558,7 +550,7 @@ public class baseD {
                 double prix=rs.getDouble(7);
                 int idpharmacie=rs.getInt(8);
                 String lien=rs.getString(9);
-                p=new Produit(numeroProduit, referenceProduit, libelle, DateFabrication, DateExpiration, TemperatureStock, prix,idpharmacie,lien);
+                p = new Produit(numeroProduit, referenceProduit, libelle, DateFabrication, DateExpiration, TemperatureStock, prix,idpharmacie,lien);
             }
         }
         return p;
@@ -689,29 +681,16 @@ public class baseD {
         stm.setInt(7, numeroProduit);
         stm.executeUpdate();
     }
+
+// DDELETE PRODUIT    
+    public void supprimerProduit(int numeroProduit) throws SQLException{
+        String req = "delete from produit where numeroProduit = "+numeroProduit;
+        Statement st = con.createStatement();
+        st.executeUpdate(req);
+    }
     
      public static void main(String[] args) throws SQLException, ParseException, ClassNotFoundException{
-        baseD mydb = new baseD();// makandirouch had chi tanchedo la base données o tandiroha f classe bohdha chouf
-        // mydb.insertInToAdmin("nomAdmin12","prenom2", "0670044061"," mc256482"," email"," pseudo"," adresse",3," motDepasse", 0);
-        //mydb.insertInToClient("hh", "pm"," tele", "in", "email", "pseudo", "adresse", "1234", 0);
-        // mydb.insertInToPharmacien("nom"," prenom"," tele11", "cin"," email"," pseudo", "adresse", "motDepasse", 0,2);
-        // mydb.insertIntoCommande(0, "2018-1-14", "EtatCommande");
-        // mydb.insertIntoFacture(0,"2018-1-14",1523);
-        // mydb.insertIntoLineCommande(8, 17, 7);
-        // mydb.insertIntoPaiementcarte("2017-5-14", 121.0, 1, "nomp", "prenomProprietaire","123", "rue najd el jadida", "mc456182");
-        // mydb.insertIntoPaiementLivraison("2017-4-14", 0, 0, "nomClient"," prenomClient"," emailClient"," teleClient"," adresseClient", "CinClient");
-        // mydb.insertIntoProduit(0, "libelle", "2017-12-14", "2017-5-14", 2, 0, 12,2);
-        // mydb.insertIntoPlanning("2018-1-14","2018-1-14","2018-1-14","2018-1-14");
-        // mydb.deletProduit(1);
-        
-       /* Pharmacie c = mydb.selectPharmacie(1);
-        c.setNomPharmacie("anasio");
-        
-        mydb.modifierPharmacie(c);
-         System.out.println(c);
-         System.out.println("hello !!");*/
-       mydb.insertIntoDateGarde(0, "19:30:10","19:30:10", "19:30:10","19:30:10", 1, "2018-1-14");
-       mydb.insertIntoDateFerie(0, "19:30:10","19:30:10", "19:30:10","19:30:10", 1, "2018-1-14");
+
     }
     
 }
