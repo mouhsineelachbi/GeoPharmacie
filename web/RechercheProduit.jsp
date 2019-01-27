@@ -19,7 +19,7 @@
         
         <form action="SRechercheProduit" method="post">
                 <input name="libelle" type="text"/> 
-                
+                <input name="libelle" type="hidden"/>
                <input type='hidden' name="action" value="rechercher"/>
                <input type="submit" value="Rechercher" />
         </form>

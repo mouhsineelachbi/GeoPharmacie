@@ -30,10 +30,12 @@
                     <th>TEMPERZTURE</th>
                     <th>DATE D'EXPERATION</th>
                     <th> DATE DE FABRICATION</th>
+                    <th>PHARMACIE</th>
                 </tr> 
                 <%
                                 LinkedList<Produit> produits = op.AfficherProduit();                                
                                 System.out.println("hhhhh"+produits.size());
+                                
             for(Produit p :produits){
                 
                 // n'est pas terminé
@@ -45,6 +47,7 @@
                     <td><%=p.getTemperatureStock() %></td>
                     <td> <%=p.getDateExpiration() %></td>
                     <td><%=p.getDateFabrication() %></td>
+                    <td><%= op.NomPharmacie(p.getIdpharmacie())%></td>
                 </tr> 
                  <%
                     
