@@ -1,4 +1,10 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package Servelet;
+
 import GeoPharmacie.Produit;
 import GeoPharmacie.baseD;
 import java.io.IOException;
@@ -11,42 +17,52 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
-@WebServlet(name = "modifierProduit", urlPatterns = {"/modifierProduit"})
-public class modifierProduit extends HttpServlet {
-
+/**
+ *
+ * @author Mythose
+ */
+@WebServlet(name = "ajouterProduit", urlPatterns = {"/ajouterProduit"})
+public class ajouterProduit extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException, SQLException {
-            int numProduit = Integer.parseInt(request.getParameter("numproduit"));
+            throws ServletException, IOException, SQLException {
             int ref = Integer.parseInt(request.getParameter("reference"));
             String libelle = request.getParameter("libelle");
-            String dateex = request.getParameter("dateex");
-            String datefab = request.getParameter("datefab");
-            double temp = Double.parseDouble(request.getParameter("temp"));
             double prix = Double.parseDouble(request.getParameter("prix"));
-            Produit p = new Produit(numProduit, ref, libelle, datefab, dateex, temp,  prix);
+            double temp = Double.parseDouble(request.getParameter("temp"));
+            String datefab = request.getParameter("datefab");
+            String dateex = request.getParameter("dateex");
+            int idPharmacie = Integer.parseInt(request.getParameter("idPharmacie"));
             baseD db = new baseD();
-            db.modifierProduit(numProduit, ref, libelle, dateex, datefab, temp, prix);
-            request.setAttribute("produit", p);
+            db.insertIntoProduit(ref, libelle, dateex, datefab, temp, prix, idPharmacie);
+            //request.setAttribute("produit", p);
             // Forward to to the JSP file.
-            request.getRequestDispatcher("modifier_ListProduit.jsp").forward(request, response);
+            request.getRequestDispatcher("AjouterProduit.jsp").forward(request, response);
+        
     }
+
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException { 
+            throws ServletException, IOException {
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(ajouterProduit.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
+    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(modifierProduit.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ajouterProduit.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
 
     @Override
     public String getServletInfo() {

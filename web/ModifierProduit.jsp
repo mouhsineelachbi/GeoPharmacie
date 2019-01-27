@@ -11,16 +11,6 @@
             Produit p = (Produit)request.getAttribute("Produit");
         %>
         <table border=2 >
-        <!--<form method="POST" action="modifierProduit">
-            <input type="hidden" name="numProduit" value="">
-            <input type="text" name="ref" value="">
-            <input type="text" name="libelle" value="">
-            <input type="date" name="dateEx" value="">
-            <input type="text" name="dateFab" value="">
-            <input type="text" name="temperature" value="">
-            <input type="text" name="prix" value="">
-            <input type="hidden" name="idPharmacie" value="">
-        </form>-->
             <tr>
                 <th>REFERENCE PRODUIT</th>
                 <th>LIBELLE</th>
