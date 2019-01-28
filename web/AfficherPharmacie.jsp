@@ -30,6 +30,7 @@
                     <th>TEL </th>
                     <th>DATE DE FERIE</th>
                     <th>DATE DE GARDE</th>
+                    <th>image</th>
                 </tr>
                 <tr>
                     <%
@@ -54,6 +55,8 @@
                     <input type="hidden" name="action" value="affichageIndepondante"/>  
                     <th><input type="submit" value="PLUS DE DETAILL"> </th>
                 </form>
+                <th><img src="<%=request.getContextPath()%>/image<%=p.getLien()%>" alt="Acune" width="200" height="200"/></th>
+               
             </tr>
                  <%
                     

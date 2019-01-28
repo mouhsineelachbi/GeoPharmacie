@@ -25,7 +25,7 @@ public class modifierProduit extends HttpServlet {
             String datefab = request.getParameter("datefab");
             double temp = Double.parseDouble(request.getParameter("temp"));
             double prix = Double.parseDouble(request.getParameter("prix"));
-            Produit p = new Produit(numProduit, ref, libelle, datefab, dateex, temp,  prix);
+            Produit p = new Produit(numProduit, ref, libelle, datefab, dateex, temp, prix);
             baseD db = new baseD();
             db.modifierProduit(numProduit, ref, libelle, dateex, datefab, temp, prix);
             request.setAttribute("produit", p);

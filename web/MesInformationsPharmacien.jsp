@@ -94,6 +94,16 @@
                              <input type="submit" value="Modifier les informations"/>
                                        
         </form>
+                           
+                           
+                         <!-- //**********ici modification a faire**********<a href="AjouterPharmacie.jsp">AJOUTER VOTRE PHARMACIE</a>   -->
+                         
+                          <form action="AjouterPharmacie" method="post">
+                               <input type="hidden" name="numeroPharmacien" value="<%=cl.getNumeroPharmacien()%>"/>
+                               <input type="submit" value="AJOUTER VOTRE PHARMACIE"/>
+                               <input type='hidden' name="action" value="ajouterCien"/>
+                           </form>  
+                           
                            <form action="AjouterPharmacie" method="post">
                                <input type="hidden" name="idPharmacie" value="<%=cl.getIdPharmacie() %>"/>
                                <input type="submit" value="Afficher les Informations de la pharmacie"/>
@@ -124,7 +134,15 @@
                    out.print(message);
                 }
             
-        %>  
-        <a href="AfficherPharmaciePharmacien.jsp">LISTER TOUT LES PHARMACIES</a>  
+%>  <br>
+     <form action="ModifierPharmacien" method="post">
+        <input type="submit" value="LISTER TOUT LES PHARMACIES"/>
+        <input type="hidden" name="idpharmaciePharmacien" value="<%=cl.getIdPharmacie() %>"/> 
+        <input type="hidden" name="action" value="IDPHARMACIEN"/>
+        </form>
+
+      <!--  <a href="AfficherPharmaciePharmacien.jsp">LISTER TOUT LES PHARMACIES </a> 
+        -->
+        </form>
     </body>
 </html>

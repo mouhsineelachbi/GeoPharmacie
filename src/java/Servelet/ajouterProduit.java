@@ -5,7 +5,6 @@
  */
 package Servelet;
 
-import GeoPharmacie.Produit;
 import GeoPharmacie.baseD;
 import java.io.IOException;
 import java.sql.SQLException;

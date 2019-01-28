@@ -24,17 +24,19 @@
                 
                 <tr>
                     <th>NOM PHARMACIE</th>
-                
                     <th>ADRESSE  </th>
-                
                     <th>TEL </th>
                     <th>DATE DE FERIE</th>
                     <th>DATE DE GARDE</th>
+                    <th>image</th>
                 </tr>
                 <tr>
                     <%
+                        int idpharmaciePharmacien;
+                    idpharmaciePharmacien =(Integer)request.getAttribute("idpharmaciePharmacien");
                                 LinkedList<Pharmacie> Pharmacies = op.AfficherPharmacie();                                
-                                System.out.println("hhhhh"+Pharmacies.size());
+                                
+                                
              for(Pharmacie p: Pharmacies){
                 
                 // n'est pas terminé
@@ -45,15 +47,28 @@
                 
                     <th> <%=p.getTele()%></th>
                 <form action="ModifierPharmacien" method="post">
-                    <input type="hidden" name="idpharmacie" value="<%=p.getIdPharmacie()%>"/>
+                    <input type="hidden" name="idpharmaciePharmacien" value="<%=idpharmaciePharmacien %>"/>
+                     <input type="hidden" name="idpharmacie" value="<%=p.getIdPharmacie()%>"/>
                     <input type="hidden" name="action" value="affichageIndepondanteFp"/>  
+                    
+                    
                     <th><input type="submit" value="PLUS DE DETAILL"> </th>
+               
+                
+                
                 </form>
                 <form action="ModifierPharmacien" method="post">
                     <input type="hidden" name="idpharmacie" value="<%=p.getIdPharmacie()%>"/>
+                    <input type="hidden" name="idpharmaciePharmacien" value="<%=idpharmaciePharmacien %>"/>
                     <input type="hidden" name="action" value="affichageIndepondantep"/>  
+                
+                    
                     <th><input type="submit" value="PLUS DE DETAILL"> </th>
+                
+                
                 </form>
+                <th><img src="<%=request.getContextPath()%>/image<%=p.getLien()%>" /></th>
+                       
             </tr>
                  <%
                     

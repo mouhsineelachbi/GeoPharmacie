@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Servelet;
 
 import GeoPharmacie.baseD;
@@ -17,10 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author Mythose
- */
+
 @WebServlet(name = "SupprimerProduit", urlPatterns = {"/SupprimerProduit"})
 public class SupprimerProduit extends HttpServlet {
 
@@ -29,8 +21,7 @@ public class SupprimerProduit extends HttpServlet {
         int numeroProduit = Integer.parseInt(request.getParameter("numeroProduit"));
         baseD db = new baseD();
         db.supprimerProduit(numeroProduit);
-        request.getRequestDispatcher("supprimer_ListProduit.jsp").forward(request, response);
-        
+        request.getRequestDispatcher("supprimer_ListProduit.jsp").forward(request, response); 
     }
 
 

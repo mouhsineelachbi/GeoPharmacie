@@ -23,14 +23,26 @@ public class AjouterPharmacie extends HttpServlet {
             System.out.println("avant recupirer les champs d'input*****************************************************************");
 
          String action = request.getParameter("action");
+         
+                  if(action.equals("ajouterCien")){
+                      int numeroPharmacien=Integer.parseInt(request.getParameter("numeroPharmacien"));
+                      request.setAttribute("numeroPharmacien", numeroPharmacien);
+                        ServletContext context= getServletContext();
+                        context.getRequestDispatcher("/AjouterPharmacie.jsp").forward(request, response);
+                       
+                  }
           if(action.equals("ajouterPhar")){
               String nomPharmacie = request.getParameter("nomPharmacie");
               String adresse=request.getParameter("adresse");
-              int numeroPharmacien=Integer.parseInt(request.getParameter("numeroPharmacien"));
+            
                String tel =request.getParameter("tel");
+               
+               //String lien=request.getParameter("lien");
                
                if(!op.VerifierExistanceNomPharmacie(nomPharmacie)){
                op.insertInToPharmacie(0, nomPharmacie, adresse, tel);
+               int numeroPharmacien=Integer.parseInt(request.getParameter("numeroPharmacien"));
+               op.modifierIdPharmacie_Cien(numeroPharmacien);
                response.sendRedirect("uploadPharmacie.jsp");
                }
                else{

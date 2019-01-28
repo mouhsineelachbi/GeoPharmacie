@@ -12,10 +12,10 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <form action="UploadDownloadFileServlet" method="post" enctype="multipart/form-data">
-                    Select File to Upload:  <input type="file" name="fileName">
+        <form action="uploadA" method="post" enctype="multipart/form-data">
+                    Select File to Upload:  <input type="file" name="file">
                     <br>
                     <input type="submit" value="Upload">
-                </form>
+         </form>
     </body>
 </html>
