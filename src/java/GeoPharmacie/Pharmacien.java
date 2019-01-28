@@ -7,9 +7,10 @@ public class Pharmacien extends Utilisateur {
     private int NumeroPharmacien;
     private int idPharmacie;
 
-    
     public Pharmacien(){
+        
     }
+    
     public Pharmacien(int NumeroPharmacien,String Nom, String Prenom, String Cin, String tel, String Email, String Adresse, String Pseudo, String motDePasse, int idPharmacie){
         super(Nom, Prenom, Cin, tel, Email, Adresse, Pseudo, motDePasse);
         this.NumeroPharmacien = NumeroPharmacien;
@@ -20,6 +21,7 @@ public class Pharmacien extends Utilisateur {
         super(Nom, Prenom, Cin, tel, Email, Adresse, Pseudo, motDePasse);
         this.NumeroPharmacien = NumeroPharmacien;
     }
+    
     public int getIdPharmacie() {
         return idPharmacie;
     }
@@ -44,9 +46,19 @@ public class Pharmacien extends Utilisateur {
     LinkedList<Produit> ModifierProduit(){
         return null;
     }
-    void AjouterDescription(){}
-    void SupprimerDescription(){}
-    void ModifierDescription(){}
+    void AjouterDescription(){
     
-    Compte creerCompte(){return null;}
+    }
+    
+    void SupprimerDescription(){
+    
+    }
+    
+    void ModifierDescription(){
+    
+    }
+    
+    Compte creerCompte(){
+        return null;
+    }
    }

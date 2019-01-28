@@ -1,18 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package GeoPharmacie;
-
 import java.util.Date;
 import java.util.LinkedList;
 
-/**
- *
- * @author Hamza
- */
 public class Planning {
+    
     private int numeroPharmacien;
     private String dateOuverture;
     private String dateFermeture;
@@ -92,8 +83,7 @@ public class Planning {
         this.idPharmacie = idPharmacie;
     }
     
-    
-   public void ConsulterPlanning(){
+    public void ConsulterPlanning(){
         
     }
     
