@@ -1,6 +1,7 @@
 package GeoPharmacie;
 
 public class Produit {
+    
     private int ReferenceProduit;
     private String Libelle;
     private String DateFabrication;

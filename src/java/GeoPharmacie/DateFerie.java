@@ -1,15 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package GeoPharmacie;
 
-/**
- *
- * @author Hamza
- */
 public class DateFerie {
+    
     private int idDateFirie;
     private String heureDM;
     private String heureFM;
@@ -19,6 +11,7 @@ public class DateFerie {
     private String jourFerie;
 
     public DateFerie() {
+        
     }
 
     public DateFerie(int idDateFirie, String heureDM, String heureFM, String heureDS, String heureFS, int idPharmacie, String jourFerie) {
