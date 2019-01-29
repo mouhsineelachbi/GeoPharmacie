@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 
 public class baseD {
     private Connection con;
+    
     public baseD () throws SQLException{
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -53,19 +54,30 @@ public class baseD {
 //************************************************************************************************************************************************
     public void insertInToPharmacie(int idpharmacie,String nomPharmacie,String adresse,String tel) throws SQLException{
         Statement stmt = con.createStatement();
-        String query="INSERT INTO pharmacie (idpharmacie, nomPharmacie, adresse,numeroPharmacien,tel)VALUES ("+idpharmacie+",'"
+        String query="INSERT INTO pharmacie ( nomPharmacie, adresse,tel)VALUES ('"
                     +nomPharmacie+"',' "+adresse+"','"+tel+"')";
         System.out.println("ibase de pharmacien************************");
         stmt.executeUpdate(query);
     }
 
+    //
+    ///**********************************************************************************************************************************************
+    public void insertInPharmacie(int idpharmacie,String nomPharmacie,String adresse,String tel,String lien) throws SQLException{
+        Statement stmt = con.createStatement();
+        lien="vide";
+        String query="INSERT INTO pharmacie (idpharmacie, nomPharmacie, adresse,numeroPharmacien,tel,lien)VALUES ("+idpharmacie+",'"
+                    +nomPharmacie+"',' "+adresse+"','"+tel+"','"+lien+"')";
+        System.out.println("ibase de pharmacie1************************");
+        stmt.executeUpdate(query);
+        System.out.println("ibase de pharmacie1************************");
+    }
 //************************************************************************************************************************************************
     public void insertInToPharmacien( String nom,String prenom,String tele,String cin,String email,String pseudo,String adresse,String motDepasse,int numeroPharmacien,int idPharmacie) throws SQLException{
         Statement stmt = con.createStatement();
         String query="INSERT INTO pharmacien (numeroPharmacien,nom,prenom,cin, tele,email, pseudo, adresse,motDepasse,idPharmacie)VALUES ("
                     +numeroPharmacien+",'"+nom+"',' "+prenom+"','"
                     + cin+"','"+ tele+"',' "+email+"','"+ pseudo+"','"+ adresse+"','"+motDepasse+"',"+idPharmacie+")";
-        System.out.println("**********************ibase de pharmacien********        idPharmacie   "+idPharmacie+"              ****************");
+        System.out.println("**********************ibase de pharmacien********        adresse   "+adresse+"              ****************");
         stmt.executeUpdate(query);
     }
     
@@ -242,8 +254,28 @@ public class baseD {
         } 
         return fs;
     }
-
-// Afficher un seul Client
+    //getLastPharmacie()
+    public Pharmacie getLastPharmacie()throws SQLException{
+        String req = "select Max(idpharmacie)as nb from pharmacie ";
+        Statement st = con.createStatement();
+        Pharmacie ph=new Pharmacie();
+         ResultSet rst = st.executeQuery(req);
+        while(rst.next()){
+            int idpharmacie=rst.getInt("nb");
+            
+            ph = new Pharmacie();
+            ph=selectPharmacie(idpharmacie);
+        }return ph;
+        
+    }
+    //****************************************modifierIdPharmacie_Cien()
+    public void modifierIdPharmacie_Cien(int numeroPharmacien)throws SQLException{
+        String req = "UPDATE pharmacien set idpharmacie="+getLastPharmacie().getIdPharmacie()+" where numeroPharmacien="+numeroPharmacien+" ";
+        Statement st = con.createStatement();
+        st.executeUpdate(req);
+         
+    }
+    //afficher une seule Client
     public Client selectClient(String cin) throws SQLException{
         String req = "select * from client where cin ='"+cin+"'";
         Statement st = con.createStatement();
@@ -338,6 +370,30 @@ public class baseD {
         p =new Pharmacien(numeroPharmacien, nom, prenom, cin, tel, email, adresse, pseudo, password, idPharmacie);
         return p;
     }
+    //**********************************************************************
+    //PHARMACIEN DEPUIS SON IDPHARMACIE
+     public Pharmacien selectPharmacien(int idPharmacie) throws SQLException{
+        Pharmacien p=new Pharmacien();
+        Statement st = con.createStatement();
+        String req = "select * from pharmacien where idPharmacie="+idPharmacie+"";
+        st.executeQuery(req);
+        ResultSet rst = st.executeQuery(req);
+        while(rst.next()){
+        int numeroPharmacien = rst.getInt(1);
+        String nom = rst.getString(2);
+        String prenom = rst.getString(3);
+        String tel = rst.getString(5);
+        String email = rst.getString(6);
+        String pseudo = rst.getString(7);
+        String adresse = rst.getString(8);
+        String password = rst.getString(9);
+        String cin = rst.getString(4);
+     
+        p =new Pharmacien(numeroPharmacien, nom, prenom, cin, tel, email, adresse, pseudo, password, idPharmacie);
+        }
+        return p;
+    }
+     //********************************************************************************************
  
     public String NomPharmacie(int idPharmacie) throws SQLException{
         Pharmacie p = new Pharmacie();
@@ -361,6 +417,7 @@ public class baseD {
         Pharmacie p = new Pharmacie(idPharmacie, nomPharmacie, adresse, tel);
         return p;
     }
+    //***********************************************************************************************
     
     public ArrayList<Pharmacien> selectPharmacien() throws SQLException {
         Statement stmt = con.createStatement();
@@ -498,8 +555,35 @@ public class baseD {
         }
         return p;
     }
+    // Get Pharmacie Id of Product
+    public String GetPharId(int numProduit) throws SQLException{
+        String req = "Select idpharmacie from produit";
+        Statement st = con.createStatement();
+        ResultSet rst = st.executeQuery(req);
+        String idPharmacie = rst.getString(8);
+        return idPharmacie;
+}
     
-//Rechercher par nom de produit
+// Get Pharmacie id from database
+    public LinkedList<String> GetPharId() throws SQLException{
+        String req = "select idpharmacie from pharmacie";
+        Statement st = con.createStatement();
+        LinkedList<String> Lid = new LinkedList<String>();
+        ResultSet rst = st.executeQuery(req);
+        while(rst.next()){
+            String id = rst.getString(1);
+            Lid.add(id);
+        }
+        return Lid;
+    }    
+
+// DDELETE PRODUIT    
+    public void supprimerProduit(int numeroProduit) throws SQLException{
+        String req = "delete from produit where numeroProduit = "+numeroProduit;
+        Statement st = con.createStatement();
+        st.executeUpdate(req);
+    }
+    //Rechercher par nom de produit
     public LinkedList<Produit> rechercheProduit(String nomProd) throws SQLException{
         Produit p;
          LinkedList <Produit>lisprod=new LinkedList<>();
@@ -593,8 +677,20 @@ public class baseD {
         stm.executeUpdate();
      }
  
-//update date garde 
-     
+    //update date garde 
+      public void UpdateDateGarde(int idDateGarde,String heureDM,String heureFM,String heureDS,String heureFS,int idPharmacie,String jourGarde) throws SQLException{
+        PreparedStatement stm = con.prepareStatement("update dategarde SET  heureDM=?, heureFM=?, heureDS=?, heureFS=?, idPharmacie=?, jourGarde=? where idDateGarde=?");
+        
+        stm.setString(1, heureDM);
+        stm.setString(2, heureFM);
+        stm.setString(3,heureDS);
+        stm.setString(4, heureFS);
+        stm.setString(6, jourGarde);
+        stm.setInt(5, idPharmacie);
+        stm.setInt(7, idDateGarde);
+        stm.executeUpdate();
+        
+    }
 //// UPDATE ADMIN
  
     public void modifierAdmin(int numeroAdmin ,String nom, String prenom, String cin, String tel, String email, String adresse, String pseudo, String motdepasse) throws SQLException{
@@ -652,7 +748,25 @@ public class baseD {
         st.executeUpdate(req);
     }
     
- 
+ //UPDATE PHARMACIE AVEC LE LIEN 
+        public void updatePharmacie(Pharmacie c) throws SQLException{
+        System.out.println("nomPharmacie"+c.getNomPharmacie());
+         PreparedStatement st;
+         String req = "update pharmacie SET nomPharmacie=?, adresse=?, tel=?,lien=? where idpharmacie=? ";
+        
+        st = con.prepareStatement(req);
+        st.setString(1, c.getNomPharmacie());
+        st.setString(2, c.getAdresse());
+        st.setString(3, c.getTele());
+        st.setString(4, c.getLien());
+        st.setInt(5, c.getIdPharmacie());
+//st.executeQuery(req);
+       // PreparedStatement stm = con.prepareStatement("");
+       System.out.println("nomPharmacie------------------------------"+c.getNomPharmacie());
+       System.out.println("nomPharmacie------------------------------"+c.getLien());
+        st.executeUpdate();
+      
+    }
 // UPDATE PHARMACIEN
     public void modifierPharmacien(int idPharmacie, String nom, String prenom, String cin, String tel, String email, String adresse, String pseudo, String motdepasse,int numeroPharmacien) throws SQLException{
         PreparedStatement stm = con.prepareStatement("update pharmacien SET nom=?, prenom=?, cin=?, tele=?, email=?, adresse=?, pseudo=?, motdepasse=? ,idPharmacie=? where numeroPharmacien=?");
@@ -705,36 +819,34 @@ public class baseD {
     }
 
 // Get Pharmacie Id of Product
-    public String GetPharId(int numProduit) throws SQLException{
-        String req = "Select idpharmacie from produit";
-        Statement st = con.createStatement();
-        ResultSet rst = st.executeQuery(req);
-        String idPharmacie = rst.getString(8);
-        return idPharmacie;
-}
     
 // Get Pharmacie id from database
-    public LinkedList<String> GetPharId() throws SQLException{
-        String req = "select idpharmacie from pharmacie";
-        Statement st = con.createStatement();
-        LinkedList<String> Lid = new LinkedList<String>();
-        ResultSet rst = st.executeQuery(req);
-        while(rst.next()){
-            String id = rst.getString(1);
-            Lid.add(id);
-        }
-        return Lid;
-    }    
+    
 
 // DDELETE PRODUIT    
-    public void supprimerProduit(int numeroProduit) throws SQLException{
-        String req = "delete from produit where numeroProduit = "+numeroProduit;
-        Statement st = con.createStatement();
-        st.executeUpdate(req);
-    }
     
      public static void main(String[] args) throws SQLException, ParseException, ClassNotFoundException{
-
+        baseD mydb = new baseD();// makandirouch had chi tanchedo la base données o tandiroha f classe bohdha chouf
+        // mydb.insertInToAdmin("nomAdmin12","prenom2", "0670044061"," mc256482"," email"," pseudo"," adresse",3," motDepasse", 0);
+        //mydb.insertInToClient("hh", "pm"," tele", "in", "email", "pseudo", "adresse", "1234", 0);
+        // mydb.insertInToPharmacien("nom"," prenom"," tele11", "cin"," email"," pseudo", "adresse", "motDepasse", 0,2);
+        // mydb.insertIntoCommande(0, "2018-1-14", "EtatCommande");
+        // mydb.insertIntoFacture(0,"2018-1-14",1523);
+        // mydb.insertIntoLineCommande(8, 17, 7);
+        // mydb.insertIntoPaiementcarte("2017-5-14", 121.0, 1, "nomp", "prenomProprietaire","123", "rue najd el jadida", "mc456182");
+        // mydb.insertIntoPaiementLivraison("2017-4-14", 0, 0, "nomClient"," prenomClient"," emailClient"," teleClient"," adresseClient", "CinClient");
+        // mydb.insertIntoProduit(0, "libelle", "2017-12-14", "2017-5-14", 2, 0, 12,2);
+        // mydb.insertIntoPlanning("2018-1-14","2018-1-14","2018-1-14","2018-1-14");
+        // mydb.deletProduit(1);
+        
+       /* Pharmacie c = mydb.selectPharmacie(1);
+        c.setNomPharmacie("anasio");
+        
+        mydb.modifierPharmacie(c);
+         System.out.println(c);
+         System.out.println("hello !!");*/
+       mydb.insertIntoDateGarde(0, "19:30:10","19:30:10", "19:30:10","19:30:10", 2, "2018-1-15");
+       mydb.insertIntoDateFerie(0, "19:30:11","19:30:10", "19:30:10","19:30:10", 2, "2018-1-15");
     }
     
 }

@@ -1,10 +1,10 @@
 <%-- 
-    Document   : ModifierFerie
-    Created on : 27 janv. 2019, 16:01:55
+    Document   : ModifierGarde
+    Created on : 27 janv. 2019, 23:36:52
     Author     : Hamza
 --%>
 
-<%@page import="GeoPharmacie.DateFerie"%>
+<%@page import="GeoPharmacie.DateGarde"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -17,14 +17,14 @@
         <table border="">
             <%
                 
-                DateFerie d=new DateFerie();
-                d =(DateFerie)request.getAttribute("ferie");
+                DateGarde d=new DateGarde();
+                d =(DateGarde)request.getAttribute("garde");
                 System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++"+d.getIdPharmacie());
             %>
-            <input type="hidden" name="idDateFerie" value="<%=d.getIdDateFirie() %>"/>
+            <input type="hidden" name="idDateGarde" value="<%=d.getIdDateGarde() %>"/>
             <tr>
                 <td> LE JOUR DE FERIE</td>
-                <td><input name="jourferie" type="date" value="<%=d.getJourFerie() %>"> </td>
+                <td><input name="jourgarde" type="date" value="<%=d.getJourGarde() %>"> </td>
             </tr>
            <tr>
                <td> L'HEURE DE DEBUT DU MATAIN :</td> <td><input name="heureDM" type="time" value="<%=d.getHeureDM() %>"> </td>
@@ -47,7 +47,7 @@
             </tr>
             <tr>  
                 <td>
-                  <input type="hidden" name="action" value="ModifierDateFerie"/>                      
+                  <input type="hidden" name="action" value="ModifierDateGarde"/>                      
                 </td> 
                 <td>
                     <input type="submit" value="Enregister" />                        

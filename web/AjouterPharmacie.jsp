@@ -12,6 +12,9 @@
         <title>Ajouter une pharmacie</title>
     </head>
     <body>
+        <%
+             int numeroPharmacien =(Integer)request.getAttribute("numeroPharmacien");
+        %>
         <h1>Ajouter une pharmacie</h1>
             <form action="AjouterPharmacie" method="post">
         <table border="">
@@ -26,20 +29,21 @@
             <tr>
                 <td> TEL :</td> <td><input name="tel" type="tel"/> </td>
             </tr>
-            
+             
             
             <tr>  
                 <td>
-                  <input type='hidden' name="action" value="ajouterPhar"/>                      
+                  <input type='hidden' name="action" value="ajouterPhar"/>
+                  <input type='hidden' name="numeroPharmacien" value="<%=numeroPharmacien%>"/>
                 </td> 
                 <td>
                     <input type="submit" value="Enregister" />                        
                 </td>
             </tr>
             
+            
         </table>
         </form>
-        
        
                 
          

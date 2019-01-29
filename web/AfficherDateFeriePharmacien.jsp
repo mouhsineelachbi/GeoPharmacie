@@ -4,6 +4,7 @@
     Author     : Hamza
 --%>
 
+<%@page import="java.util.List"%>
 <%@page import="GeoPharmacie.baseD"%>
 <%@page import="GeoPharmacie.DateFerie"%>
 <%@page import="java.util.LinkedList"%>
@@ -30,11 +31,16 @@
              <%
             
             baseD op = new baseD();
-            int idpharmacie;
-                    idpharmacie =(Integer)request.getAttribute("idpharmacie");
-             LinkedList<DateFerie> feries = op.AfficherDateFeries(idpharmacie);
-             
-                                System.out.println("hhhhh"+feries.size());
+            //int t[]=new int[2];
+           // for(int i=0;i<2;i++)        
+           
+           List <Integer> list=new LinkedList();
+            list =(List)request.getAttribute("list");
+           int idpharmacie=list.get(0);
+           int idpharmaciePharmacien=list.get(1);
+            LinkedList<DateFerie> feries = op.AfficherDateFeries(idpharmacie);
+             System.out.println("++++++++++++++afficherDateFeriePharmacien-------------"+idpharmacie);
+                                
              for(DateFerie f: feries){
             
             %>
@@ -46,8 +52,9 @@
                 <td> <%=f.getHeureFS() %></td> 
                 <td> 
                     <form action="SModifierDateFD" method="post">
+                        <input type="hidden" name="idpharmaciePharmacien" value="<%=idpharmaciePharmacien %>"/>
                         <input type="hidden" name="idDateFerie" value="<%=f.getIdDateFirie() %>"/>
-                        <input type="hidden" name="idpharmacie" value="<%=idpharmacie%>"/>
+                        <input type="hidden" name="idpharmacie" value="<%=f.getIdPharmacie() %>"/>
                         <input type="hidden" name="jourferie" value="<%=f.getJourFerie()%>"/>
                         <input type="hidden" name="heureDM" value="<%=f.getHeureDM()%>"/>
                         <input type="hidden" name="heureFM" value="<%=f.getHeureFM()%>"/>

@@ -6,7 +6,16 @@ public class Pharmacie {
     private String nomPharmacie;
     private String adresse;
     private String tele;
+    private String lien;
 
+   
+    public Pharmacie(int IdPharmacie, String nomPharmacie, String adresse, String tele, String lien) {
+        this.IdPharmacie = IdPharmacie;
+        this.nomPharmacie = nomPharmacie;
+        this.adresse = adresse;
+        this.tele = tele;
+        this.lien = lien;
+    }
     public Pharmacie(int IdPharmacie, String nomPharmacie, String adresse,String tele) {
         this.IdPharmacie = IdPharmacie;
         this.nomPharmacie = nomPharmacie;
@@ -16,7 +25,15 @@ public class Pharmacie {
 
     public Pharmacie() {
         
+    } 
+    public void setLien(String lien) {
+        this.lien = lien;
     }
+
+    public String getLien() {
+        return lien;
+    }
+
 
     public void setTele(String tele) {
         this.tele = tele;

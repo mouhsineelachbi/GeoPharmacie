@@ -4,6 +4,7 @@
     Author     : Hamza
 --%>
 
+<%@page import="java.util.List"%>
 <%@page import="GeoPharmacie.DateFerie"%>
 <%@page import="GeoPharmacie.baseD"%>
 <%@page import="java.util.LinkedList"%>
@@ -31,13 +32,15 @@
              <%
             
             baseD op = new baseD();
-            int idpharmacie;
-            idpharmacie =(Integer)request.getAttribute("idpharmacie");
+             List <Integer> list=new LinkedList();
+            list =(List)request.getAttribute("list");
+           int idpharmacie=list.get(0);
+           int idpharmaciePharmacien=list.get(1);
                 
             LinkedList<DateGarde> gardes = op.AfficherDateGarde(idpharmacie);
-            DateFerie d=new DateFerie();
-            d =(DateFerie)request.getAttribute("ferie");
-                                System.out.println("hhhhh"+gardes.size());
+            DateGarde d=new DateGarde();
+            d =(DateGarde)request.getAttribute("garde");
+                                
              for(DateGarde f: gardes){
             
             %>
@@ -47,7 +50,19 @@
                 <td><%=f.getHeureFM() %> </td> 
                <td> <%=f.getHeureDS() %> </td> 
                 <td> <%=f.getHeureFS() %></td> 
-                <td> <a href="ModifierFerie.jsp">MODIFIER</a></td>
+                <td> 
+                 <form action="SModifierDateFD" method="post">
+                        <input type="hidden" name="idpharmaciePharmacien" value="<%=idpharmaciePharmacien %>"/>
+                        <input type="hidden" name="idDateGarde" value="<%=f.getIdDateGarde() %>"/>
+                        <input type="hidden" name="idpharmacie" value="<%=f.getIdPharmacie() %>"/>
+                        <input type="hidden" name="jourgarde" value="<%=f.getJourGarde() %>"/>
+                        <input type="hidden" name="heureDM" value="<%=f.getHeureDM()%>"/>
+                        <input type="hidden" name="heureFM" value="<%=f.getHeureFM()%>"/>
+                        <input type="hidden" name="heureDS" value="<%=f.getHeureDS()%>"/>
+                        <input type="hidden" name="heureFS" value="<%=f.getHeureFS()%>"/>
+                        <input type="hidden" name="action" value="EnvSerModifierG"/>
+                        <input type="submit" value="MODIFIER"/>
+                    </form></td>
               </tr>
               <% }
               

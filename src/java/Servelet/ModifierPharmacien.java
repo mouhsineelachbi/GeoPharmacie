@@ -151,6 +151,7 @@ public class ModifierPharmacien extends HttpServlet {
            
           response.sendRedirect("AfficherDateGarde.jsp");
         }
+       //*********************************************************************************-------------------------------------------------
         //********************************************************************************
             if(action.equals("affichageIndepondante")){
             int idPharmacie=Integer.parseInt(request.getParameter("idpharmacie"));
@@ -173,26 +174,46 @@ public class ModifierPharmacien extends HttpServlet {
            
           response.sendRedirect("AfficherDateFerie.jsp");
         }
+                    
+
+        //*******************************************************************
         //**************************************************************************************
         if(action.equals("affichageIndepondantep")){
             int idPharmacie=Integer.parseInt(request.getParameter("idpharmacie"));
-            request.setAttribute("idpharmacie", idPharmacie);
+            int idpharmaciePharmacien=Integer.parseInt(request.getParameter("idpharmaciePharmacien"));
+            LinkedList<Integer> list=new LinkedList<Integer>() ;
+            list.add(idPharmacie);
+            list.add(idpharmaciePharmacien);
+            
+            request.setAttribute("list", list);
                 ServletContext context= getServletContext();
                 RequestDispatcher rd= context.getRequestDispatcher("/AfficherDateGardePharmacien.jsp");
                 rd.forward(request, response);
             
            
-          response.sendRedirect("AfficherDateGardePharmacien.jsp");
+         // response.sendRedirect("AfficherDateGardePharmacien.jsp");
         }
         if(action.equals("affichageIndepondanteFp")){
             int idPharmacie=Integer.parseInt(request.getParameter("idpharmacie"));
-            request.setAttribute("idpharmacie", idPharmacie);
+            int idpharmaciePharmacien=Integer.parseInt(request.getParameter("idpharmaciePharmacien"));
+            LinkedList<Integer> list=new LinkedList<Integer>() ;
+            list.add(idPharmacie);
+            list.add(idpharmaciePharmacien);
+            
+            request.setAttribute("list", list);
                 ServletContext context= getServletContext();
                 RequestDispatcher rd= context.getRequestDispatcher("/AfficherDateFeriePharmacien.jsp");
                 rd.forward(request, response);
             
            
 //          response.sendRedirect("AfficherDateFeriePharmacien.jsp");
+        }
+        if(action.equals("IDPHARMACIEN")){
+            int idPharmacie=Integer.parseInt(request.getParameter("idpharmaciePharmacien"));
+            request.setAttribute("idpharmaciePharmacien", idPharmacie);
+                ServletContext context= getServletContext();
+                RequestDispatcher rd= context.getRequestDispatcher("/AfficherPharmaciePharmacien.jsp");
+                rd.forward(request, response);
         }
     
        if(action.equals("deconnecter")){

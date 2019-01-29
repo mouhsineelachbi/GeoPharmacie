@@ -4,6 +4,7 @@
     Author     : Hamza
 --%>
 
+<%@page import="GeoPharmacie.baseD"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -12,6 +13,10 @@
         <title>JSP Page</title>
     </head>
     <body>
+        <%
+            baseD op =new baseD();
+            int idPharmacie = op.getLastPharmacie().getIdPharmacie()+1;
+        %>
         <form action="inscription" method="post">
         <table border="">
             <tr>
@@ -49,10 +54,11 @@
                      
                 </td>
             </tr>
-            <tr id="5">
-            <td id="3"><input type="hidden" name="idPharmacie" id="idPharmacie" value="Identité de la pharmacie"disabled="disabled" /></td>
-            <td id="4"><input type="hidden" name="idPharmacie" id="id2" /></td><!--on doit afficher  la liste des pharmacies existe-->
-            </tr>
+           
+            
+            <td><input type="hidden" name="idPharmacie" value="1"  /></td><!--on doit afficher  la liste des pharmacies existe-->
+            
+           
             <tr>  <td>
                                         <input type='hidden' name="action" value="ajouter"/>
                                         
@@ -61,32 +67,7 @@
                     <input type="submit" value="Enregister" />                        
                 </td>
             </tr>
-            
-
-                
-                       <script>
-                           document.getElementById('3').style.visibility = 'hidden';
-                           document.getElementById('4').style.visibility = 'hidden';
-                                var list = document.getElementById('list'); 
-                                list.addEventListener('change', function() {
-                                // On affiche le contenu de l'élément <option> ciblé par la propriété selectedIndex
-                                if(list.options[list.selectedIndex].innerHTML=='Pharmacien'){
-                                    document.getElementById('3').style.visibility= 'visible';
-                                    document.getElementById('4').style.visibility = 'visible';
-                                    document.getElementById('5').style.visibility = 'visible';
-                                    document.getElementById('idPharmacie').type = 'text';
-                                    document.getElementById('id2').type = 'number';
-                                }
-                                else{
-                                     document.getElementById('3').style.visibility= 'hidden';
-                                    document.getElementById('4').style.visibility = 'hidden';
-                                    document.getElementById('5').style.visibility = 'hidden';
-                                    
-                                }
-                                    
-                                //alert(list.options[list.selectedIndex].innerHTML);
-                                }, true);
-                       </script>
+         
         </table>
         </form>
     </body>
