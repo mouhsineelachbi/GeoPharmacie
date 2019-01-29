@@ -15,6 +15,7 @@
             TEMPERATURE <input type="text" name="temp"><br>
             DATE DE FABRICATION <input type="date" name="datefab"><br>         
             DATE D'EXPIRATION <input type="date" name="dateex"><br>
+            QUANTITE <input type="date" name="quantite"><br>
             ID PHARMACIE
             <select name="idPharmacie">
                 <%

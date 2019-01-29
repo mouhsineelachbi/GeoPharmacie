@@ -10,6 +10,7 @@
         <title>Description <%=p.getLibelle()%></title>
     </head>
     <body>
+        <form action="Commande" method="POST">
         <table border=2>
             <tr>
                 <th>REFERENCE PRODUIT</th>
@@ -29,5 +30,7 @@
                 <td><%=p.getDateFabrication()%></td>
                 <td></td>
             </tr>
+            <br>
+            <input type="submit" value="Commander"/>
     </body>
 </html>

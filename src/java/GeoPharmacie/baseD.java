@@ -121,11 +121,11 @@ public class baseD {
     
 //*******************************************************************************************************************
 
-    public void insertIntoProduit(int referenceProduit,String libelle,String DateExpiration,String DateFabrication,double TemperatureStock, double prix,int idPharmacie) throws SQLException{
+    public void insertIntoProduit(int referenceProduit,String libelle,String DateExpiration,String DateFabrication,double TemperatureStock, double prix,int quantite, int idPharmacie) throws SQLException{
         Statement stmt =con.createStatement();
-        String query="INSERT INTO produit( referenceProduit, libelle,DateExpiration, DateFabrication, TemperatureStock, prix,idPharmacie) values ("
+        String query="INSERT INTO produit( referenceProduit, libelle,DateExpiration, DateFabrication, TemperatureStock, prix, quantite, idPharmacie) values ("
                 +referenceProduit+", '"+libelle+"','"+DateExpiration+"', '"+DateFabrication+"', "
-                +TemperatureStock+","+prix+","+idPharmacie+")";
+                +TemperatureStock+","+prix+","+quantite+","+idPharmacie+")";
         stmt.execute(query);
     }
 

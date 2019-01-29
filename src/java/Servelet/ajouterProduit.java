@@ -31,13 +31,11 @@ public class ajouterProduit extends HttpServlet {
             double temp = Double.parseDouble(request.getParameter("temp"));
             String datefab = request.getParameter("datefab");
             String dateex = request.getParameter("dateex");
+            int quantite = Integer.parseInt(request.getParameter("quantite"));
             int idPharmacie = Integer.parseInt(request.getParameter("idPharmacie"));
             baseD db = new baseD();
-            db.insertIntoProduit(ref, libelle, dateex, datefab, temp, prix, idPharmacie);
-            //request.setAttribute("produit", p);
-            // Forward to to the JSP file.
+            db.insertIntoProduit(ref, libelle, dateex, datefab, temp, prix, quantite, idPharmacie);
             request.getRequestDispatcher("AjouterProduit.jsp").forward(request, response);
-        
     }
 
 
