@@ -442,6 +442,26 @@ public class baseD {
         }
         return p;
     }
+    
+    public Produit AfficherProduit(int numProduit) throws SQLException{
+        String req = "select * from produit where numeroProduit="+numProduit;
+        Produit p = new Produit();
+        Statement st = con.createStatement();
+        ResultSet rst = st.executeQuery(req);
+        while(rst.next()){
+            int num = rst.getInt(1);
+            int ref = rst.getInt(2);
+            String libelle = rst.getString(3);
+            String d1 = rst.getString(4);
+            String d2 = rst.getString(5);
+            Double temp = rst.getDouble(6);
+            Double prix = rst.getDouble(7);
+            int idpharmacie = rst.getInt(8);
+            String lien = rst.getString(9);
+            p = new Produit(num, ref, libelle, d1, d2, temp, prix, idpharmacie, lien);            
+        }
+        return p;
+    }
     //*****************************************************************************************
  
     public LinkedList<Facture> AfficherFacture(int numerofacture) throws SQLException{

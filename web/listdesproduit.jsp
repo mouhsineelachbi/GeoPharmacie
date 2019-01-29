@@ -10,7 +10,7 @@
     </head>
     <body>
         <% baseD db = new baseD(); %>
-        <form  action="modifierProduit" method="POST">
+        <form  action="descriptionProduit" method="POST">
         <table border=2 >
             <tr>
                 <th>REFERENCE PRODUIT</th>
@@ -34,9 +34,8 @@
                 <td><input type="text" name="temp" value=<%=p.getTemperatureStock()%>></td>
                 <td><input type="date" name="dateex" value=<%=p.getDateExpiration()%>></td>
                 <td><input type="date" name="datefab" value=<%=p.getDateFabrication()%>></td>
-                <!--<td><select><option value="empty"></option><option value="Modifier">Modifier</select>-->
                     <input type="hidden" name="numproduit" value=<%=p.getNumeroProduit()%>>
-                <td><center><input type="submit" value="Modifier"/></center></td>
+                <td><center><input type="submit" value="plus informations"/></center></td>
             </tr>
                 <%
                     }
