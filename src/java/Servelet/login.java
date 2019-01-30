@@ -22,7 +22,7 @@ public class login extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
-         baseD db ;
+        baseD db ;
         String cin = request.getParameter("cin");
         String password = request.getParameter("password");
         String type = request.getParameter("type");
@@ -33,22 +33,19 @@ public class login extends HttpServlet {
        if(password.trim().isEmpty() || cin.trim().isEmpty() || type.isEmpty())
        {
             message ="Vous devez remplire tous les champs SVP!";
-           request.setAttribute("message", message);
-           ServletContext context= getServletContext();
-                        RequestDispatcher rd= context.getRequestDispatcher("/login.jsp");
-                        rd.forward(request, response);
-       }
-            else
+            request.setAttribute("message", message);
+            ServletContext context= getServletContext();
+            RequestDispatcher rd= context.getRequestDispatcher("/login.jsp");
+            rd.forward(request, response);
+        }
+        else
        {
-          
-       
            Cookie ck = new Cookie("username", cin);
            ck.setMaxAge(3600);
            response.addCookie(ck);
-           
            Cookie pass = new Cookie("password", password);
            pass.setMaxAge(3600);
-            response.addCookie(pass);
+           response.addCookie(pass);
        
        
        
@@ -80,10 +77,7 @@ public class login extends HttpServlet {
                         session.setAttribute("prenom", prenom);
                         session.setAttribute("cin", cin);
                         session.setAttribute("password", password);
-                        System.out.println("********************************************************************** login avant la redirection");
-                       // response.sendRedirect("MesInformations.jsp");
-                        System.out.println("********************************************************************** login apres la redirection");
-                       
+                        
                     }
                     else{
                         // WRONG PASSWORD
@@ -92,7 +86,7 @@ public class login extends HttpServlet {
                 }
                 else{
                     // CLIENT DOESNT EXIST
-                    //response.sendRedirect("login.jsp");
+                    response.sendRedirect("login.jsp");
                 }
             }
             else{
@@ -111,7 +105,7 @@ public class login extends HttpServlet {
                         
                         ServletContext context= getServletContext();
                         
-                        HttpSession session =request.getSession();
+                        HttpSession session = request.getSession();
                         session.setAttribute("Pharmacien", p);
                         session.setAttribute("nom", nom);
                         session.setAttribute("prenom", prenom);

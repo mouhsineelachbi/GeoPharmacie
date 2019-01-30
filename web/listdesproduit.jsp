@@ -22,8 +22,7 @@
                 <th> MODIFIER </th>
             </tr>
             <%
-                int numeroPharmacien = 2;
-                LinkedList<Produit> produitList = db.listProduit(numeroPharmacien);
+                LinkedList<Produit> produitList = db.listProduit();
                 for(Produit p:produitList){
                     
                 %>

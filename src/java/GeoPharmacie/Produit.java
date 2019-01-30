@@ -11,8 +11,33 @@ public class Produit {
     private double Prix;
     private int idpharmacie;
     private String lien;
+    private int quantite;
 
-    public Produit(int NumeroProduit,int ReferenceProduit, String Libelle, String DateFabrication, String DateExpiration, double TemperatureStock,  double Prix,int idpharmacie,String lien) {
+    public Produit(int NumeroProduit,int ReferenceProduit, String Libelle, String DateFabrication, String DateExpiration, double TemperatureStock,  double Prix,int idpharmacie ,String lien) {
+        this.ReferenceProduit = ReferenceProduit;
+        this.Libelle = Libelle;
+        this.DateFabrication = DateFabrication;
+        this.DateExpiration = DateExpiration;
+        this.TemperatureStock = TemperatureStock;
+        this.NumeroProduit = NumeroProduit;
+        this.Prix = Prix;
+        this.idpharmacie=idpharmacie;
+        this.lien=lien;
+    }
+    
+    public Produit(int NumeroProduit,int ReferenceProduit, String Libelle, String DateFabrication, String DateExpiration, double TemperatureStock,  double Prix,int idpharmacie ,int quantite, String lien) {
+        this.ReferenceProduit = ReferenceProduit;
+        this.Libelle = Libelle;
+        this.DateFabrication = DateFabrication;
+        this.DateExpiration = DateExpiration;
+        this.TemperatureStock = TemperatureStock;
+        this.NumeroProduit = NumeroProduit;
+        this.Prix = Prix;
+        this.idpharmacie=idpharmacie;
+        this.lien=lien;
+        this.quantite = quantite;
+    }
+    public Produit(int NumeroProduit,int ReferenceProduit, String Libelle, String DateFabrication, String DateExpiration, double TemperatureStock,  double Prix,int idpharmacie, int quantite) {
         this.ReferenceProduit = ReferenceProduit;
         this.Libelle = Libelle;
         this.DateFabrication = DateFabrication;
@@ -122,5 +147,12 @@ public class Produit {
     public void setPrix(float Prix) {
         this.Prix = Prix;
     }
-     
+
+    public int getQuantite() {
+        return quantite;
+    }
+
+    public void setQuantite(int quantite) {
+        this.quantite = quantite;
+    }   
 }

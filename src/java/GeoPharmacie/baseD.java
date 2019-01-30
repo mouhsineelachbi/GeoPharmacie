@@ -82,9 +82,15 @@ public class baseD {
     }
     
     //*************************************************************************************************************
-    public void insertIntoCommande(int numeroCommande,String DateCommande,String EtatCommande)throws SQLException{
+    public void insertIntoCommande(int numeroCommande,String DateCommande,String EtatCommande, String cin)throws SQLException{
         Statement stmt =con.createStatement();
-        String query="INSERT INTO commande (numeroCommande,DateCommande,EtatCommande) VALUES("+numeroCommande+",'"+DateCommande+"','"+EtatCommande+"')";
+        String query="INSERT INTO commande (DateCommande, EtatCommande, numeroclient) VALUES ('"+DateCommande+"','"+EtatCommande+"','"+getNumClient(cin)+"')";
+        stmt.execute(query);
+    }
+    
+    public void insertIntoCommande(String DateCommande,String EtatCommande, String cin) throws SQLException{
+        Statement stmt =con.createStatement();
+        String query="INSERT INTO commande (DateCommande, EtatCommande, numeroclient) VALUES ('"+DateCommande+"','"+EtatCommande+"','"+getNumClient(cin)+"')";
         stmt.execute(query);
     }
 
@@ -321,17 +327,18 @@ public class baseD {
         String query = "select * from client where cin='"+cin+"' ";
         stmt.executeQuery(query);
         ResultSet rs = stmt.executeQuery(query);
-        //while(rs.next()){
+        while(rs.next()){
         //cin=rs.getString("cin");
-        String email = rs.getString("email");
-        String motDepasse = rs.getString("motdepasse");
-        String nom = rs.getString("nom");
-        int numeroAdmin = rs.getInt("numeroClient");
-        String prenom = rs.getString("prenom");
-        String pseudo = rs.getString("pseudo");
-        String tele = rs.getString("tele");
-        String adresse = rs.getString(7);
-        c = new Client(numeroAdmin, nom, prenom, cin, tele, email, adresse, pseudo, motDepasse);
+            String email = rs.getString("email");
+            String motDepasse = rs.getString("motdepasse");
+            String nom = rs.getString("nom");
+            int numeroAdmin = rs.getInt("numeroClient");
+            String prenom = rs.getString("prenom");
+            String pseudo = rs.getString("pseudo");
+            String tele = rs.getString("tele");
+            String adresse = rs.getString(7);
+            c = new Client(numeroAdmin, nom, prenom, cin, tele, email, adresse, pseudo, motDepasse);
+        }
         return c;
     }
         
@@ -411,10 +418,13 @@ public class baseD {
         String req = "select * from pharmacie where idpharmacie ='"+idPharmacie+"'";
         st.executeQuery(req);
         ResultSet rst = st.executeQuery(req);
-        String nomPharmacie = rst.getString(2);
-        String adresse = rst.getString(3);
-        String tel = rst.getString(4);
-        Pharmacie p = new Pharmacie(idPharmacie, nomPharmacie, adresse, tel);
+        Pharmacie p = new Pharmacie();
+        while(rst.next()){
+            String nomPharmacie = rst.getString(2);
+            String adresse = rst.getString(3);
+            String tel = rst.getString(4);
+            p = new Pharmacie(idPharmacie, nomPharmacie, adresse, tel);
+        }
         return p;
     }
     //***********************************************************************************************
@@ -812,41 +822,112 @@ public class baseD {
             Double temp = rst.getDouble(6);
             Double prix = rst.getDouble(7);
             int idpharmacie = rst.getInt(8);
-            Produit pr = new Produit(num, ref, libelle, d1, d2, temp, prix,idpharmacie);
+            String lien = rst.getString(9);
+            int quantite = rst.getInt(10);
+            Produit pr = new Produit(num, ref, libelle, d1, d2, temp ,prix ,idpharmacie, quantite, lien );
             lp.add(pr);
         }
         return lp;        
     }
 
+    public LinkedList<Produit> listProduit() throws SQLException{
+        String req = "select * from produit";
+        LinkedList<Produit> lp = new LinkedList<Produit>();
+        Statement st = con.createStatement();
+        ResultSet rst = st.executeQuery(req);
+        while(rst.next()){
+            int num = rst.getInt(1);
+            int ref = rst.getInt(2);
+            String libelle = rst.getString(3);
+            String d1 = rst.getString(4);
+            String d2 = rst.getString(5);
+            Double temp = rst.getDouble(6);
+            Double prix = rst.getDouble(7);
+            int idpharmacie = rst.getInt(8);
+            String lien = rst.getString(9);
+            int quantite = rst.getInt(10);
+            Produit pr = new Produit(num, ref, libelle, d1, d2, temp, prix ,idpharmacie ,quantite ,lien);
+            lp.add(pr);
+        }
+        return lp;        
+    }    
+
 // Get Pharmacie Id of Product
     
 // Get Pharmacie id from database
     
+    public String getDate() throws SQLException{
+        String req = "select CURDATE()";//"select now()";
+        Statement st = con.createStatement();
+        ResultSet rst = st.executeQuery(req);
+        String date = new String();
+        while(rst.next()){
+            date = rst.getString(1);
+        }
+        return date;
+    }
+    
+    public int getMaxNumCommande() throws SQLException{
+        String req = "select max(numeroCommande) from commande";
+        Statement st = con.createStatement();
+        ResultSet rst = st.executeQuery(req);
+        int num = 0;
+        while(rst.next()){
+            num = rst.getInt(1);
+        }
+        return num;
+    }
+    
+    public int getNumClient(String cin) throws SQLException{
+        String req = "select * from client where cin = '"+cin+"'";
+        Statement st = con.createStatement();
+        ResultSet rst = st.executeQuery(req);
+        int numClient=0;
+        while(rst.next()){
+            numClient = rst.getInt(1);
+        }
+        return numClient;
+    }
+    
+    public LinkedList<Produit> getClientProduit(String cin) throws SQLException{
+        int num = getNumClient(cin);
+        String req = "select * from produit where numeroProduit in (select numeroProduit from linecommande where numeroCommande in (select numeroCommande from commande where numeroclient="+num+"))";
+        Statement st = con.createStatement();
+        ResultSet rst = st.executeQuery(req);
+        LinkedList<Produit> pl = new LinkedList<Produit>();
+        while(rst.next()){
+            int numProduit = rst.getInt(1);
+            int ref = rst.getInt(2);
+            String libelle = rst.getString(3);
+            String d1 = rst.getString(4);
+            String d2 = rst.getString(5);
+            Double temp = rst.getDouble(6);
+            Double prix = rst.getDouble(7);
+            int idpharmacie = rst.getInt(8);
+            String lien = rst.getString(9);
+            int quantite = rst.getInt(10);
+            Produit pr = new Produit(numProduit, ref, libelle, d1, d2, temp, prix ,idpharmacie ,quantite ,lien);
+            pl.add(pr);
+        }
+        return pl;
+    }
+    
+    public int getQuantiteProduitClient(String cin, int numproduit) throws SQLException{
+        String req = "select * from linecommande where numeroCommande in (select numeroCommande from commande where numeroclient="+getNumClient(cin)+") and numeroproduit ="+numproduit;
+        Statement st = con.createStatement();
+        ResultSet rst = st.executeQuery(req);
+        int quantite = 0;
+        while(rst.next()){
+            quantite = rst.getInt(3);
+        }
+        return quantite;
+    }
 
 // DDELETE PRODUIT    
     
      public static void main(String[] args) throws SQLException, ParseException, ClassNotFoundException{
-        baseD mydb = new baseD();// makandirouch had chi tanchedo la base données o tandiroha f classe bohdha chouf
-        // mydb.insertInToAdmin("nomAdmin12","prenom2", "0670044061"," mc256482"," email"," pseudo"," adresse",3," motDepasse", 0);
-        //mydb.insertInToClient("hh", "pm"," tele", "in", "email", "pseudo", "adresse", "1234", 0);
-        // mydb.insertInToPharmacien("nom"," prenom"," tele11", "cin"," email"," pseudo", "adresse", "motDepasse", 0,2);
-        // mydb.insertIntoCommande(0, "2018-1-14", "EtatCommande");
-        // mydb.insertIntoFacture(0,"2018-1-14",1523);
-        // mydb.insertIntoLineCommande(8, 17, 7);
-        // mydb.insertIntoPaiementcarte("2017-5-14", 121.0, 1, "nomp", "prenomProprietaire","123", "rue najd el jadida", "mc456182");
-        // mydb.insertIntoPaiementLivraison("2017-4-14", 0, 0, "nomClient"," prenomClient"," emailClient"," teleClient"," adresseClient", "CinClient");
-        // mydb.insertIntoProduit(0, "libelle", "2017-12-14", "2017-5-14", 2, 0, 12,2);
-        // mydb.insertIntoPlanning("2018-1-14","2018-1-14","2018-1-14","2018-1-14");
-        // mydb.deletProduit(1);
-        
-       /* Pharmacie c = mydb.selectPharmacie(1);
-        c.setNomPharmacie("anasio");
-        
-        mydb.modifierPharmacie(c);
-         System.out.println(c);
-         System.out.println("hello !!");*/
-       mydb.insertIntoDateGarde(0, "19:30:10","19:30:10", "19:30:10","19:30:10", 2, "2018-1-15");
-       mydb.insertIntoDateFerie(0, "19:30:11","19:30:10", "19:30:10","19:30:10", 2, "2018-1-15");
+        baseD db = new baseD();
+        System.out.println(db.getDate());
     }
     
 }
