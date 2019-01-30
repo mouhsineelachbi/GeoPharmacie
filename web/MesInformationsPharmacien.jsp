@@ -18,6 +18,17 @@
         <title>INFORMATIONPHARMACIEN</title>
     </head>
     <body>
+        
+            <%
+                String cin;
+                Cookie ck[] = request.getCookies();
+                for (int i = 0; i < ck.length; i++) {
+                    String name = ck[i].getName();
+                    String value = ck[i].getValue();
+                    if(name.equals("cin")) {cin = name; break;}
+                }
+            %>
+        
         <%
              //recupier depuis Slogin
             baseD op = new baseD();

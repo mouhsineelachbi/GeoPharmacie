@@ -5,15 +5,13 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
 
 @WebServlet(name = "Commande", urlPatterns = {"/Commande"})
 public class Commande extends HttpServlet {
@@ -33,21 +31,26 @@ public class Commande extends HttpServlet {
             String date = db.getDate();
             //HttpSession session = request.getSession(true);
             //String cin = session.getAttribute("cin").toString();
-            Cookie[] cks = request.getCookies();
             String cin = new String();
-            for (int i = 0; i < cks.length; i++) {
-                String name = cks[i].getName();
-                cin = cks[i].getValue();
-                if (name.equals("cin")) {
-                    break;
+            Cookie[] ck = request.getCookies();
+            if(ck != null) {
+                for (int i = 0; i < ck.length; i++) {
+                    Cookie cookie = ck[i];
+                    String name = cookie.getName();
+                    String value = cookie.getValue();
+                    if(name.equals("username")){
+                        cin = value;
+                        break;
+                    }
                 }
             }
-            
+            System.out.println("CIN = "+cin);
+            System.out.println(db.getNumClient(cin));
             db.insertIntoCommande(date , "non payé", cin);
             System.out.println(cin);
             int maxNumCommande = db.getMaxNumCommande();
             db.insertIntoLineCommande(numeroProduit, maxNumCommande, quantite);
-            response.sendRedirect("panier.jsp");
+            response.sendRedirect("listdesproduit.jsp");
     }
 
     @Override

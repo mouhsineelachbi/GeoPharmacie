@@ -13,11 +13,10 @@
     <body>
         <%
             baseD db = new baseD();
-            session = request.getSession(true);
-            String cin = session.getAttribute("cin").toString();
-            LinkedList<Produit> pl = db.getClientProduit(cin);
+            //session = request.getSession(true);
+            //String cin = session.getAttribute("cin").toString();
         %>
-    <tabe>
+    <table border="2">
         <tr>
             <th> REFERENCE PRODUIT</th>
             <th> LIBELLE</th>
@@ -29,9 +28,24 @@
         </tr>
         <tr>
             <%
+                String cin = new String();
+                Cookie[] ck = request.getCookies();
+                if(ck != null) {
+                    for (int i = 0; i < ck.length; i++) {
+                        Cookie cookie = ck[i];
+                        String name = cookie.getName();
+                        String value = cookie.getValue();
+                        if(name.equals("username")){
+                            cin = value;
+                            break;
+                        }
+                    }
+                }
+                
+                LinkedList<Produit> pl = db.getClientProduit(cin);
+                int numeroClient = db.getNumClient(cin);
                 for(int i=0; i<pl.size(); i++){
                     Produit p = pl.get(i);
-                    int numeroClient = p.getNumeroProduit();
             %>
                 <td><input type="text" disabled name="reference" value=<%=p.getReferenceProduit()%>></td>
                 <td><input type="text" disabled name="libelle" value=<%=p.getLibelle()%>></td>
@@ -39,9 +53,8 @@
                 <td><input type="text" disabled name="temp" value=<%=p.getTemperatureStock()%>></td>
                 <td><input type="date" disabled name="dateex" value=<%=p.getDateExpiration()%>></td>
                 <td><input type="date" disabled name="datefab" value=<%=p.getDateFabrication()%>></td>
-                <td><input type="text" name="quantite" value=<%=db.getQuantiteProduitClient(cin, numeroClient)%>></td>
-                <!--<td><select><option value="empty"></option><option value="Modifier">Modifier</select>-->
-                <input type="hidden" disabled name="numeroProduit" value=<%=p.getNumeroProduit()%>>           
+                <td><input type="text" disabled name="quantite" value=<%=db.getQuantiteProduitClient(cin, numeroClient)%>></td>
+                <input type="hidden"  name="numeroProduit" value=<%=p.getNumeroProduit()%>>           
         </tr>
         <%
             }

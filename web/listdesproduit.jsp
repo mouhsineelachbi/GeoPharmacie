@@ -22,6 +22,20 @@
                 <th> MODIFIER </th>
             </tr>
             <%
+                String cin = new String();
+                Cookie[] ck = request.getCookies();
+                if(ck != null) {
+                    for (int i = 0; i < ck.length; i++) {
+                        Cookie cookie = ck[i];
+                        String name = cookie.getName();
+                        String value = cookie.getValue();
+                        if(name.equals("username")){
+                            cin = value;
+                            break;
+                        }
+                    }
+                }
+                
                 LinkedList<Produit> produitList = db.listProduit();
                 for(Produit p:produitList){
                     
