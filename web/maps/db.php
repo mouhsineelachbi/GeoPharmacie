@@ -1,6 +1,6 @@
 <?php
 // Opens a connection to a MySQL server.
-$connection=mysqli_connect ("localhost", 'root', '','demo');
+$connection=mysqli_connect ("localhost", 'root', '','geophar');
 if (!$connection) {
     die('Not connected : ' . mysqli_connect_error());
 }

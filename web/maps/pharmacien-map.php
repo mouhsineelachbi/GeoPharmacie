@@ -125,7 +125,7 @@ include 'locations_model.php';
             marker = new google.maps.Marker({
                 position: new google.maps.LatLng(locations[i][1], locations[i][2]),
                 map: map,
-                icon :   locations[i][4] === '1' ?  red_icon  : purple_icon,
+                icon :   red_icon,
                 html: "<div>\n" +
                 "<table class=\"map1\">\n" +
                 "<tr>\n" +
@@ -163,7 +163,7 @@ include 'locations_model.php';
                     var manual_marker = markers[markerId]; // find marker
                     manual_marker.setIcon(red_icon);
                     infowindow.close();
-                    infowindow.setContent("<div style=' color: purple; font-size: 25px;'> Waiting for admin confirm!!</div>");
+                    //infowindow.setContent("<div style=' color: purple; font-size: 25px;'> Waiting for admin confirm!!</div>");
                     infowindow.open(map, manual_marker);
 
                 }else{

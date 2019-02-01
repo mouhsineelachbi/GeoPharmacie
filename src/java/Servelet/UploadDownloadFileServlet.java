@@ -79,9 +79,9 @@ public class UploadDownloadFileServlet extends HttpServlet {
 				nom = libelle+"."+part1;*/
 				
 				
-				String s = "C:\\Users\\Hamza\\Documents\\NetBeansProjects\\GeoPharmacieweb\\web\\image\\";
+				//String s = "C:\\Users\\Hamza\\Documents\\NetBeansProjects\\GeoPharmacieweb\\web\\image\\";
                 
-				
+				String s ="C:\\Users\\abdel\\OneDrive\\Documentos\\NetBeansProjects\\GeoPharmacieweb\\web\\image\\";
 				
 				File file = new File(s+nom);
 				//article.setLien(file.getAbsolutePath());
@@ -99,7 +99,7 @@ public class UploadDownloadFileServlet extends HttpServlet {
 				/*ArrayList<Article> array = new ArrayList<Article>();
 				array = services.getAllArticles();
 				request.setAttribute("listeArticles",array);*/
-				String nextJSP = "/AfficherPharmacie.jsp";
+				String nextJSP = "/MesInformationsPharmacien.jsp";
 				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextJSP);
 				dispatcher.forward(request,response);
 				}

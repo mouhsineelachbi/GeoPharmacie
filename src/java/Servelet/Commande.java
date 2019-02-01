@@ -50,7 +50,7 @@ public class Commande extends HttpServlet {
             System.out.println(cin);
             int maxNumCommande = db.getMaxNumCommande();
             db.insertIntoLineCommande(numeroProduit, maxNumCommande, quantite);
-            response.sendRedirect("listdesproduit.jsp");
+            response.sendRedirect("produitC.jsp");
     }
 
     @Override

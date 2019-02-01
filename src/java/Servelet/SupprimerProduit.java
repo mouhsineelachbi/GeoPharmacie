@@ -21,7 +21,7 @@ public class SupprimerProduit extends HttpServlet {
         int numeroProduit = Integer.parseInt(request.getParameter("numeroProduit"));
         baseD db = new baseD();
         db.supprimerProduit(numeroProduit);
-        request.getRequestDispatcher("supprimer_ListProduit.jsp").forward(request, response); 
+        request.getRequestDispatcher("modifier_ListProduit.jsp").forward(request, response); 
     }
 
 

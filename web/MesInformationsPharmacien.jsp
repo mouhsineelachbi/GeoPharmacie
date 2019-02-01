@@ -202,8 +202,7 @@
                        </form></li> 
                  
                 <li><form action="ajouterProduit" method="post">
-                  
-                    <input type="hidden" name="action" value="location"/>
+                   <input type="hidden" name="action" value="location"/>
                     <input id="7" type="submit" value="Mon Location" class="optn">
                        </form></li> 
                        

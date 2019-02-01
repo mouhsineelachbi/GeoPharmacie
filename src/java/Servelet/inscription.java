@@ -9,6 +9,7 @@ import GeoPharmacie.Client;
 import GeoPharmacie.Pharmacien;
 import GeoPharmacie.baseD;
 import java.io.IOException;
+import static java.lang.System.out;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -90,13 +91,7 @@ public class inscription extends HttpServlet {
                         }
                         else
                         {
-                            //  java.awt.event.ActionEvent evt;
-                              //JOptionPane jop1;
-
-                            //Boîte du message d'information
-                           // jop1 = new JOptionPane();
-                           // jop1.showMessageDialog(null, "CIN déja utilisé ", "Information", JOptionPane.INFORMATION_MESSAGE);
-                          // JOptionPane.showMessageDialog(null, "CIN déja utilisé !");
+                          // out.println();
 
                           }
               }

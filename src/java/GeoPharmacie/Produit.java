@@ -154,5 +154,15 @@ public class Produit {
 
     public void setQuantite(int quantite) {
         this.quantite = quantite;
-    }   
+    } 
+
+    public String getLien() {
+        return lien;
+    }
+
+    public void setLien(String lien) {
+        this.lien = lien;
+    }
+    
+    
 }

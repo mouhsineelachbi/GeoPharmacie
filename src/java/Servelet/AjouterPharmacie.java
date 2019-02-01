@@ -46,7 +46,7 @@ public class AjouterPharmacie extends HttpServlet {
                response.sendRedirect("uploadPharmacie.jsp");
                }
                else{
-                response.sendRedirect("AfficherPharmacie.jsp");}
+                response.sendRedirect("MesInformationsPharmacien.jsp");}
           }
           if(action.equals("Afficher")){
                 int idPharmacie=Integer.parseInt(request.getParameter("idPharmacie"));

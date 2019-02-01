@@ -38,7 +38,7 @@ include_once 'locations_model.php';
             google.maps.event.addListener(marker, 'click', (function(marker, i) {
                 return function() {
                     confirmed =  locations[i][4] === '1' ?  'checked'  :  0;
-                    $("#confirmed").prop(confirmed,locations[i][4]);
+                    //$("#confirmed").prop(confirmed,locations[i][4]);
                     $("#id").val(locations[i][0]);
                     $("#description").val(locations[i][3]);
                     $("#form").show();
@@ -49,7 +49,7 @@ include_once 'locations_model.php';
         }
     }
 
-    function saveData() {
+/*    function saveData() {
         var confirmed = document.getElementById('confirmed').checked ? 1 : 0;
         var id = document.getElementById('id').value;
         var url = 'locations_model.php?confirm_location&id=' + id + '&confirmed=' + confirmed ;
@@ -61,7 +61,7 @@ include_once 'locations_model.php';
                 infowindow.setContent("<div style='color: purple; font-size: 25px;'>Inserting Errors</div>");
             }
         });
-    }
+    }*/
 
 
     function downloadUrl(url, callback) {
@@ -89,8 +89,6 @@ include_once 'locations_model.php';
             <td><a>Description:</a></td>
             <td><textarea disabled id='description' placeholder='Description'></textarea></td>
         </tr>
-
-        <tr><td></td><td><input type='button' value='Save' onclick='saveData()'/></td></tr>
     </table>
 </div>
 <script async defer

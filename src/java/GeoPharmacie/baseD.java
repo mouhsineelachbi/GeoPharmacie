@@ -132,6 +132,14 @@ public class baseD {
                 +TemperatureStock+","+prix+","+quantite+","+idPharmacie+")";
         stmt.execute(query);
     }
+    
+        public void insertIntoProduit(int referenceProduit,String libelle,String DateExpiration,String DateFabrication,double TemperatureStock, double prix,int idPharmacie) throws SQLException{
+        Statement stmt =con.createStatement();
+        String query="INSERT INTO produit( referenceProduit, libelle,DateExpiration, DateFabrication, TemperatureStock, prix,idPharmacie) values ("
+                +referenceProduit+", '"+libelle+"','"+DateExpiration+"', '"+DateFabrication+"', "
+                +TemperatureStock+","+prix+","+idPharmacie+")";
+        stmt.execute(query);
+    }
 
 //*******************************************************************************************************************
     
@@ -272,6 +280,23 @@ public class baseD {
         }return ph;
         
     }
+   //getLastProduit()
+    public Produit getLastProduit()throws SQLException{
+        String req = "select Max(numeroproduit)as nb from produit ";
+        Statement st = con.createStatement();
+        Produit p =new Produit();
+         ResultSet rst = st.executeQuery(req);
+          int numeroproduit=0;
+        while(rst.next()){
+             numeroproduit=rst.getInt("nb");
+             
+           p= AfficherProduit(numeroproduit);
+            
+           
+        }
+        return p;
+        
+    }
     //****************************************modifierIdPharmacie_Cien()
     public void modifierIdPharmacie_Cien(int numeroPharmacien)throws SQLException{
         String req = "UPDATE pharmacien set idpharmacie="+getLastPharmacie().getIdPharmacie()+" where numeroPharmacien="+numeroPharmacien+" ";
@@ -363,16 +388,18 @@ public class baseD {
         String req = "select * from pharmacien where cin = '"+cin+"'";
         st.executeQuery(req);
         ResultSet rst = st.executeQuery(req);
-        int numeroPharmacien = rst.getInt(1);
-        String nom = rst.getString(2);
-        String prenom = rst.getString(3);
-        String tel = rst.getString(5);
-        String email = rst.getString(6);
-        String pseudo = rst.getString(7);
-        String adresse = rst.getString(8);
-        String password = rst.getString(9);
-        int idPharmacie = rst.getInt(10);
-        p =new Pharmacien(numeroPharmacien, nom, prenom, cin, tel, email, adresse, pseudo, password, idPharmacie);
+        while(rst.next()){
+            int numeroPharmacien = rst.getInt(1);
+            String nom = rst.getString(2);
+            String prenom = rst.getString(3);
+            String tel = rst.getString(5);
+            String email = rst.getString(6);
+            String pseudo = rst.getString(7);
+            String adresse = rst.getString(8);
+            String password = rst.getString(9);
+            int idPharmacie = rst.getInt(10);
+            p =new Pharmacien(numeroPharmacien, nom, prenom, cin, tel, email, adresse, pseudo, password, idPharmacie);
+        }
         return p;
     }
     //**********************************************************************
@@ -791,6 +818,20 @@ public class baseD {
         stm.executeUpdate();
         System.out.println("======================================================= IdPharmacie ==="+idPharmacie+" tele =======   "+tel);
     }
+    
+    public void modifierProduit(Produit p) throws SQLException{
+        PreparedStatement stm = con.prepareStatement("update produit SET referenceProduit=?, libelle=?, dateExpiration=?, dateFabrication=?, TemperatureStock=?, prix=?,lien=? where numeroProduit=?");
+        stm.setInt(1, p.getReferenceProduit());
+        stm.setString(2, p.getLibelle());
+        stm.setString(3, p.getDateExpiration());
+        stm.setString(4, p.getDateFabrication());
+        stm.setDouble(5, p.getTemperatureStock());
+        stm.setDouble(6, p.getPrix());
+        stm.setInt(8, p.getNumeroProduit());
+        //stm.setInt(8, p.getIdpharmacie());
+        stm.setString(7, p.getLien());
+        stm.executeUpdate();
+    }    
  
 // UPDATE PRODUIT
     public void modifierProduit(int numeroProduit, int referenceProduit, String libelle, String dateExpiration, String dateFabrication, double TemperaturStock, double prix) throws SQLException{

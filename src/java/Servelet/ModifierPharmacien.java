@@ -215,7 +215,23 @@ public class ModifierPharmacien extends HttpServlet {
                 RequestDispatcher rd= context.getRequestDispatcher("/AfficherPharmaciePharmacien.jsp");
                 rd.forward(request, response);
         }
-    
+    if(action.equals("listpharm")){
+        System.out.println(request.getParameter("idpharmacie"));
+     int idPharmacie=Integer.parseInt(request.getParameter("idpharmacie"));
+        
+     request.setAttribute("idpharmacie", idPharmacie);
+                ServletContext context= getServletContext();
+                RequestDispatcher rd= context.getRequestDispatcher("/ListPharmacies.jsp");
+                rd.forward(request, response);
+    }
+    if(action.equals("AjoutProd")){
+        System.out.println(request.getParameter("idpharmacie"));
+        int idPharmacie=Integer.parseInt(request.getParameter("idpharmacie"));
+        request.setAttribute("idpharmacie", idPharmacie);
+                ServletContext context= getServletContext();
+                RequestDispatcher rd= context.getRequestDispatcher("/AjouterProduit.jsp");
+                rd.forward(request, response);
+    }
        if(action.equals("deconnecter")){
           /* int numeroPharmacien =Integer.parseInt(request.getParameter("numeroPharmacien"));
             String nom = request.getParameter("nom");
@@ -228,22 +244,19 @@ public class ModifierPharmacien extends HttpServlet {
             String motdepasse=request.getParameter("motdepasse");
             int idPharmacie=Integer.parseInt(request.getParameter("idpharmacie"));
             */
-                        HttpSession session =request.getSession(true);
-                        session.removeAttribute("Pharmacien");   
+                        HttpSession session =request.getSession();  
                         session.invalidate();
+                        
                         Cookie ck[]= request.getCookies();
-           for (Cookie ck1 : ck) {
-               ck1.setValue("");
-               ck1.setMaxAge(-1);
-               
-               String a = ck1.getValue();
-               System.out.println("44444444444444444444444444444444444444444444444444444get value"+a);
-           }
-                        response.sendRedirect("login.jsp");
-                               
+                        for (Cookie ck1 : ck) {
+                           ck1.setValue("");
+                           ck1.setMaxAge(-1);
 
-                              
-       }
+                           String a = ck1.getValue();
+                           System.out.println("44444444444444444444444444444444444444444444444444444get value"+a);
+                       }
+                        response.sendRedirect("PageClient.jsp");
+                }
     }
 
   

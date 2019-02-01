@@ -20,6 +20,7 @@ public class descriptionProduit extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         int numProduit = Integer.parseInt(request.getParameter("numproduit"));
+        System.out.println("Descriptin produit numproduit = "+numProduit);
         baseD db = new baseD();
         Produit p = db.AfficherProduit(numProduit);
         request.setAttribute("produit", p);
