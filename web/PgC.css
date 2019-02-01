@@ -1,0 +1,501 @@
+body{
+   
+  margin: 0;
+  padding: 0;
+  background: url(bg2.png);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover; 
+  background-repeat:  no-repeat;
+  background-attachment: fixed;
+}
+.Pc{
+  width: 25%;
+  
+  margin: 20px;
+  padding: 20px;
+  text-align: center;
+  background-color:rgba(72,126,176,.5);
+  
+  
+  float: left;
+  
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+div{
+    float: left;
+}
+
+
+
+
+
+.Pc h1{
+  margin-top: 100px;
+  font-family: 'Permanent Marker', cursive;
+  color: #fff;
+  font-size: 40px;
+}
+
+
+
+.Pc p{
+     
+  font-family: 'Permanent Marker', cursive;
+  color: #fff;
+  font-size: 20px;
+  text-shadow: 0px 3px 8px #1C6EA4;
+}
+.Pc h3{
+  margin-top: 100px;
+  font-family: 'Permanent Marker', cursive;
+  color: #fff;
+  font-size: 20px;
+}
+
+.Pc input{
+  display: block;
+  width: 100%;
+  padding: 0 16px;
+  height: 44px;
+  text-align: center;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  font-family: "montserrat",sans-serif;
+}
+
+
+
+
+.txtb{
+  margin: 20px 0;
+  background: rgba(255,255,255,.5);
+  border-radius: 6px;
+}
+
+.txta{
+  margin: 20px 0;
+  background: rgba(255,255,255,.5);
+  border-radius: 6px;
+  color: #fff;
+  cursor: pointer;
+  transition: 0.8s;
+}
+
+.signup-btn{
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background: #487eb0;
+  color: #fff;
+  border-radius: 44px;
+  cursor: pointer;
+  transition: 0.8s;
+}
+.signup-btn:hover{
+  transform: scale(0.96);
+}
+.Pc a{
+  text-decoration: none;
+  color: #fff;
+  font-family: "montserrat",sans-serif;
+  font-size: 14px;
+  padding: 10px;
+  transition: 0.8s;
+  display: block;
+}
+.Pc a:hover{
+  background: rgba(0,0,0,.3);
+}
+
+
+
+.Pc a{
+  text-decoration: none;
+  color: #fff;
+  font-family: "montserrat",sans-serif;
+  font-size: 14px;
+  padding: 10px;
+  transition: 0.8s;
+  display: block;
+}
+
+
+
+.b{
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    font-family: 'Permanent Marker', cursive;
+    
+}
+
+.b label{
+    position: relative;
+    cursor: pointer;
+}
+.b label input{
+    display: none;
+}
+
+.b label span
+{
+    position: relative;
+    display: inline-block;
+    margin: 10px 9px;
+    padding: 5px;
+    width: 120px; 
+    border: 1px solid #487eb0;
+    color: #5fa6e8;
+    background-color: rgba(95,166,232,.1);
+    border-radius: 4px;
+}
+
+.b label input:checked ~ span
+{
+    color: #fff;
+    background-color: rgba(95,166,232,.5);
+    border: 2px solid #fff;
+}
+
+.b label select
+{
+    position: relative;
+    display: inline-block;
+    margin: 10px 10px;
+    padding: 5px;
+    width: 290px; 
+    border: 1px solid #487eb0;
+    color: #fff;
+    border-radius: 4px;
+    font-size: 20px;
+    border-radius:15px;
+    background-color:#487eb0;
+}
+
+ul {
+    margin: 2px;
+    padding: 2px;
+    list-style: none;
+}
+ul li {
+    
+    float: left;
+    
+    height: 40px;
+    
+    
+    line-height: 40px;
+    text-align: center;
+    font-size: 20px;
+}
+
+ul li a {
+    background-color: rgba(83, 160, 232,.5);
+    text-decoration: none;
+    color: white;
+    display: block;
+}
+
+ul li a:hover{
+    background-color: #526ee8;
+    border-radius: 44px;
+  cursor: pointer;
+  transition: 0.8s;
+}
+
+ul li ul li {
+    display: none;
+}
+ul li:hover ul li{
+    display: block;
+}
+
+
+
+
+
+.sf{
+    margin-left:  50px;
+    margin-bottom: 10px;
+    padding: 7px;
+    border:none;
+    font-size: 20px;
+    font-family: 'Permanent Marker', cursive;
+}
+
+.RP{
+    
+    background: #53a0e8;
+    color: white;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    position: relative;
+    padding: 7px;
+    font-family: 'Permanent Marker', cursive;
+    border: none;
+    font-size: 20px;
+}
+
+.RP:hover{
+ background: #487eb0;
+}
+
+
+
+.logo{
+    
+    margin-top: 15px;
+    margin-left: 10px;
+}
+
+.opt{
+  
+  
+   float: left;
+  width: 100%;
+    
+}
+
+.sf{
+    margin-left: 300px;
+    padding: 7px;
+    border:none;
+    font-size: 20px;
+    font-family: 'Permanent Marker', cursive;
+}
+.footer {
+  margin-top: 30px; 
+  left: 0;
+  bottom: 0;
+   float: left;
+  width: 100%;
+  background-color: rgba(72,126,176,.5);
+  color: white;
+  text-align: center;
+}
+
+.deco{
+  display: block;
+  width: 100%;
+  padding: 0 16px;
+  
+  height: 44px;
+  text-align: center;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  font-family: "montserrat",sans-serif;
+}
+
+.deco{
+  
+  
+  background:#487eb0 ;
+  color: #fff;
+  border-radius: 44px;
+  cursor: pointer;
+  transition: 0.8s;
+}
+.deco:hover{
+  background:rgba(255, 0, 0, .5) ;
+  transform: scale(0.96);
+}
+
+.optn {
+    
+    
+    margin: 0px;
+    font-family: "montserrat",sans-serif;
+    outline: none;
+    border: none;
+    text-align: center;
+    height: 44px;
+    display: block;
+    background-color: rgba(83, 160, 232,.5);
+    
+    text-decoration: none;
+    color: white;
+    display: block;
+}
+
+.optn:hover{
+    background-color: #526ee8;
+    border-radius: 44px;
+  cursor: pointer;
+  transition: 0.8s;
+  
+}
+
+.tl{
+   
+    padding-bottom: 0px;
+    width: 65%;
+    float: left;
+    
+    margin-top: 40px;
+    
+}
+.l{
+   
+   
+    
+    width: 65%;
+    float: left;
+    
+    margin-top: 40px;
+    
+}
+.l table{
+    background-color:rgba(72,126,176,.5);
+    width: 100%;
+    font-family: 'Permanent Marker', cursive;
+    text-align: center;
+    color: #fff;
+    border-color: rgba(83, 160, 232,.0);
+    border-collapse:collapse;
+    padding: 8px;
+}
+.l th {background-color: rgba(83, 160, 232,.2)}
+.l tr:hover {background-color: rgba(83, 160, 232,.2)}
+.l input{
+  display: block;
+  width: 100%;
+  padding: 0 16px;
+  height: 44px;
+  text-align: center;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  font-family: 'Permanent Marker', cursive;
+  
+}
+
+.l h1{
+  margin: 20px;
+  font-family: 'Permanent Marker', cursive;
+  color: #fff;
+  font-size: 40px;
+  text-shadow: 4px 3px 8px #1C6EA4;
+}
+
+
+
+
+
+.ph{
+   width: 200px;
+   height: 300px;
+    float: left;
+    background-color:rgba(72,126,176,.5);
+    margin: 20px;
+    text-align: center;
+    border-radius: 6px;
+}
+
+.top p{
+     
+  font-family: 'Permanent Marker', cursive;
+  color: #fff;
+  font-size: 20px;
+  text-shadow: 0px 3px 8px #1C6EA4;
+}
+.title{
+    
+    height: 10%;
+    width: 100%;
+    font-family: 'Permanent Marker', cursive;
+    color: #fff;
+    text-align: center;
+    font-size:20px;
+    text-shadow: 4px 3px 8px #1C6EA4;
+}
+
+.image{
+    height: 60%;
+    width: 100%;
+    background-color:rgba(191, 177, 237,.5);
+}
+.des{
+    background-color:rgba(96, 72, 176,.5);
+    height: 30%;
+    width: 100%;
+    font-family: 'Permanent Marker', cursive;
+    color: #fff;
+    text-align: center;
+    font-size:15px;
+    text-shadow: 4px 3px 8px #3d2e70;
+    
+}
+
+.des input{
+  display: block;
+  width: 100%;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  
+  text-align: center;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  font-family: "montserrat",sans-serif;
+}
+.des input{
+  
+  background: rgba(255,255,255,.5);
+  border-radius: 6px;
+  color: #fff;
+  cursor: pointer;
+  transition: 0.8s;}
+
+
+
+
+
+.top{
+  width: 60%;
+  margin-top: 20px;
+  
+  text-align: center;
+  background-color:rgba(72,126,176,.5);
+  
+  
+  float: left;
+  
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+
+
+
+
+
+.top h1{
+  margin-top: 20px;
+  font-family: 'Permanent Marker', cursive;
+  color: #fff;
+  font-size: 40px;
+}
+
+
+
+.top p{
+     
+  font-family: 'Permanent Marker', cursive;
+  color: #fff;
+  font-size: 20px;
+  text-shadow: 0px 3px 8px #1C6EA4;
+}
+
+
+
+
+.in{
+    margin: 10px;
+    border-radius: 12px;
+}
+
+

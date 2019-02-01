@@ -12,14 +12,14 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>RechercheProduit</title>
+        <title>Geophar</title>
     </head>
     <body>
         <h1>RechercheProduit.jsp</h1>
         
         <form action="SRechercheProduit" method="post">
                 <input name="libelle" type="text"/> 
-                <input name="libelle" type="hidden"/>
+                
                <input type='hidden' name="action" value="rechercher"/>
                <input type="submit" value="Rechercher" />
         </form>

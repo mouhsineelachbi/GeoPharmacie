@@ -47,13 +47,10 @@ ul li:hover ul li{
 
 
 
-.search-form{
-    
-    float: right;
-    margin-right: 100px;
-}
 
-input[type=text]{
+
+.sf{
+    margin-left: 30px;
     padding: 7px;
     border:none;
     font-size: 20px;
@@ -61,7 +58,7 @@ input[type=text]{
 }
 
 .RP{
-    float: right;
+    
     background: #53a0e8;
     color: white;
     border-radius: 0 5px 5px 0;
@@ -85,9 +82,9 @@ input[type=text]{
 
 
 .r{
-    background-color: black;
+   
     height: 600px;
-    width: 900px;
+    width: 700px;
     float: left;
     margin: 20px;
     
@@ -106,7 +103,7 @@ input[type=text]{
 
 
 .footer {
-   
+  margin-top: 30px; 
   left: 0;
   bottom: 0;
    float: left;
@@ -116,4 +113,101 @@ input[type=text]{
   text-align: center;
 }
 
-/*position: fixed;*/
+.ph{
+   width: 200px;
+   height: 300px;
+    float: left;
+    background-color:rgba(72,126,176,.5);
+    margin: 15px;
+    text-align: center;
+    border-radius: 6px;
+}
+
+.title{
+    
+    height: 10%;
+    width: 100%;
+    font-family: 'Permanent Marker', cursive;
+    color: #fff;
+    text-align: center;
+    font-size:20px;
+    text-shadow: 4px 3px 8px #1C6EA4;
+}
+
+.image{
+    height: 60%;
+    width: 100%;
+    background-color:rgba(191, 177, 237,.5);
+}
+.des{
+    background-color:rgba(96, 72, 176,.5);
+    height: 30%;
+    width: 100%;
+    font-family: 'Permanent Marker', cursive;
+    color: #fff;
+    text-align: center;
+    font-size:15px;
+    text-shadow: 4px 3px 8px #3d2e70;
+    
+}
+
+.des input{
+  display: block;
+  width: 100%;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  
+  text-align: center;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  font-family: "montserrat",sans-serif;
+}
+.des input{
+  
+  background: rgba(255,255,255,.5);
+  border-radius: 6px;
+  color: #fff;
+  cursor: pointer;
+  transition: 0.8s;}
+
+
+
+
+
+.top{
+  width: 75%;
+  margin-top: 20px;
+  margin-left:  12%;
+   margin-right: 12%;
+  text-align: center;
+  background-color:rgba(72,126,176,.5);
+  
+  
+  float: left;
+  
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+
+
+
+
+
+.top h1{
+  margin-top: 20px;
+  font-family: 'Permanent Marker', cursive;
+  color: #fff;
+  font-size: 40px;
+}
+
+
+
+.top p{
+     
+  font-family: 'Permanent Marker', cursive;
+  color: #fff;
+  font-size: 20px;
+  text-shadow: 0px 3px 8px #1C6EA4;
+}

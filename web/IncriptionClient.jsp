@@ -4,71 +4,55 @@
     Author     : Hamza
 --%>
 
-<%@page import="GeoPharmacie.baseD"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Geophar</title>
+        <link href="IC.css" rel="stylesheet" media="all"/>
+        
     </head>
     <body>
-        <%
-            baseD op =new baseD();
-            int idPharmacie = op.getLastPharmacie().getIdPharmacie()+1;
-        %>
+        <div class="K">
+        
         <form action="inscription" method="post">
-        <table border="">
-            <tr>
-                <td> NOM :</td>
-                <td><input name="nom" type="text"/> </td>
-            </tr>
-            <tr>
-                <td> PRENOM :</td> <td><input name="prenom" type="text"/> </td>
-            </tr>
-            <tr>
-                <td> CIN :</td> <td> <input name="cin" type="text"/></td>
-            </tr>
-            <tr>
-                <td> TEL :</td> <td><input name="tel" type="tel"/> </td>
-            </tr>
-            <tr>
-                <td> EMAIL :</td> <td><input name="email" type="email"/> </td>
-            </tr>
-            <tr>
-                <td> ADRESSE :</td> <td><input name="adresse" type="text"/> </td>
-            </tr>
-            <tr>
-                <td> PSEUDO :</td> <td> <input name="pseudo" type="text"/></td>
-            </tr>
-            <tr>
-                <td> MOT DE PASSE :</td> <td> <input name="motdepasse" type="password"/></td>
-            </tr>
-            <tr>
-                <td> TYPE :</td>
-                <td>
-                    <select name="type" id="list">
-                                <option value="Client">Client</option>
-                                <option value="Pharmacien">Pharmacien</option> 
-                     </select>
-                     
-                </td>
-            </tr>
-           
             
-            <td><input type="hidden" name="idPharmacie" value="1"  /></td><!--on doit afficher  la liste des pharmacies existe-->
+            <h1>Inscription</h1>
             
-           
-            <tr>  <td>
-                                        <input type='hidden' name="action" value="ajouter"/>
-                                        
-                </td> 
-                <td>
-                    <input type="submit" value="Enregister" />                        
-                </td>
-            </tr>
-         
-        </table>
+                <input name="nom" type="text" placeholder="nom" class="txtb"> 
+                <input name="prenom" type="text" placeholder="prenom" class="txtb">
+                <input name="cin" type="text" placeholder="cin" class="txtb">
+                <input name="tel" type="tel" placeholder="tel" class="txtb">
+                <input name="email" type="email" placeholder="email" class="txtb">
+                <input name="adresse" type="text" placeholder="adresse" class="txtb">
+                <input name="pseudo" type="text" placeholder="pseudo" class="txtb">
+                <input name="motdepasse" type="password"  placeholder="motdepasse" class="txtb">
+                <div class="b">
+                  <p><centet>TYPE :</centet></p>
+                        <label>
+                            <select name="type" id="list">
+                                        <option value="Client">Client</option>
+                                        <option value="Pharmacien">Pharmacien</option> 
+                            </select>
+                        </label>
+                </div>
+                <input type="hidden" name="idPharmacie" value="1"  />
+                <input type='hidden' name="action" value="ajouter"/>
+                <input type="submit" value="Enregister" class="signup-btn" />
+                <a href="http://localhost:8080/GeoPharmacieweb/PageClient.jsp?">déjà inscrit</a>
+                                       
+        </div>
+        <div class="X">
+             <a><img src="bg3.png" alt=""/></a>
+            <h1>Giopharmacie vous aide à trouver votre médecin plus rapidement et à l'endroit le plus proche.</h1>
+        </div>
+                
+               
+                       <
+        
+            
         </form>
+        </div>
     </body>
 </html>

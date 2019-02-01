@@ -41,7 +41,6 @@ public class baseD {
 //**********************************************************INSERTION dans Le client******************************************************************************************
     
     public void insertInToClient( String nom,String prenom,String tele,String cin,String email,String pseudo,String adresse,String motDepasse,int numeroClient) throws SQLException{
-        System.out.println("ibase de donneeeeeeet************************");
         Statement stmt = con.createStatement();
         String query="INSERT INTO client  (nom, prenom,cin,tele,email, pseudo,adresse,numeroClient,motDepasse)VALUES(' "+nom+"',' "
                     +prenom+"','"+ cin+"','"
@@ -56,7 +55,6 @@ public class baseD {
         Statement stmt = con.createStatement();
         String query="INSERT INTO pharmacie ( nomPharmacie, adresse,tel)VALUES ('"
                     +nomPharmacie+"',' "+adresse+"','"+tel+"')";
-        System.out.println("ibase de pharmacien************************");
         stmt.executeUpdate(query);
     }
 

@@ -30,17 +30,17 @@ body{
   height: 1200px;  
  
   text-align: center;
-  background: url(bg.png);
+  
   background-size: 40% 100%;
   background-position: center center;
   background-repeat:  no-repeat;
   
   overflow: hidden;
-  
+  float: left;
 }
 
 .I h1{
-  margin-top: 100px;
+  margin-top: 20px;
   font-family: 'Permanent Marker', cursive;
   color: #fff;
   font-size: 40px;
@@ -197,3 +197,41 @@ body{
     background-color:#487eb0;
 }
 
+#slideshow {
+  overflow: hidden;
+  height: 510px;
+  width: 728px;
+  margin: 0 auto;
+}
+
+.slide-wrapper {
+  width: 2912px;
+  -webkit-animation: slide 18s ease infinite;
+}
+
+.slide {
+  
+  height: 100%;
+  width: 100%;
+}
+
+.slide-image{
+  max-width:100%; 
+  max-height:100%;
+}
+
+.slide-number {
+  color: #000;
+  text-align: center;
+  font-size: 10em;
+}
+
+@-webkit-keyframes slide {
+  20% {margin-left: 0px;}
+  30% {margin-left: -728px;}
+  50% {margin-left: -728px;}
+  60% {margin-left: -1456px;}
+  70% {margin-left: -1456px;}
+  80% {margin-left: -2184px;}
+  90% {margin-left: -2184px;}
+}

@@ -11,8 +11,19 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Mes InfoRmations</title>
+        <title>Geophar</title>
+        <link href="PgC.css" rel="stylesheet" media="all"/>
     </head>
+    <style type="text/css">
+.l {
+    height: 600px;
+    background-image: url('s9.jpg');
+    background-repeat: no-repeat;
+    background-size: cover; 
+    background-repeat:  no-repeat;
+    
+}
+</style>
     <body>
   <!-- -->
     <%
@@ -33,11 +44,7 @@
                 //faux
                 
                 %>
-         <c:if test="${!empty sessionScope.cin && !empty sessionScope.password}">
-                <p>Bienvenue ${sessionScope.nom} ${sessionScope.prenom}
-                <!-- Bon Journéé Mr. <%=cl.getNom()%>  <%=cl.getPrenom()%>-->
-             </p>
-         </c:if>
+         
     <%
         int i;
         Cookie[] k=request.getCookies() ;
@@ -47,38 +54,24 @@
     
     %>
     
+      <div class="Pc">
+         <form action="ModifierClient" method="post">
+             <p>INFORMATION CLIENT</p>  
         
-        
-        <table border="" background="aqua">
+              
+              <input disabled="disabled" name="nom" value="<%=cl.getNom()  %>" class="txtb">
+              <input disabled="disabled" name="prenom" value="<%=cl.getPrenom()  %>" class="txtb">
+              <input disabled="disabled" name="email" value="<%=cl.getEmail() %>" class="txtb">
+              <input disabled="disabled" name="cin" value="<%=cl.getCin() %>" class="txtb">
+              <input disabled="disabled" name="adresse" value="<%=cl.getAdresse() %>" class="txtb">
+              <input disabled="disabled" name="pseudo" value="<%=cl.getPseudo()%>" class="txtb">
+              <input disabled="disabled" name="tel" value="<%=cl.getTel()%>" class="txtb">
                
-                <tr>
-                    
-                    <th>Nom</th>
-                    <th>Prenom</th>
-                    <th>Email</th>
-                    <th>Cin</th>
-                    <th> Adresse</th>
-                    <th> Pseudo</th>
-                    <th> Tel</th>
-                    
-                    
- 
-                   
-                </tr> 
-                            
-                <tr>
-                    <td><%=cl.getNom() %></td>
-                    <td><%=cl.getPrenom() %></td>
-                    <td><%=cl.getEmail() %></td>
-                    <td><%=cl.getCin() %></td>
-                    <td> <%=cl.getAdresse() %></td>
-                    <td> <%=cl.getPseudo()%></td>
-                    <td> <%=cl.getTel()%></td>
-                    
-                </tr>
-        </table>
+              
+        
+        
                      <form action="ModifierClient" method="post">
-                            <input type="hidden" name="numeroclient" value="<%=cl.getNumClient()  %>"/>
+                            <input  type="hidden" name="numeroclient" value="<%=cl.getNumClient()  %>"/>
                             <input type="hidden" name="nom" value="<%=cl.getNom()  %>"/>
                             <input type="hidden" name="prenom" value="<%=cl.getPrenom()  %>"/>
                             <input type="hidden" name="cin" value="<%=cl.getCin()  %>"/>
@@ -91,15 +84,12 @@
                            
                            
                             
-                             <input type="submit" value="Modifier les informations"/>
+                             <input type="submit" value="Modifier les informations" class="signup-btn">
+                            
                              
-                        </form>
-                            <form action="ModifierPharmacien" method="post">
-                                   <input type="hidden" name="action" value="deconnecter"/>
-                                    <input type="submit" value="Déconnecter"/>
-
-                               </form>
-                            <b style="color: green;">
+                     </form>
+         
+           <b style="color: green;">
                                 
         <%
                 String message=(String)request.getAttribute("message");
@@ -109,8 +99,71 @@
                 }
             
         %>
-        </b>
-        
-        <a href="AfficherPharmacie.jsp">LISTER TOUT LES PHARMACIES</a>   
+        </b> 
+      </div>
+        <div>
+            
+            
+                <nav class="menu">
+                    
+                        <a><img src="bg3.png" alt=""/></a>
+                    
+                    
+            <form action="SRechercheProduit" method="post" class="search-form">
+                <input name="libelle" class="sf"/> 
+                
+               <input type="hidden" name="action" value="rechercher"/>
+               <input type="submit" value="Rechercher" class="RP">
+            </form>
+                    
+                    <dive class="opt">
+            <ul>
+                <li>
+                    <form action="ajouterProduit" method="post">
+                    <input type="hidden" name="action" value="prodC"/>
+                    <input type="submit" value="List des Produits" class="optn"></form>
+                </li>
+                <li>
+                    <form action="ajouterProduit" method="post">
+                    <input type="hidden" name="action" value="pharC"/>
+                    <input type="submit" value="List des Pharmacies" class="optn"></form>
+                </li>
+                <li>
+                    <form action="ajouterProduit" method="post">
+                    <input type="hidden" name="action" value="pharG"/>
+                    <input type="submit" value="Les Pharmacies de Garde" class="optn"></form>
+                </li>
+                <li><form><input type="submit" value="les Pharmacies proches" class="optn"></form>
+                </li>
+                <li>
+                    <form action="ajouterProduit" method="post">
+                    <input type="hidden" name="action" value="panier"/>
+                    <input type="submit" value="Panier" class="optn"></form>
+                </li>
+                <li><form action="Deconnexion" method="post">
+                                       <input type="hidden" name="action" value="deconnecter"/>
+                                       <input type="submit" value="Déconnecter" class="deco">
+                    </form>
+                </li>
+            </ul>
+                    </dive>
+            </nav>
+            
+            
+        </div>
+        <div class="l">
+            <c:if test="${!empty sessionScope.cin && !empty sessionScope.password}">
+                        <h1> Bienvenue <br>${sessionScope.nom} ${sessionScope.prenom}
+                <!-- Bienvenue<%=cl.getNom()%>  <%=cl.getPrenom()%>--><br>
+                            Ici, vous trouverez tout <br>
+                            pour vous aider à trouver<br> 
+                            vos médicaments dans <br>
+                            la pharmacie la plus proche.
+                        </h1>
+                    </c:if>  
+        </div>
+        <div class="footer">
+            <p>Copyright © 2019 IOSM.</p>
+        </div>
     </body>
 </html>

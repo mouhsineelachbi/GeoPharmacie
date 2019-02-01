@@ -9,13 +9,31 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Geophar</title>
+        <link href="style.css" rel="stylesheet" media="all"/>
+ <style>       
+.upl[type=submit] {
+  background-color: #53a0e8;
+  color: white;
+  height: 42px;
+  
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  
+}
+
+.upl[type=submit]:hover {
+  background-color: #487eb0;
+}</style>
     </head>
     <body>
+        <div class="top">
         <form action="uploadA" method="post" enctype="multipart/form-data">
-                    Select File to Upload:  <input type="file" name="file">
-                    <br>
-                    <input type="submit" value="Upload">
-         </form>
+            <h1>Sélectionnez une photo à utiliser comme couverture de votre nouvelle pharmacie</h1>  <input type="file" name="fileName" class="RP">
+                    
+                    <input type="submit" value="Télécharger" class="upl">
+                </form>
+        </div>
     </body>
 </html>

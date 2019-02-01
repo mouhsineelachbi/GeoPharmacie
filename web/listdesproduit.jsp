@@ -6,11 +6,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>stock</title>
+        <title>Geophar</title>
     </head>
     <body>
         <% baseD db = new baseD(); %>
-        <form  action="descriptionProduit" method="POST">
+        <form  action="modifierProduit" method="POST">
         <table border=2 >
             <tr>
                 <th>REFERENCE PRODUIT</th>
@@ -22,21 +22,8 @@
                 <th> MODIFIER </th>
             </tr>
             <%
-                String cin = new String();
-                Cookie[] ck = request.getCookies();
-                if(ck != null) {
-                    for (int i = 0; i < ck.length; i++) {
-                        Cookie cookie = ck[i];
-                        String name = cookie.getName();
-                        String value = cookie.getValue();
-                        if(name.equals("username")){
-                            cin = value;
-                            break;
-                        }
-                    }
-                }
-                
-                LinkedList<Produit> produitList = db.listProduit();
+                int numeroPharmacien = 2;
+                LinkedList<Produit> produitList = db.listProduit(numeroPharmacien);
                 for(Produit p:produitList){
                     
                 %>
@@ -47,8 +34,9 @@
                 <td><input type="text" name="temp" value=<%=p.getTemperatureStock()%>></td>
                 <td><input type="date" name="dateex" value=<%=p.getDateExpiration()%>></td>
                 <td><input type="date" name="datefab" value=<%=p.getDateFabrication()%>></td>
+                <!--<td><select><option value="empty"></option><option value="Modifier">Modifier</select>-->
                     <input type="hidden" name="numproduit" value=<%=p.getNumeroProduit()%>>
-                <td><center><input type="submit" value="plus informations"/></center></td>
+                <td><center><input type="submit" value="Modifier"/></center></td>
             </tr>
                 <%
                     }

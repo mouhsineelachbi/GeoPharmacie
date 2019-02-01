@@ -12,7 +12,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Geophar</title>
     </head>
     <body>
         <%
@@ -28,7 +28,6 @@
                     <th>TEL </th>
                     <th>DATE DE FERIE</th>
                     <th>DATE DE GARDE</th>
-                    <th>image</th>
                 </tr>
                 <tr>
                     <%
@@ -67,8 +66,6 @@
                 
                 
                 </form>
-                <th><img src="<%=request.getContextPath()%>/image<%=p.getLien()%>" /></th>
-                       
             </tr>
                  <%
                     

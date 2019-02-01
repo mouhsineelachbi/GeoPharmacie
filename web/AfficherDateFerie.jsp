@@ -4,6 +4,7 @@
     Author     : Hamza
 --%>
 
+<%@page import="GeoPharmacie.Pharmacien"%>
 <%@page import="GeoPharmacie.DateFerie"%>
 <%@page import="java.util.LinkedList"%>
 <%@page import="GeoPharmacie.baseD"%>
@@ -12,9 +13,16 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>AfficherDateFerie ou de ropos</title>
+        <title>Geophar</title>
+        <link href="PgC.css" rel="stylesheet" media="all"/>
     </head>
     <body>
+        <% 
+            baseD op=new baseD();
+            int idpharmacie;
+                    idpharmacie =(Integer)request.getAttribute("idpharmacie");
+             Pharmacien cl= op.selectPharmacien(idpharmacie);
+            %>
         <h1>AfficherDateFerie</h1>
         
        
@@ -29,9 +37,7 @@
             </tr>
              <%
             
-            baseD op = new baseD();
-            int idpharmacie;
-                    idpharmacie =(Integer)request.getAttribute("idpharmacie");
+            
              LinkedList<DateFerie> feries = op.AfficherDateFeries(idpharmacie);
              
                                 System.out.println("hhhhh"+feries.size());

@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Supprimer Produit du Stock</title>
+        <title>Geophar</title>
     </head>
     <body>
         
